@@ -67,6 +67,7 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
       setCity(data.city)
       setSub(data.subcategory)
       setSSkill(data.sskills)
+      setSt(data.start_date)
       
           
          }).catch((error) => {
@@ -76,8 +77,9 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
    },[])  
 
    console.log(data)
+   console.log(data.start_date)
    
-   const input = useInput(new Date(data.start_date))
+   const input = useInput(new Date(data.start_date))   
    const input2 = useInput(new Date(data.end_date))
 
    const Validate=()=>{
@@ -296,8 +298,25 @@ return(
                     defaultValue = {data.project_rates}
                     onChangeText={(prates) => setPrates(prates)}
                 />
+
+            <View style={styles.inputStyle}>
+            <Text onPress={input.showDatepicker}>{moment(input.date).format('YYYY-MM-DD')}</Text>
+            </View>
+              {input.show && (
+                   <DateTimePicker
+                   style={styles.inputStyle}       
+                   testID="dateTimePicker1"   
+                   defaultValue={st}                
+                   value={input.date}
+                   mode={input.mode}
+                   is24Hour={true}
+                   //display="default"
+                   onChange={input.onChange}
+                   isDarkModeEnabled='false'                
+                   />
+               )}
           
-          <Text style={styles.textStyle}>Start Date</Text>
+          {/*<Text style={styles.textStyle}>Start Date</Text>
           <Button     
              
              onPress={input.showDatepicker}
@@ -331,7 +350,7 @@ return(
                    />
 
            
-             )}
+             )}*/}
 
 <View style={styles.btnHolder}>
                     <Buttons text="Submit" onPress={Validate} />
@@ -410,7 +429,7 @@ const styles = StyleSheet.create({
 
     textStyle:{
      fontSize:16,
-     color:'white',
+     color:'green',
      fontFamily:'OpenSans-bold',
      marginLeft:20
     },

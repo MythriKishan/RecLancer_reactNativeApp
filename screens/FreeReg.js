@@ -22,7 +22,7 @@ function FreeReg({route}){
    const RegHandler = () => {
 
     /**Email Validation **/
-    let reg_mail = /^\S+@\S+\.\S+$/; 
+    /*let reg_mail = /^\S+@\S+\.\S+$/; 
     if(email.trim() === "")
     {
       seteError('Email is Required!');
@@ -33,10 +33,10 @@ function FreeReg({route}){
       }  
     else{
       seteError('');
-    }
+    }*/
 
     /**Mobile Validation **/
-    let reg_mob = /^[0-9]{10}$/;
+   /* let reg_mob = /^[0-9]{10}$/;
     if(mob.trim() === "")
     {
       setmError('Mobile is Required!');
@@ -47,7 +47,7 @@ function FreeReg({route}){
       }  
     else{
       setmError('');
-    }
+    }*/
 
     /*Password Validation*/
     let reg_pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
@@ -134,6 +134,26 @@ function FreeReg({route}){
           theme={{colors: {primary: '#069A8E'}}}
           //placeholder = "Enter Email"
           onChangeText={(mob) => setMob(mob)}
+          onFocus={()=>{
+            let reg_mail = /^\S+@\S+\.\S+$/; 
+            if(email != "")
+            {            
+              if(email.trim() === "")
+              {
+                seteError('Email is Required!');
+              }
+              else if(reg_mail.test(email) === false)    
+              {
+                seteError('Enter Valid email Id!');
+                }  
+              else{
+                seteError('');
+              }
+            }
+            else{
+              seteError('Enter Vaild email');
+            }
+          }}
           />
           <Text style={styles.errorText}>{mError}</Text>
 
@@ -143,6 +163,27 @@ function FreeReg({route}){
           theme={{colors: {primary: '#069A8E'}}}
           //placeholder = "Enter Email"
           onChangeText={(pass) => setPass(pass)}
+          onFocus={()=>{
+            if(mobile != '')
+            {
+              let reg_mob = /^[0-9]{10}$/;
+              if(mob.trim() === "")
+              {
+                setmError('Mobile is Required!');
+              }
+              else if(reg_mob.test(mob) === false)    
+              {
+                setmError('Enter Valid Mobile Number!');
+                }  
+              else{
+                setmError('');
+              }
+            }
+            else{
+              setmError('Enter 10 digit Mobile Number')
+            }
+          }}
+
           />
           <Text style={styles.errorText}>{pError}</Text>
 

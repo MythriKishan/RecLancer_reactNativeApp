@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from "react";
-import { StyleSheet,Text,View } from "react-native";
+import { StyleSheet,Text,View,Alert} from "react-native";
 import SearchForm from "../../components/SearchForm";
 import RecResults from "./RecResults";
 import * as actions from '../actions';
@@ -157,21 +157,22 @@ const dispatch = useDispatch();
       }).then((response) => response.json())
       .then((responseJson) => {
    
-        //console.log(responseJson);
+        console.log(responseJson);
 
-        if(responseJson != "")
-      {
+       if(responseJson === '400'){
+
+          Alert.alert("No Matching Records");
+        }  
+
+        else if(responseJson != "" || responseJson != 400)
+              {
 
         navigation.navigate('Recruiter Result',
         {
             d: responseJson
         });
       
-      }
-      else{
-
-        Alert.alert(responseJson);
-      }   
+      }  
        
             
            }).catch((error) => {
@@ -184,7 +185,9 @@ return(
 <View style={styles.screen}> 
 <View style={styles.headerStyle}>
                 {/* Header reusable component*/}
-                <Header title="Search" style={styles.headerTitle} />
+                {/*<Header title="Search" style={styles.headerTitle} />*/}
+
+                <Text style={styles.headerTitle}>Job Search</Text>
             </View>
 
             <Dropdown
@@ -237,8 +240,8 @@ return(
                    placeholder='Select Worktype'
                    //searchPlaceholder="Search..."
                    onChange={item => 
-                     setCat(item.value)}       
-                     value={cat}
+                     setWt(item.value)}       
+                     value={wt}
                 />
 
             <View style={styles.btnHolder}>
@@ -292,7 +295,8 @@ const mapDispatchToProps = dispatch => {
            height: 50,
            borderColor: 'grey',
            borderRadius: 4,
-           borderWidth: 1
+           borderWidth: 1,
+           backgroundColor:'#FFFFFF',
    
        },
        btnHolder: {
@@ -339,6 +343,13 @@ const mapDispatchToProps = dispatch => {
          fontFamily:'OpenSans-bold',
          color:'red',
          paddingLeft:20
-        }
+        },
+        headerTitle:{     
+          fontFamily:'OpenSans-Bold',
+          fontSize:20,
+          fontWeight:'bold',
+          color:'#967E76'
+      },
+      
 
 });

@@ -27,6 +27,7 @@ function FreeLogin({navigation,route,props}){
    const [eError, seteError] = useState("");
    const [pError,setpError] = useState("");
    const [error,setError] = useState("");  
+   const[active,setActive] = useState('');
     
 
    const LoginHandler=()=>{
@@ -138,7 +139,8 @@ function FreeLogin({navigation,route,props}){
 
        <View style={styles.headerStyle}>
        {/* Header reusable component*/ }
-       <Header title="Login Page" style={styles.headerTitle}/>
+       {/*<Header title="Login Page" style={styles.headerTitle}/>*/}
+       <Text style={styles.headerTitle}>Freelancer Login</Text>
        </View>
 
        <Text style={styles.errorText}>{error}</Text>
@@ -146,8 +148,10 @@ function FreeLogin({navigation,route,props}){
        <TextInput
          style={styles.inputStyle}
          placeholder = "Enter Email"
-         theme={{colors: {primary: '#069A8E'}}}
-         //placeholder = "Enter Email"
+         placeholderTextColor='#967E76'
+         theme={{colors: {primary: '#967E76'}}}
+         inputContainerStyle={{borderBottomWidth:0}}
+         //placeholder = "Enter Email"           
          onChangeText={(email) => setEmail(email)}
          />
          <Text style={styles.errorText}>{eError}</Text>          
@@ -156,7 +160,9 @@ function FreeLogin({navigation,route,props}){
          style={styles.inputStyle}
          placeholder = "Enter Password"
          secureTextEntry={true}
+         theme={{colors: {primary: '#967E76'}}}
          onChangeText={(password) => setPass(password)}
+         inputContainerStyle={{borderBottomWidth:0}}
          />
         <Text style={styles.errorText}>{eError}</Text>
 
@@ -166,7 +172,7 @@ function FreeLogin({navigation,route,props}){
          <Buttons text="Submit" onPress={LoginHandler}/>
          <Buttons text="Cancel" onPress={cancelHandler}/>
          </View>    
-         <Buttons text="Mobile Login" onPress={MLogin}/>     
+         {/*<Buttons text="Mobile Login" onPress={MLogin}/>  */}   
 </View>
       
    )
@@ -205,20 +211,24 @@ const styles = StyleSheet.create({
    },
    headerStyle:{
        justifyContent:'center',
-       alignItems:'center',
-      
+       alignItems:'center',      
    },
-   headerTitle:{
-       justifyContent:'center',
-       alignItems:'center',
+   headerTitle:{     
+       fontFamily:'OpenSans-Bold',
+       fontSize:20,
+       fontWeight:'bold',
+       color:'#967E76'
    },
    inputStyle:{
         margin:15,
-        width:250,
-        height:50,
-        borderColor:'grey',
-        borderRadius:4,
-        borderWidth:1
+        width:'80%',
+        height:40,
+        borderColor:'#D7C0AE',
+        borderBottomColor: "#65451F",
+        borderRadius:10,
+        underlineColorAndroid:"transparent",
+        borderWidth:1,
+        backgroundColor:'#FFFFFF',
 
    },
    btnHolder:{

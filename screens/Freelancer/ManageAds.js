@@ -31,10 +31,20 @@ const ManageAds = ({User,Token,route,navigation}) =>
           })
          
         }).then((response) => response.json())
-        .then((responseJson) => {     
-          console.log(responseJson);  
-          setData(responseJson);
-              
+        .then((responseJson) => { 
+          console.log(responseJson);
+          
+      if(responseJson.code === '400' || responseJson === '{')
+          {
+            Alert.alert('No Records');
+          }
+          else if(responseJson.code != '' || responseJson.code != '400') { 
+            console.log(responseJson);  
+            setData(responseJson);
+            }
+          else{
+            Alert.alert('Error,Retry!!')
+          }
              }).catch((error) => {
                console.error(error);
              });

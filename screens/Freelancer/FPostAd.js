@@ -46,14 +46,10 @@ const FreePostAd = ({User,Token,route,navigation}) => {
             "label" : d.name
           })));
         //console.log(responseJson);
-
-
         
            }).catch((error) => {
              console.error(error);
-           });
-
-          
+           });         
 
    })
   

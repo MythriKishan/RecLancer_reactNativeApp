@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { StyleSheet,Text,View,Button } from "react-native";
+import { StyleSheet,Text,View,Button,Image } from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
 import appstate from '../appreducers';
@@ -52,9 +52,22 @@ const FreeHome = ({User,Token,route,navigation}) => {
 return(
   
 <View style={styles.screen}>
-<View style={styles.headerStyle}>
-        {/* Header reusable component*/}
-      <Header title="Freelancer Home Page" style={styles.headerTitle} />
+<View style={styles.textCont}>
+      <Image
+          source={require('../../assets/HomeImg.jpg')}
+          style={styles.transImage}
+        />   
+
+
+<View style={styles.textCont}>
+      <Text style={styles.textStyle}>
+      Opportunities don't happen, you create them
+      </Text>
+     </View>
+      
+{/*<View style={styles.headerStyle}>
+        
+      <Header title="Freelancer Home Page" style={styles.headerTitle} />*/}
       {/*<Text style={{marginTop:20,color:'white'}}>{User}</Text>
       <Text style={{marginTop:20,color:'white'}}>{Token}</Text>
       <Button title="Freelancer Post Ad" onPress={passValues}/>
@@ -103,6 +116,25 @@ const styles = StyleSheet.create({
     headerTitle: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    transImage:{
+      height: 250,
+      width: 250,
+      opacity: 0.5,
+      borderRadius:4, 
+      marginTop:30     
+    },
+    textCont:{  
+      justifyContent:'center',
+      alignItems:'center'
+     },
+     textStyle:{
+      fontFamily:'OpenSans-Bold',
+      fontSize:18,
+      marginTop:20,
+      fontWeight:'bold',
+      color:'#65451F'
+      //color:'#FC6C85'    
     },
     
     

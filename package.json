@@ -26,14 +26,17 @@
     "expo-image-editor": "^1.7.1",
     "expo-image-manipulator": "^11.1.1",
     "expo-image-picker": "~14.1.1",
+    "expo-radio-button": "^1.0.8",
     "expo-status-bar": "~1.4.4",
     "expo-video-player": "^2.2.0",
+    "modal-enhanced-react-native-web": "^0.2.0",
     "moment": "^2.29.4",
     "react": "18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "0.71.8",
     "react-native-element-dropdown": "^2.9.0",
     "react-native-gesture-handler": "~2.9.0",
+    "react-native-image-zoom-viewer": "^3.0.1",
     "react-native-material-dropdown-v2-fixed": "^0.11.3",
     "react-native-modal-datetime-picker": "^15.0.0",
     "react-native-paper": "^5.6.0",
@@ -43,9 +46,11 @@
     "react-native-select-dropdown": "^3.3.2",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-web": "^0.18.12",
+    "react-native-webview": "^13.3.1",
     "react-redux": "^8.0.5",
     "recoil": "^0.7.7",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "typescript": "^4.9.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

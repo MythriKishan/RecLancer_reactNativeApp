@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from "react";
-import { StyleSheet,Text,View } from "react-native";
+import { StyleSheet,Text,View,Alert } from "react-native";
 import * as actions from '../actions';
 import appstate from '../appreducers';
 import { connect } from 'react-redux';
@@ -158,26 +158,21 @@ getWorktype();
         .then((responseJson) => {
      
           //console.log(responseJson);
+
+          if(responseJson === '400'){
+
+            Alert.alert("No Matching Records");
+          }  
   
-          if(responseJson != "")
-        {
-  
-            //Then open Profile activity and send user email to profile activity.
-            //console.log(responseJson);
-           /* navigation.navigate('Draw',
-            {screen: 'Freelancer Result',
-            params:{d:responseJson}*/
-            navigation.navigate('Freelancer Result',
-                        {
-                            d: responseJson
-                        });
+          else if(responseJson != "" || responseJson != 400)
+        { 
+          navigation.navigate('Freelancer Result',
+           {
+            d: responseJson
+        });
         
         }
-        else{
-  
-          Alert.alert(responseJson);
-        }   
-         
+    
               
              }).catch((error) => {
                console.error(error);

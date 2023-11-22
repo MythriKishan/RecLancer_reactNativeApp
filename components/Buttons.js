@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     btnCon:{
         marginTop:5,      
         marginBottom:30,
-        backgroundColor:'#069A8E',
+        backgroundColor:'#967E76',
         borderColor:'#94B49F',
         borderRadius:10,
         width:100, 

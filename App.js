@@ -48,11 +48,19 @@ import Details from './screens/Freelancer/Details';
 import FLogout from './screens/Freelancer/FLogout';
 import RLogout from './screens/Recruiter/RLogout';
 import UploadImages from './screens/Freelancer/UploadImages';
+import FUploadImages from './screens/Freelancer/FUploadImages';
 import EditImage from './screens/Freelancer/EditImage';
 import FreeMLogin from './screens/FreeMLogin';
 import RDetails from './screens/Freelancer/RDetails';
 import FDetails from './screens/Recruiter/FDetails';
 import REditImages from './screens/Recruiter/REditImages';
+import FreePost from './screens/Freelancer/FreePost';
+import Fuploads from './screens/Freelancer/Fuploads';
+import RecAd from './screens/Freelancer/RecAd';
+import ImageZoom from './screens/Freelancer/ImageZoom';
+import Faccount from './screens/Freelancer/Faccount';
+import Hide from './screens/Freelancer/Hide';
+import Fdelete from './screens/Freelancer/Fdelete';
 
 
 const Stack = createNativeStackNavigator();
@@ -66,7 +74,8 @@ function DrawerNavigate(){
         headerStyle: { backgroundColor: '#351401' },
         headerTintColor: 'white',
         sceneContainerStyle: { backgroundColor: '#3f2f25' },
-        drawerContentStyle: { backgroundColor: '#351401' },
+       // drawerContentStyle: { backgroundColor: '#351401' },
+       drawerContentStyle:{ backgroundColor: '#FFFBE9'},
         drawerInactiveTintColor: 'white',
         drawerActiveTintColor: '#351401',
         drawerActiveBackgroundColor: '#e4baa1',
@@ -200,8 +209,9 @@ function DrawerNavigator() {
       screenOptions={{
         headerStyle: { backgroundColor: '#351401' },
         headerTintColor: 'white',
-        sceneContainerStyle: { backgroundColor: '#3f2f25' },
-        drawerContentStyle: { backgroundColor: '#351401' },
+        //sceneContainerStyle: { backgroundColor: '#3f2f25' },
+        sceneContainerStyle: { backgroundColor: '#FFFBE9' },
+        drawerContentStyle: { backgroundColor: '#351401' },       
         drawerInactiveTintColor: 'white',
         drawerActiveTintColor: '#351401',
         drawerActiveBackgroundColor: '#e4baa1',
@@ -221,7 +231,7 @@ function DrawerNavigator() {
      
       <Drawer.Screen
         name="Freelancer PostAd"
-        component={FreePostAd}
+        component={FreePost}
         options={{
           drawerIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
@@ -229,9 +239,21 @@ function DrawerNavigator() {
         }}
       />
 
-<Draw.Screen
+{/*<Draw.Screen
         name="Uploads"
         component={UploadImages}
+        options={{
+          title: 'Upload Images',
+          drawerItemStyle: { display: 'none' },
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),
+        }}
+      />*/}
+
+<Draw.Screen
+        name="Uploads"
+        component={Fuploads}
         options={{
           title: 'Upload Images',
           drawerItemStyle: { display: 'none' },
@@ -280,6 +302,42 @@ function DrawerNavigator() {
 <Drawer.Screen
         name="Success Page"        
         component={Success}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+          drawerItemStyle: { display: 'none' }
+  
+        }}
+      />
+
+    <Drawer.Screen
+        name="Account"        
+        component={Faccount}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+       
+        }}
+      />
+
+
+<Drawer.Screen
+        name="Hide Profile"        
+        component={Hide}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+          drawerItemStyle: { display: 'none' }
+  
+        }}
+      />
+
+<Drawer.Screen
+        name="Delete Account"        
+        component={Fdelete}
         options={{
           drawerIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
@@ -365,7 +423,8 @@ else{
           screenOptions={{
             headerStyle: { backgroundColor: '#351401' },
             headerTintColor: 'white',
-            contentStyle: { backgroundColor: '#3f2f25' },
+           // contentStyle: { backgroundColor: '#3f2f25' },
+           contentStyle:{ backgroundColor: '#FFFBE9'}
           }}
         >
           <Stack.Screen name="Home" component={Home} /> 
@@ -374,6 +433,7 @@ else{
           <Stack.Screen name="Recruiter Login" component={RecLogin} /> 
           <Stack.Screen name="Recruiter Register" component={RecReg}/>
           <Stack.Screen name="Freelancer Mobile Login" component={FreeMLogin}/>
+
       
           <Stack.Screen
             name="Drawer"
@@ -398,11 +458,13 @@ else{
     <Stack.Screen name="Recruiter Edit Ad" component={Redit_ad} />
     <Stack.Screen name="Recruiter Ad Status" component={RStatusAd} />
     <Stack.Screen name="Recruiter Result" component={RecResults} />
-    <Stack.Screen name="Rec Ad Details" component={RDetails} />
+    <Stack.Screen name="Rec Ad Details" component={RecAd} />
     <Stack.Screen name="Freelancer Edit Ad" component={Fedit_ad} />
     <Stack.Screen name="Freelancer Ad Status" component={FStatusAd} />
     <Stack.Screen name="Freelancer Edit Image" component={EditImage} />
     <Stack.Screen name="Recruiter Edit Image" component={REditImages} />
+    <Stack.Screen name="ImageZoom" component={(ImageZoom)}/>
+    
 
         </Stack.Navigator>
         </Provider>

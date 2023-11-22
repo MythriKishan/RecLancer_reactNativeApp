@@ -51,6 +51,7 @@ const RDetails = ({ User, Token, navigation, route }) => {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+        setData(responseJson[0]);
         var images = [];
         var images22 = [];
        console.log("cshdashjsgjshdgshdghsghdsd", responseJson);
@@ -59,7 +60,7 @@ const RDetails = ({ User, Token, navigation, route }) => {
           images22.push({ name: e.trim(), id: i + 1 });
         });
         setImageShow(images22);
-        setData(responseJson[0]);
+       
       })
       .catch((error) => {
         //console.error(error);

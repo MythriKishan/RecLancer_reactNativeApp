@@ -86,7 +86,7 @@ const ManageAds = ({User,Token,route,navigation}) =>
 
                          <View style={styles.btnHolder}>
              <Buttons text="Edit Ad" onPress={()=> editAd(item.ad_id)}/>
-             <Buttons text="Status" onPress={()=> statusAd(item.ad_id)}/>
+             {/*<Buttons text="Status" onPress={()=> statusAd(item.ad_id)}/>*/}
              <Buttons text="Edit Images" onPress={()=> editImg(item.ad_id)}/>
          </View>                               
              </TouchableOpacity>

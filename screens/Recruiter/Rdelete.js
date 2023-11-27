@@ -9,11 +9,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Buttons from "../../components/Buttons";
 
 
-const Fdelete = ({User,Token,route,navigation}) => {
+const Rdelete = ({User,Token,route,navigation}) => {
 
     const DeleteHandler = () => {
 
-        fetch('https://reclancer.com/reclancerapi/fdelete.php',
+        fetch('https://reclancer.com/reclancerapi/rdelete.php',
         {
           method: 'POST',
           headers: {
@@ -42,6 +42,10 @@ const Fdelete = ({User,Token,route,navigation}) => {
 
     }
 
+    const cancelHandler = () =>{
+      Alert.alert("Dont Delete");
+    }
+
 
 
     return (        
@@ -53,14 +57,14 @@ const Fdelete = ({User,Token,route,navigation}) => {
 
           <Text style={styles.errorStyle}>User {User} are you sure you want to Delete this Account?</Text>
 
-      <View style={styles.Btnrow}>
+      <View style={styles.btnHolder}>
 
         <TouchableOpacity onPress={DeleteHandler} style={styles.btnStyle}>
           <Text style={styles.textStyle}>Yes</Text>
         </TouchableOpacity> 
-        {/*<TouchableOpacity onPress={cancelHandler} style={styles.btnStyle}>
+        <TouchableOpacity onPress={cancelHandler} style={styles.btnStyle}>
           <Text style={styles.textStyle}>No</Text>
-    </TouchableOpacity>*/}
+    </TouchableOpacity>
       </View>
    
           
@@ -94,7 +98,7 @@ const mapDispatchToProps = dispatch => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Fdelete)
+  )(Rdelete)
 
 const styles = StyleSheet.create({
 
@@ -118,7 +122,6 @@ const styles = StyleSheet.create({
          borderColor:'grey',
          borderRadius:4,
          borderWidth:1
-
     },
     btnHolder:{
     flexDirection:'row',
@@ -145,6 +148,6 @@ const styles = StyleSheet.create({
         fontSize: 16
     
       },
-     
+
 });
 

@@ -286,15 +286,18 @@ getWorktype();
                    justifyContent: 'center',
                    alignItems: 'center',
                },
-               inputStyle: {
-                   margin: 15,
-                   width: 250,
-                   height: 50,
-                   borderColor: 'grey',
-                   borderRadius: 4,
-                   borderWidth: 1
-           
-               },
+               inputStyle:{
+                margin:15,
+                width:'80%',
+                height:40,
+                borderColor:'#D7C0AE',
+                borderBottomColor: "#65451F",
+                borderRadius:10,
+                underlineColorAndroid:"transparent",
+                borderWidth:1,
+                backgroundColor:'#FFFFFF',
+          
+           },
                btnHolder: {
                    flexDirection: 'row',
                    justifyContent: 'space-evenly',

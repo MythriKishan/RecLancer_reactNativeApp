@@ -10,6 +10,7 @@ import { useFonts } from 'expo-font';
 import dropdown from './screens/Freelancer/dropdown';
 import 'react-native-gesture-handler';
 
+
 import combinedreducer from './screens/combinedreducer';
 
 //import { configureStore } from '@reduxjs/toolkit'
@@ -61,27 +62,30 @@ import ImageZoom from './screens/Freelancer/ImageZoom';
 import Faccount from './screens/Freelancer/Faccount';
 import Hide from './screens/Freelancer/Hide';
 import Fdelete from './screens/Freelancer/Fdelete';
+import Raccount from './screens/Recruiter/Raccount';
+import RHide from './screens/Recruiter/RHide';
+import Rdelete from './screens/Recruiter/Rdelete';
 
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
-const Draw =  createDrawerNavigator();
+const Drawar =  createDrawerNavigator();
 
 function DrawerNavigate(){
   return (
-    <Draw.Navigator
-      screenOptions={{
-        headerStyle: { backgroundColor: '#351401' },
-        headerTintColor: 'white',
-        sceneContainerStyle: { backgroundColor: '#3f2f25' },
-       // drawerContentStyle: { backgroundColor: '#351401' },
-       drawerContentStyle:{ backgroundColor: '#FFFBE9'},
-        drawerInactiveTintColor: 'white',
-        drawerActiveTintColor: '#351401',
-        drawerActiveBackgroundColor: '#e4baa1',
-      }}
-    >
-       <Draw.Screen 
+    <Drawar.Navigator    
+    screenOptions={{       
+      headerStyle: { backgroundColor: '#351401' },
+      headerTintColor: 'white',
+      //sceneContainerStyle: { backgroundColor: '#3f2f25' },
+      sceneContainerStyle: { backgroundColor: '#FFFBE9' },
+      drawerContentStyle: { backgroundColor: '#351401' },       
+      drawerInactiveTintColor: 'white',
+      drawerActiveTintColor: '#351401',
+      drawerActiveBackgroundColor: '#e4baa1',
+    }}
+  >
+       <Drawar.Screen 
         name="Recruiter Home"
         component={RecHome}
         options={{
@@ -91,93 +95,43 @@ function DrawerNavigate(){
           ),
         }}
        />
-     
-       <Draw.Screen 
-        name="Recruiter PostAd"
-        component={RecPostAd}
-        options={{
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
-          ),
-        }}
-      />
-      
 
-      <Draw.Screen
+<Drawar.Screen 
         name="Freelancer Search"
         component={FreeSearch}
         options={{
+          title: 'Freelancer Search',
           drawerIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
           ),
         }}
-      />
+       />
 
-      {/* <Draw.Screen 
-        name="Freelancer Result"        
-        component={FreeResults}
-        options={{
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
-          ),          
-          drawerItemStyle: { display: 'none' }
-  
-        }}
-      />
-
-      <Draw.Screen
-        name="Freelancer Details"        
-        component={FreeDetails}
-        options={{
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
-          ),          
-          drawerItemStyle: { display: 'none' }
-  
-        }}
-      />*/}
-      
-
-    <Draw.Screen
-        name="Success Screen"        
-        component={SuccessPage}
-        options={{
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
-          ),          
-          drawerItemStyle: { display: 'none' }
-  
-        }}
-      />
-
-
-    {/*<Draw.Screen
-        name="Recruiter Ad Status"        
-        component={RStatusAd}
-        options={{
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
-          ),          
-          drawerItemStyle: { display: 'none' }
-  
-        }}
-      />*/}
-
-      <Drawer.Screen
-        name="Manage Ads"        
+<Drawar.Screen 
+        name="Manage Ads"
         component={DashBoard}
         options={{
+          title: 'Manage Ads',
           drawerIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
-          ),          
-        
+          ),
         }}
-      />
+       />
 
+<Drawar.Screen 
+        name="Account"
+        component={Raccount}
+        options={{
+          title: 'Account',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),
+        }}
+       />
 
-     {/*<Draw.Screen
-        name="Recruiter Edit Ad"        
-        component={Redit_ad}
+<Drawer.Screen
+        name="Recruiter Hide Profile"        
+        component={RHide}
         options={{
           drawerIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
@@ -185,20 +139,24 @@ function DrawerNavigate(){
           drawerItemStyle: { display: 'none' }
   
         }}
-      />*/}
+      />
 
-       <Draw.Screen
-        name="Recruiter Logout"        
-        component={RLogout}
+<Drawer.Screen
+        name="Recruiter Delete Account"        
+        component={Rdelete}
         options={{
           drawerIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
           ),          
-         
+          drawerItemStyle: { display: 'none' }
+  
         }}
-      />    
+      />
 
-    </Draw.Navigator>
+
+
+     
+    </Drawar.Navigator>
   );
 
 }
@@ -206,7 +164,7 @@ function DrawerNavigate(){
 function DrawerNavigator() {
   return (
     <Drawer.Navigator
-      screenOptions={{
+      screenOptions={{       
         headerStyle: { backgroundColor: '#351401' },
         headerTintColor: 'white',
         //sceneContainerStyle: { backgroundColor: '#3f2f25' },
@@ -446,7 +404,7 @@ else{
 
 
           <Stack.Screen
-          name="Draw"
+          name="Drawar"
           component={DrawerNavigate}
           options={{
             headerShown: false,

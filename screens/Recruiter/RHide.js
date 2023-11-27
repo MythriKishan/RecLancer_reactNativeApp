@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ScrollView } from 'react-native-gesture-handler';
 import Buttons from "../../components/Buttons";
 
-const DashBoard = ({User,Token,route,navigation}) => 
+const RHide = ({User,Token,route,navigation}) => 
 {
     //const dispatch = useDispatch();
 
@@ -17,7 +17,6 @@ const DashBoard = ({User,Token,route,navigation}) =>
     console.log(Token+"manage Ads")
 
     useEffect(()=>{
-
         fetch('https://reclancer.com/reclancerapi/Radlists.php',
         {
           method: 'POST',    
@@ -32,10 +31,19 @@ const DashBoard = ({User,Token,route,navigation}) =>
           })
          
         }).then((response) => response.json())
-        .then((responseJson) => {     
+        .then((responseJson) => { 
+          
+          if(responseJson === '400'){
+
+            Alert.alert("No Matching Records");
+          }  
+          else if(responseJson != "" || responseJson != 400)
+          {
           console.log(responseJson);  
           setData(responseJson);
-              
+          }
+          
+             
              }).catch((error) => {
                console.error(error);
              });
@@ -46,7 +54,7 @@ const DashBoard = ({User,Token,route,navigation}) =>
 
         //Alert.alert(userid);
          
-        navigation.navigate('Recruiter Edit Ad',{adid:userid});  
+        navigation.navigate('Freelancer Edit Ad',{adid:userid});  
            
         }
 
@@ -57,9 +65,11 @@ const DashBoard = ({User,Token,route,navigation}) =>
             navigation.navigate('Recruiter Ad Status',{adid:userid});  
                
             }
-
+          
         const editImg = (userid) => {
-          navigation.navigate('Recruiter Edit Image',{id:userid});  
+
+          navigation.navigate('Freelancer Edit Image',{id:userid});  
+
         }
 
 
@@ -70,15 +80,16 @@ const DashBoard = ({User,Token,route,navigation}) =>
                         <Text style={styles.itemText}>{item.ad_id}</Text>
                         <Text style={styles.itemText}>{item.name}</Text>                        
                         <Text style={styles.itemText}>{item.skills}</Text>
-                        {/*<Button title="Edit Ad" onPress={()=> editAd(item.ad_id)}/>
+                       {/* <Button title="Edit Ad" onPress={()=> editAd(item.ad_id)}/>
                         <Button title="Change Status" onPress={()=> statusAd(item.ad_id)}/> */}
 
-                        <View style={styles.btnHolder}>
-             <Buttons text="Edit Ad" onPress={()=> editAd(item.ad_id)}/>
-             {/*<Buttons text="Status" onPress={()=> statusAd(item.ad_id)}/>*/}
-             <Buttons text="Edit Images" onPress={()=> editImg(item.ad_id)}/>
-         </View>                                          
+                         <View style={styles.btnHolder}>
+             
+             <Buttons text="Hide Profile" onPress={()=> statusAd(item.ad_id)}/>
+            
+         </View>                               
              </TouchableOpacity>
+            
         )
       }
 
@@ -119,7 +130,7 @@ const mapDispatchToProps = dispatch => {
   export default connect(  
     mapStateToProps,
     mapDispatchToProps    
-  )(DashBoard)
+  )(RHide)
 
 const styles = StyleSheet.create({
 screen:{
@@ -160,7 +171,6 @@ listItem: {
   alignItems: 'stretch'  
 
 },
-
 
 
 });

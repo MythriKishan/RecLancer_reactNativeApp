@@ -24,35 +24,10 @@ function RecLogin({navigation,route,props}){
     console.log(email);
     console.log(password);
 
-    /**Email Validation **/
+    
     let reg_mail = /^\S+@\S+\.\S+$/; 
-    if(email.trim() === "")
-    {
-      seteError('Email is Required!');
-    }
-    else if(reg_mail.test(email) === false)    
-    {
-      seteError('Enter Valid email Id!');
-      }  
-    else{
-      seteError('');
-    }
-
-    /*Password Validation*/
-    let reg_pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-    if(password.trim() === "")
-    {
-      setpError('Password is Required!');
-    }
-    if(reg_pass.test(password) == false)
-    {
-      setpError('Invalid Password!');
-    } 
-    else{
-      setpError('');
-    }  
-
-    if(email != " " && password != " ")  
+    let reg_pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    if(email != " " && (reg_mail.test(email) === true) && password != " " && (reg_pass.test(password) == true))  
     {
     fetch('https://reclancer.com/reclancerapi/apprec_login.php', {
      method: 'POST',
@@ -79,7 +54,7 @@ function RecLogin({navigation,route,props}){
         console.log(token);
 
         //Alert.alert("Success");
-        navigation.navigate('Draw',
+        navigation.navigate('Drawar',
         {screen: 'Recruiter Home',
         params:{          
             id:id,
@@ -130,6 +105,33 @@ function RecLogin({navigation,route,props}){
       placeholder = "Enter Password"
       secureTextEntry={true}
       onChangeText={(password) => setPass(password)}
+      onFocus={()=>{
+        let reg_mail = /^\S+@\S+\.\S+$/; 
+       
+        if(email.trim() === "")
+    {
+      seteError('Email is Required!');
+    }
+    else if(reg_mail.test(email) === false)    
+    {
+      seteError('Enter Valid email Id!');
+      }  
+    else{
+      seteError('');
+    }
+    let reg_pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    if(password.trim() === "")
+    {
+      setpError('Password is Required!');
+    }
+    if(reg_pass.test(password) == false)
+    {
+      setpError('Password must contain at least eight characters, at least one number and both lower and uppercase letters!');
+    } 
+    else{
+      setpError('');
+    }  
+      }}
       />
      <Text style={styles.errorText}>{pError}</Text>
 
@@ -186,14 +188,17 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     inputStyle:{
-         margin:15,
-         width:250,
-         height:50,
-         borderColor:'grey',
-         borderRadius:4,
-         borderWidth:1
- 
-    },
+      margin:15,
+      width:'80%',
+      height:40,
+      borderColor:'#D7C0AE',
+      borderBottomColor: "#65451F",
+      borderRadius:10,
+      underlineColorAndroid:"transparent",
+      borderWidth:1,
+      backgroundColor:'#FFFFFF',
+
+ },
     btnHolder:{
     flexDirection:'row',
     justifyContent:'space-evenly',

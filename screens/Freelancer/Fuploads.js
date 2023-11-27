@@ -170,7 +170,8 @@ const Fuploads = ({ User, Token ,navigation, route }) => {
           setLoading(false);
           setInternal([]);
           setClick(true);
-          Alert.alert('Posted Successfully');
+          //Alert.alert('Posted Successfully');
+          navigation.navigate('Success Page');
         })
         .catch((err) => {
          // console.log("Error", err);

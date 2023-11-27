@@ -1,9 +1,10 @@
-import React, { Component,useEffect,useState } from "react";
+import React, { Component,useEffect,useState,useRef } from "react";
 import { StyleSheet,View,Text,Button } from "react-native";
 import RegInput from "../components/RegInput";
 import Category from "../models/category";
 import Header from "../components/Header";
 import Buttons from "../components/Buttons";
+import PhoneInput from 'react-native-phone-number-input';
 import { TextInput } from "react-native-paper";
 
 function RecReg({route}){
@@ -16,12 +17,15 @@ function RecReg({route}){
    const [cpass,setCPass] = useState("");
    const [eError, seteError] = useState("");
    const [mError,setmError] = useState("");
-   const [pError,setpError] = useState("");   
-
+   const [pError,setpError] = useState(""); 
+   
+   const [phoneNumber, setphoneNumber] = useState('');
+   const phoneInput = useRef(null);
+   
    const RegHandler = () => {
 
     /**Email Validation **/
-    let reg_mail = /^\S+@\S+\.\S+$/; 
+    /*let reg_mail = /^\S+@\S+\.\S+$/; 
     if(email.trim() === "")
     {
       seteError('Email is Required!');
@@ -32,10 +36,10 @@ function RecReg({route}){
       }  
     else{
       seteError('');
-    }
+    }*/
 
     /**Mobile Validation **/
-    let reg_mob = /^[0-9]{10}$/;
+    /*let reg_mob = /^[0-9]{10}$/;
     if(mob.trim() === "")
     {
       setmError('Mobile is Required!');
@@ -46,11 +50,11 @@ function RecReg({route}){
       }  
     else{
       setmError('');
-    }
+    }*/
 
     /*Password Validation*/
     let reg_pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-    if(pass.trim() === "")
+    /*if(pass.trim() === "")
     {
       setpError('Password is Required!');
     }
@@ -60,7 +64,7 @@ function RecReg({route}){
     } 
     else{
       setpError('');
-    } 
+    } */
     
     
      /**Password and Confirm Password **/
@@ -69,9 +73,10 @@ function RecReg({route}){
       Alert.alert("Password Mismatch")
    }*/
 
+   let reg_mail = /^\S+@\S+\.\S+$/;
    if((reg_mail.test(email) === true) && (reg_pass.test(pass) === true))  
     {
-    fetch('https://reclancer.com/reactnative/apprec_reg.php', {
+    fetch('https://reclancer.com/reclancerapi/apprec_reg.php', {
      method: 'POST',
       headers: {
     'Accept': 'application/json',
@@ -79,7 +84,7 @@ function RecReg({route}){
   },
   body: JSON.stringify({ 
     email: email,
-    num : mob,     
+    num : phoneNumber,     
     password: pass
  
   })
@@ -88,6 +93,7 @@ function RecReg({route}){
       .then((responseJson) => { 
 
       console.log(responseJson)
+      Alert.alert('Successfully Registered');
       
       }).catch((error) => {
         console.error(error);
@@ -118,40 +124,98 @@ function RecReg({route}){
         <Header title="Registration Form" style={styles.headerTitle}/>
         </View>
 
+        <Text style={styles.errorText}>{error}</Text>
+        <Text style={styles.titleStyle}>Mobile</Text>
+        <PhoneInput
+        ref={phoneInput}
+        defaultValue={phoneNumber}
+        defaultCode="IN"
+        layout="first"
+        withShadow
+        autoFocus
+        containerStyle={styles.phoneContainer}
+        textContainerStyle={styles.textInput}
+        //textContainerStyle={styles.inputStyle}
+        onChangeFormattedText={text => {
+          setphoneNumber(text);
+        }}
+        onFocus={()=>{
+          if(phoneNumber === '')
+          {
+            setmError('Enter Mobile Number');
+          }
+          else{
+            setmError('');
+          }
+        }}
+      />
+      <Text style={styles.errorText}>{mError}</Text>
+
+      <Text style={styles.titleStyle}>Email</Text>
         <TextInput
           style={styles.inputStyle}
-          label="Email"
+          //label="Email"
           theme={{colors: {primary: '#069A8E'}}}
           //placeholder = "Enter Email"
           onChangeText={(email) => setEmail(email)}
+          onFocus={()=>{
+            if(phoneNumber != '')
+            {
+              let reg_mob = /^[0-9]{10}$/;
+             if(reg_mob.test(phoneNumber) === false)    
+              {
+                setmError('Enter Valid Mobile Number!');
+                }  
+              else{
+                setmError('');
+              }
+            }
+            else{
+              setmError('Enter 10 digit Mobile Number')
+            }
+          }}
           />
           <Text style={styles.errorText}>{eError}</Text>    
 
-        <TextInput
-          style={styles.inputStyle}
-          label="Mobile"
-          theme={{colors: {primary: '#069A8E'}}}
-          //placeholder = "Enter Email"
-          onChangeText={(mob) => setMob(mob)}
-          />
-          <Text style={styles.errorText}>{mError}</Text>
-
+      
+          <Text style={styles.titleStyle}>Password</Text>
          <TextInput
           style={styles.inputStyle}
-          label="Password"
+          //label="Password"
           theme={{colors: {primary: '#069A8E'}}}
           //placeholder = "Enter Email"
           onChangeText={(pass) => setPass(pass)}
+          onFocus={()=>{
+            let reg_mail = /^\S+@\S+\.\S+$/;
+            if(email != "" && reg_mail.test(email) === true)
+            {     
+              seteError('');              
+                
+              }
+              else 
+                {
+                  seteError('Enter Valid email ID')
+                }
+
+              if(pass === ''){
+                setpError('Enter Password');
+              }
+              else{
+                let reg_pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+               
+                if(reg_pass.test(pass) === false)
+                 {
+                  setpError('Invalid Password!');
+                 } 
+               else{
+                 setpError('');
+                 } 
+              }
+          }}
           />
           <Text style={styles.errorText}>{pError}</Text>
 
-         <TextInput
-          style={styles.inputStyle}
-          label="Confirm Password"
-          theme={{colors: {primary: '#069A8E'}}}
-          //placeholder = "Enter Email"
-          onChangeText={(cpass) => setCPass(cpass)}
-          />
+        
 
           {/*<Button title="Login" 
           onPress={LoginHandle}/>*/}
@@ -174,23 +238,27 @@ const styles = StyleSheet.create({
         margin:20
     },
     headerStyle:{
-        justifyContent:'center',
-        alignItems:'center',
-       
-    },
-    headerTitle:{
-        justifyContent:'center',
-        alignItems:'center',
-    },
-    inputStyle:{
-         margin:15,
-         width:250,
-         height:50,
-         borderColor:'grey',
-         borderRadius:4,
-         borderWidth:1
+      justifyContent:'center',
+      alignItems:'center',      
+  },
+  headerTitle:{     
+      fontFamily:'OpenSans-Bold',
+      fontSize:20,
+      fontWeight:'bold',
+      color:'#967E76'
+  },
+  inputStyle:{
+    margin:15,
+    width:'80%',
+    height:40,
+    borderColor:'#D7C0AE',
+    borderBottomColor: "#65451F",
+    borderRadius:10,
+    underlineColorAndroid:"transparent",
+    borderWidth:1,
+    backgroundColor:'#FFFFFF',
 
-    },
+},
     btnHolder:{
     flexDirection:'row',
     justifyContent:'space-evenly',
@@ -200,7 +268,29 @@ const styles = StyleSheet.create({
         fontSize:12,
         fontFamily:'OpenSans-bold',
         color:'red'
-       }
+       }, phoneContainer: {
+        width: '75%',
+        height: 50,
+      },
+      button: {
+        marginTop: 30,
+        width: '75%',
+        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'green',
+      },
+      textInput: {
+        paddingVertical: 0,
+      },
+      titleStyle:{
+        margin:20,
+        color:'#6B240C',
+        fontFamily:'OpenSans-Bold',
+        fontSize:18,
+        fontWeight:'bold'
+
+      }
 
 });
 

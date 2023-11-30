@@ -39,15 +39,24 @@ function Home({navigation}) {
             });   
         }
 
-        else {
+        else if(itemData.item.id === '4'){
             navigation.navigate('Recruiter Login',{
                 categoryId : itemData.item.id,
             });  
 
         }
 
+        else if(itemData.item.id === '5'){
+        navigation.navigate('Freelancer Mobile Login',{
+            categoryId : itemData.item.id,
+        });
+    }
+        else{
+            navigation.navigate('Recruiter Mobile Login',{
+                categoryId : itemData.item.id,
+        });
         }
-
+    }
         return (
             <MenuGrid
             title={itemData.item.title} 

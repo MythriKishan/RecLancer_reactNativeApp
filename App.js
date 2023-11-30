@@ -66,6 +66,7 @@ import Raccount from './screens/Recruiter/Raccount';
 import RHide from './screens/Recruiter/RHide';
 import Rdelete from './screens/Recruiter/Rdelete';
 import RUploads from './screens/Recruiter/RUploads';
+import RecMLogin from './screens/RecMLogin';
 
 
 const Stack = createNativeStackNavigator();
@@ -436,8 +437,8 @@ else{
           <Stack.Screen name="Recruiter Login" component={RecLogin} /> 
           <Stack.Screen name="Recruiter Register" component={RecReg}/>
           <Stack.Screen name="Freelancer Mobile Login" component={FreeMLogin}/>
-
-      
+          <Stack.Screen name="Recruiter Mobile Login" component={RecMLogin}/>
+         
           <Stack.Screen
             name="Drawer"
             component={DrawerNavigator}

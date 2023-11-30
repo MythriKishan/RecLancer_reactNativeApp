@@ -11,7 +11,7 @@ import { FirebaseAuthApplicationVerifier, FirebaseRecaptchaVerifierModal } from 
 import { firebaseConfig } from '../config';
 import firebase from 'firebase/compat/app';
 
-const FreeMLogin = ({route,navigation}) =>{
+const RecMLogin = ({route,navigation}) =>{
 
   const [mobile, setMobile] = useState('');
   const [merror, setMerror] = useState('');
@@ -63,7 +63,7 @@ const FreeMLogin = ({route,navigation}) =>{
       }
   
       if (mobile != '') {
-        fetch('https://reclancer.com/reclancerapi/FMlogin.php', {
+        fetch('https://reclancer.com/reclancerapi/RMlogin.php', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -139,8 +139,8 @@ const FreeMLogin = ({route,navigation}) =>{
         var token = data.jwt;
         //console.log(token);
   
-        navigation.navigate('Drawer',
-        {screen: 'Freelancer Home',
+        navigation.navigate('Drawar',
+        {screen: 'Recruiter Home',
         params:{          
             id:id,
             token:token
@@ -223,7 +223,7 @@ const mapDispatchToProps = dispatch => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(FreeMLogin)
+  )(RecMLogin)
 
   const styles = StyleSheet.create({
 

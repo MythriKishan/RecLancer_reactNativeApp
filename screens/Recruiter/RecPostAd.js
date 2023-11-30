@@ -1,5 +1,5 @@
 import React,{useEffect, useState}  from "react";
-import { StyleSheet,Text,View,TouchableOpacity,Button  } from "react-native";
+import { StyleSheet,Text,View,TouchableOpacity,Button,Alert  } from "react-native";
 import * as actions from '../actions';
 import appstate from '../appreducers';
 import { connect } from 'react-redux';
@@ -7,382 +7,262 @@ import { useSelector, useDispatch } from 'react-redux';
 import Buttons from "../../components/Buttons";
 import Header from "../../components/Header";
 import { TextInput } from "react-native-paper";
-//import { Dropdown } from 'react-native-material-dropdown-v2-fixed';
 import { Dropdown } from 'react-native-element-dropdown';
 import { ScrollView } from "react-native-gesture-handler";
 import DateTimePicker from '@react-native-community/datetimepicker'
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+//import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { AntDesign } from '@expo/vector-icons';
 import moment from "moment";
-//import { getStateFromPath } from "@react-navigation/native";
-import axios from 'axios';
 
 const RecPostAd = ({User,Token,route,navigation}) => {
-
   const [datastate,setDatastate] =  useState([]);
   const [datagen,setDatagen] = useState([]);
   const [datacat,setDatacat] = useState([]);
   const [datawt,setDatawt] = useState([]);
 
-  
-    const dispatch = useDispatch();
+  const[title,setTitle] = useState("");
+  const[name,setName] = useState("");
+  const[email,setEmail] = useState("");
+  const[mobile,setMob] = useState("");    
+  const[pskills,setPSkill] = useState("");
+  const[exp,setExp] = useState("");
+  const[sskills,setSSkill] = useState("");
+  const[adr,setAdr] = useState("");
+  const[pper,setPper] = useState("");
+  const[prates,setPrates] = useState("");
+  const[st,setSt] = useState("");
+  const[ct,setCt] = useState("");
+  const[cat,setCat] = useState("");
+  const[wt,setWt] = useState("");
+  const[gen,setGen] = useState("");
+  const[pref,setPref] = useState("");
+  const[sdate,setSdate] = useState(new Date());
+  const[edate,setEdate] = useState(new Date());
+  const[cdate,setCdate] = useState(new Date());
+  const input = useInput(new Date())
+  const input2 = useInput(new Date())
+  const input3 = useInput(new Date())
+  const[isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-    const[title,setTitle] = useState("");
-    const[name,setName] = useState("");
-    const[email,setEmail] = useState("");
-    const[mobile,setMob] = useState("");    
-    const[pskills,setPSkill] = useState("");
-    const[exp,setExp] = useState("");
-    const[sskills,setSSkill] = useState("");
-    const[adr,setAdr] = useState("");
-    const[pper,setPper] = useState("");
-    const[prates,setPrates] = useState("");
-    const[st,setSt] = useState("");
-    const[ct,setCt] = useState("");
-    const[cat,setCat] = useState("");
-    const[wt,setWt] = useState("");
-    const[gen,setGen] = useState("");
-    const[pref,setPref] = useState("");
-    const[sdate,setSdate] = useState(new Date());
-    const[edate,setEdate] = useState(new Date());
-    const input = useInput(new Date())
-    const input2 = useInput(new Date())
-    const input3 = useInput(new Date())
-    const[isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const[titleError,setTitleError] = useState("");
+  const[nameError,setNameError] = useState("");
+  const[eError, seteError] = useState("");
+  const[mobileError,setmError] = useState("");
+  const[stError,setStError] = useState("");
+  const[catError,setCatError] = useState("");
+  const[wtError,setWtError] = useState("");
+  const[gError,setGError] = useState("");
+  const[psError,setPsError] =useState("");
+  const[expError,setExpError] = useState("");
+
+ 
+  let d;
+  let s =[];
+  let state=[];
+  var res=[];
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const showeDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const hideeDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    //console.warn("A date has been picked: ", date);
+     console.warn(moment(date).format('YYYY-MM-DD'));
+     date=moment(date).format('YYYY-MM-DD');
+     setSdate(date);
+     console.log(sdate);
+    hideDatePicker();
+  };
+
+  function handleDateChange(date) {
+    // initial change: start by setting the startDate
+    if (!sdate && !edate) {
+      setSdate(date);
+     // startDate has been set, set the end date
+    } else if (sdate && !edate) {
+     setEdate(date);
+    }
+
+    // user is choosing another range => set the start date
+    // and set the endDate back to null
+    if (sdate && edate) {
+      setSdate(date);
+      setEdate("");
+    }
+ }
+
+
+  const handleeConfirm = (d) => {
+    //console.warn("A date has been picked: ", date);
+     console.warn(moment(d).format('YYYY-MM-DD'));
+     d=moment(d).format('YYYY-MM-DD');
+     setEdate(d);
+     console.log(edate);
+    hideDatePicker();
+  };
   
-    const[titleError,setTitleError] = useState("");
-    const[nameError,setNameError] = useState("");
-    const[eError, seteError] = useState("");
-    const[mobileError,setmError] = useState("");
-    const[stError,setStError] = useState("");
-    const[catError,setCatError] = useState("");
-    const[wtError,setWtError] = useState("");
-    const[gError,setGError] = useState("");
-    const[psError,setPsError] =useState("");
-    const[expError,setExpError] = useState("");
-  
-   
-    let d;
-    let s =[];
-    let state=[];
-    var res=[];
-  
-    const showDatePicker = () => {
-      setDatePickerVisibility(true);
-    };
-  
-    const showeDatePicker = () => {
-      setDatePickerVisibility(true);
-    };
-  
-    const hideDatePicker = () => {
-      setDatePickerVisibility(false);
-    };
-  
-    const hideeDatePicker = () => {
-      setDatePickerVisibility(false);
-    };
-  
-    const handleConfirm = (date) => {
-      //console.warn("A date has been picked: ", date);
-       console.warn(moment(date).format('YYYY-MM-DD'));
-       date=moment(date).format('YYYY-MM-DD');
-       setSdate(date);
-       console.log(sdate);
-      hideDatePicker();
-    };
-  
-    function handleDateChange(date) {
-      // initial change: start by setting the startDate
-      if (!sdate && !edate) {
-        setSdate(date);
-       // startDate has been set, set the end date
-      } else if (sdate && !edate) {
-       setEdate(date);
-      }
-  
-      // user is choosing another range => set the start date
-      // and set the endDate back to null
-      if (sdate && edate) {
-        setSdate(date);
-        setEdate("");
-      }
-   }
-  
-  
-    const handleeConfirm = (d) => {
-      //console.warn("A date has been picked: ", date);
-       console.warn(moment(d).format('YYYY-MM-DD'));
-       d=moment(d).format('YYYY-MM-DD');
-       setEdate(d);
-       console.log(edate);
-      hideDatePicker();
-    };
+  useEffect(()=>{
+    //console.log(route.params);
+    //const {id,token} = route.params;    
+    //dispatch(actions.action_userid(id));    
+    //dispatch(actions.action_token(token));   
+     
+    //console.log(User+"Inside Postad")
+    //console.log(Token+"token Inside Postad")
+
+    /*State list API Call*/
+  getState();
+ //setSt(getState());
+
+  /*Gender List API*/
+  getGen();
+
+  /*Category list API call*/
+  getCategory();
+
+  /*Worktype List API call*/
+  getWorktype();
+
+   },[])  
+
+   const getState= () => {
+    fetch('https://reclancer.com/reclancerapi/getstate.php',{
+      method: "Get",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "aplication/json"
+      },  
+    }).then((response) => response.json())
+      .then((responseJson) => {       
     
-    useEffect(()=>{
-      //console.log(route.params);
-      //const {id,token} = route.params;    
-      //dispatch(actions.action_userid(id));    
-      //dispatch(actions.action_token(token));   
-       
-      //console.log(User+"Inside Postad")
-      //console.log(Token+"token Inside Postad")
-  
-      /*State list API Call*/
-    getState();
-   //setSt(getState());
+        const data = responseJson;
+        console.log(data);
 
-    /*Gender List API*/
-    getGen();
+        const options = data.map(d => ({
+          "value" : d.id,
+          "label" : d.name
+        }))
 
-    /*Category list API call*/
-    getCategory();
+        setDatastate(options);  
 
-    /*Worktype List API call*/
-    getWorktype();
+           }).catch((error) => {
+             console.error(error);
+           });
 
-     },[])  
-  
-     const getState= () => {
-      fetch('https://reclancer.com/reclancerapi/getstate.php',{
-        method: "Get",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "aplication/json"
-        },  
-      }).then((response) => response.json())
-        .then((responseJson) => {       
-      
-          const data = responseJson;
-          console.log(data);
-  
-          const options = data.map(d => ({
-            "value" : d.id,
-            "label" : d.name
-          }))
-  
-          setDatastate(options);  
-  
-             }).catch((error) => {
-               console.error(error);
-             });
-  
-             
-    }
-  
-    const getGen = () => {
-      fetch('https://reclancer.com/reclancerapi/getgender.php',{
-        method: "Get",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "aplication/json"
-        },  
-      }).then((response) => response.json())
-        .then((responseJson) => {   
-      
-          const data = responseJson;
-          console.log(data);
-  
-          const options = data.map(d => ({
-            "value" : d.id,
-            "label" : d.gender
-          }))
-  
-          setDatagen(options);       
-  
-          
-          
-             }).catch((error) => {
-               console.error(error);
-             });
-  
-             
-    }
-  
-  
-    const getCategory = () => {
-      fetch('https://reclancer.com/reclancerapi/getcategory.php',{
-        method: "Get",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "aplication/json"
-        },  
-      }).then((response) => response.json())
-        .then((responseJson) => {   
-      
-          const data = responseJson;
-          console.log(data);
-  
-          const options = data.map(d => ({
-            "value" : d.id,
-            "label" : d.name
-          }))
-  
-          setDatacat(options);       
-  
-          
-          
-             }).catch((error) => {
-               console.error(error);
-             });
-  
-             
-    }
-  
-    const getWorktype = () => {
-      fetch('https://reclancer.com/reclancerapi/getworktype.php',{
-        method: "Get",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "aplication/json"
-        },  
-      }).then((response) => response.json())
-        .then((responseJson) => {   
-      
-          const data = responseJson;
-          console.log(data);
-  
-          const options = data.map(d => ({
-            "value" : d.id,
-            "label" : d.type
-          }))
-  
-          setDatawt(options);       
-  
-          
-          
-             }).catch((error) => {
-               console.error(error);
-             });
-  
-             
-    }
-  
+           
+  }
+
+  const getGen = () => {
+    fetch('https://reclancer.com/reclancerapi/getgender.php',{
+      method: "Get",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "aplication/json"
+      },  
+    }).then((response) => response.json())
+      .then((responseJson) => {   
     
-    const Validate=()=>{
-     
-     // let startDate = moment(input.date).utc().format('YYYY-MM-DD');
-     
-     // let endDate = moment(input2.date).utc().format('YYYY-MM-DD');
+        const data = responseJson;
+        console.log(data);
 
-     // let lastDate = moment(input3.date).utc().format('YYYY-MM-DD');
-     
-      /**Name Validation**/
-      let reg_name = /^[a-zA-Z ]*$/;
-      if (name.trim() === "") {
-        setNameError("Name is Required Field.");  
-      } 
-      else
-      {
-       // let reg_name = /^[a-zA-Z ]*$/;
-        if(reg_name.test(name) === false)
-      {
-        setNameError("Enter Valid Name.");
-        //this.setState({email:text}) 
-        return false; 
-        }    
-       else{
-        console.log(name);
-        setNameError("");
-       }
-      }
-  
-  
-      /**Email Validation **/
-      let reg_mail = /^\S+@\S+\.\S+$/; 
-      if(email.trim() === "")
-      {
-        seteError('Email is Required!');
-      }
-      else if(reg_mail.test(email) === false)    
-      {
-        seteError('Enter Valid email Id!');
-        }  
-      else{
-        seteError('');
-      }
-  
-      /**Mobile Validation **/
-      let reg_mob = /^[0-9]{10}$/;
-      if(mobileError.trim() === "")
-      {
-        setmError('Mobile is Required!');
-      }
-      else if(reg_mob.test(mobile) === false)    
-      {
-        setmError('Enter Valid Mobile Number!');
-        }  
-      else{
-        setmError('');
-      }
-  
-      /**State Validation**/
-     // console.log(st);
-      if(st === "" || '0')
-      {      
-        setStError('State is Required!');
-      }
-  
-      /**Category Validation**/
-      if(cat === "" || '0')
-      {      
-        setCatError('Category is Required!');
-      }
-  
-      /**WorkType Validation**/
-      if(wt === "" || '0')
-      {
-        setWtError('WorkType is Required!');
-      }
-  
-      /**Gender Validation**/
-      if(gen === "" || '0')
-      {
-        setGError('Gender is Required!');
-      }
-       
-      /**Primary skills Validation**/
-      let reg_psk = /^[a-zA-Z]{1,}/;
-      if (pskills.trim() === "") {
-        setPsError("Primary Skills is Required Field.");  
-      } 
-      else
-      {
-       // let reg_name = /^[a-zA-Z ]*$/;
-        if(reg_psk.test(pskills) === false)
-      {
-        setPsError("Enter Valid Skills.");
-        //this.setState({email:text}) 
-        return false; 
-        }    
-       else{      
-        setPsError("");
-       }
-      }
-  
-     /**Experience Validation**/
-      let reg_expr = /^(\d+(?:\.\d+)?\+?)\s*(years?)/;
-      if (exp.trim() === "") {
-        setExpError("Experience is Required Field.");  
-      } 
-      else
-      {
-       // let reg_name = /^[a-zA-Z ]*$/;
-        if(reg_expr.test(exp) === false)
-      {
-        setExpError("Enter Valid Experience.");
-        //this.setState({email:text}) 
-        return false; 
-        }    
-       else{      
-        setExpError("");
-       }
-      }
-  
-      if((name != ""))   
+        const options = data.map(d => ({
+          "value" : d.id,
+          "label" : d.gender
+        }))
+
+        setDatagen(options);       
+
+        
+        
+           }).catch((error) => {
+             console.error(error);
+           });
+
+           
+  }
+
+
+  const getCategory = () => {
+    fetch('https://reclancer.com/reclancerapi/getcategory.php',{
+      method: "Get",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "aplication/json"
+      },  
+    }).then((response) => response.json())
+      .then((responseJson) => {   
+    
+        const data = responseJson;
+        console.log(data);
+
+        const options = data.map(d => ({
+          "value" : d.id,
+          "label" : d.name
+        }))
+
+        setDatacat(options);       
+
+        
+        
+           }).catch((error) => {
+             console.error(error);
+           });
+
+           
+  }
+
+  const getWorktype = () => {
+    fetch('https://reclancer.com/reclancerapi/getworktype.php',{
+      method: "Get",
+      headers: {
+          Accept: "application/json",
+          "Content-Type": "aplication/json"
+      },  
+    }).then((response) => response.json())
+      .then((responseJson) => {   
+    
+        const data = responseJson;
+        console.log(data);
+
+        const options = data.map(d => ({
+          "value" : d.id,
+          "label" : d.type
+        }))
+
+        setDatawt(options);       
+
+        
+        
+           }).catch((error) => {
+             console.error(error);
+           });
+
+           
+  }
+
+  const Validate= () =>{
+    let startDate = moment(input.date).utc().format('YYYY-MM-DD');   
+    console.log(startDate);
+    let endDate = moment(input2.date).utc().format('YYYY-MM-DD');
+    console.log(endDate);
+    let lastDate = moment(input3.date).utc().format('YYYY-MM-DD');
+    console.log(lastDate);
+    if((name != ""))   
        {
        
-        fetch('https://reclancer.com/reclancerapi/apprec_postad.php',
+        /*fetch('https://reclancer.com/reclancerapi/apprec_postad.php',
      {
        method: 'POST',    
        headers: {
@@ -395,9 +275,7 @@ const RecPostAd = ({User,Token,route,navigation}) => {
          id : User,       
          name: name,
          email : email,       
-         mobile :mobile,    
-         sd:startDate,
-         ed:endDate,
+         mobile :mobile, 
          ptitle : title,
          pskill : pskills,
          ex : exp,
@@ -408,24 +286,25 @@ const RecPostAd = ({User,Token,route,navigation}) => {
          gen: gen,         
          prates : prates,
          addr:adr,
+         sd:startDate,
+         ed:endDate,
+         cd:lastDate,
          ppre:pper,        
-         cd: lastDate
-         //pre : pref 
+       
        })
       
      }).then((response) => response.json())
      .then((responseJson) => {
   
-       console.log(responseJson);
+       console.log(responseJson.code);
        
-       /*if(responseJson.code === 200)
+       if(responseJson.code === 200)
        {
-           navigation.navigate('Success Screen',{adid:responseJson.id});
-          
+        navigation.navigate('Uploads',{adid:responseJson.id});     
        }  
        else{
          Alert.alert(responseJson);
-       }  */ 
+       } 
            
           }).catch((error) => {
             console.error(error);
@@ -435,29 +314,51 @@ const RecPostAd = ({User,Token,route,navigation}) => {
         } 
         else{
           Alert.alert("Please enter Data into required fields");
-        }  
-  
+        }  */
+
+        navigation.navigate('Uploads',{
+          id : User,       
+         name: name,
+         email : email,       
+         mobile :mobile, 
+         ptitle : title,
+         pskill : pskills,
+         ex : exp,
+         sskill : sskills,
+         st : st,
+         ct : cat,      
+         wt : wt,
+         gen: gen,         
+         prates : prates,
+         addr:adr,
+         sd:startDate,
+         ed:endDate,
+         cd:lastDate,
+         ppre:pper  
+        })
       }
-  
-    function useInput() {
-      const [date, setDate] = useState(new Date());
-      const [mode, setMode] = useState('date');
-      const [show, setShow] = useState(false);
-  
-      const showMode = (currentMode) => {
-          setShow(true);
-          setMode(currentMode);
-      };
-      const showDatepicker = () => {
-          showMode('date');
-      };
-  
-      const onChange = (event, selectedDate) => {
-          const currentDate = selectedDate || date
-          setShow(Platform.OS === 'ios');
-          setDate(currentDate);
-      }
-      return {
+  }
+
+
+  function useInput() {
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+    }
+    return {
         date,
         showDatepicker,
         show,
@@ -466,17 +367,15 @@ const RecPostAd = ({User,Token,route,navigation}) => {
     }
 }
 
-    return (
-        <View style={styles.screen}>
-          
-             <ScrollView>
-                <View style={styles.headerStyle}>
-                    {/* Header reusable component*/}
-                    <Header title="Recruiter Post Ad" style={styles.headerTitle} />
+  return(
+  <View style={styles.screen}>
+    <ScrollView>
+   <View style={styles.textCont}>   
 
-                </View>
-
-                <TextInput
+    <Text style={styles.textStyle}>Post your Ad here</Text>
+  </View>
+              <Text style={styles.titleStyle}>Job Title</Text>
+             <TextInput
                     style={styles.inputStyle}
                     label="Job Title"
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -484,35 +383,87 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                     onChangeText={(title) => setTitle(title)}
                 />
                  <Text style={styles.errorText}>{titleError}</Text>
-                 
+
+                <Text style={styles.titleStyle}>Name</Text> 
                 <TextInput
                     style={styles.inputStyle}
                     label="Name"
                     theme={{ colors: { primary: '#069A8E' } }}
                     //placeholder = "Enter Email"
                     onChangeText={(name) => setName(name)}
+                    onFocus={()=>{
+                      if(name === '')
+                      {
+                        setNameError('Enter Name');
+                      }
+                      else{
+                        setNameError('');
+                      }
+                    }}
                 />
                  <Text style={styles.errorText}>{nameError}</Text>
 
+                 <Text style={styles.titleStyle}>Email</Text>
                 <TextInput
                     style={styles.inputStyle}
                     label="Email"
                     theme={{ colors: { primary: '#069A8E' } }}
                     //placeholder = "Enter Email"
                     onChangeText={(email) => setEmail(email)}
+                    onFocus={()=>{
+                      let reg_name = /^[a-zA-Z ]*$/;
+                  if(reg_name.test(name) === false) {
+                    setNameError("Only Alphabets and Space allowed");   
+                  }
+                  else if(!name){
+                    setNameError("Please enter name");   
+                  }    
+                  else {
+                    setNameError("");   
+                    setName(name);
+                  }
+                  if(email === '')
+                  {
+                    seteError('Enter Email ID');
+                  }
+                  else{
+                    seteError('');
+                  }
+                }}
                 />
                  <Text style={styles.errorText}>{eError}</Text>
 
+                
+                 <Text style={styles.titleStyle}>Mobile</Text>              
                 <TextInput
                     style={styles.inputStyle}
                     placeholder="Mobile"
                     onChangeText={(mobile) => setMob(mobile)}
+                    onFocus={()=>{
+                    let reg_mail = /^\S+@\S+\.\S+$/;
+                    if(email != "" && reg_mail.test(email) === true)
+                    {     
+                      seteError('');            
+                    }
+
+                      else 
+                        {
+                          seteError('Enter Valid email ID')
+                        }
+                        if(mobile === '')
+                        {
+                          setmError('Enter Valid Mobile number');
+                        }
+                        else{
+                          setmError('');
+                        }
+                      }}
+        
                 />
                 <Text style={styles.errorText}>{mobileError}</Text>
 
-        
-
-        <Dropdown
+                <Text style={styles.titleStyle}>State</Text>      
+                <Dropdown
           style={styles.inputStyle}
           placeholderStyle={styles.placeholderStyle}
           //selectedTextStyle={styles.selectedTextStyle}          
@@ -526,25 +477,21 @@ const RecPostAd = ({User,Token,route,navigation}) => {
           onChange={item => 
             setSt(item.value)}       
             value={st}
+            onFocus={()=>{
+              if(st === '')
+              {
+                setStError('Select State');
+              }
+              else{
+                setStError('');
+              }
+            }}
+            
            />
             <Text style={styles.errorText}>{stError}</Text>
 
-
-               {/* <Dropdown
-                    style={styles.dropdown}
-                    placeholder="Select State"
-                    data={StateDate}                                       
-                    //style={styles.inputStyle}
-          />*/}
-                
-
-                <Dropdown
-                    placeholder="Select City"
-                    onChangeText={(city) => setCt(city)}
-                    style={styles.inputStyle}
-                />
-
-                <Dropdown
+            <Text style={styles.titleStyle}>Category</Text>   
+            <Dropdown
                     style={styles.inputStyle}
                     placeholderStyle={styles.placeholderStyle}
                     //selectedTextStyle={styles.selectedTextStyle}          
@@ -558,16 +505,19 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                     onChange={item => 
                       setCat(item.value)}       
                       value={cat}
+                      onFocus={()=>{
+                        if(cat === '')
+                        {
+                          setCatError('Select Category');
+                        }
+                        else{
+                          setCatError('');
+                        }
+                      }} 
                 />
                 <Text style={styles.errorText}>{catError}</Text>
 
-
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Subcatgory"
-                    onChangeText={(sub) => setSub(sub)}
-                />
-
+                <Text style={styles.titleStyle}>Gender</Text>   
                 <Dropdown
                      style={styles.inputStyle}
                      placeholderStyle={styles.placeholderStyle}
@@ -582,10 +532,20 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                      onChange={item => 
                        setGen(item.value)}       
                        value={gen}
+                       onFocus={()=>{
+                        if(gen === '')
+                        {
+                          setGError('Select Gender');
+                        }
+                        else{
+                          setGError('');
+                        }
+                       }}
                 />
                  <Text style={styles.errorText}>{gError}</Text>
 
-                <Dropdown
+                 <Text style={styles.titleStyle}>Work Type</Text>  
+                 <Dropdown
                    style={styles.inputStyle}
                    placeholderStyle={styles.placeholderStyle}
                    //selectedTextStyle={styles.selectedTextStyle}          
@@ -599,54 +559,71 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                    onChange={item => 
                      setWt(item.value)}       
                      value={wt}
+                     onFocus={()=>{
+                      if(wt === '')
+                      {
+                        setWtError('Select Worktype')
+                      }
+                      else{
+                        setWtError('')
+                      }
+                     }}
                 />
                 <Text style={styles.errorText}>{wtError}</Text>
 
+                <Text style={styles.titleStyle}>Primary Skills</Text>  
                 <TextInput
                     style={styles.inputStyle}
                     placeholder="Primary Skills"
                     onChangeText={(pskills) => setPSkill(pskills)}
+                    onFocus={()=>{
+                      if(pskills === '')
+                      {
+                        setPsError('Enter Primary Skills');
+                      }
+                      else{
+                        setPsError('');
+                      }
+                    }}
                 />
                 <Text style={styles.errorText}>{psError}</Text>
 
+                <Text style={styles.titleStyle}>Experience</Text>  
                 <TextInput
                     style={styles.inputStyle}
                     placeholder="Experience"
                     onChangeText={(exp) => setExp(exp)}
+                    onFocus={()=>{
+                      if(exp === '')
+                      {
+                        setExpError('Enter Experience')
+                      }
+                      else{
+                        setExpError('')
+                      }
+                    }}
                 />
                 <Text style={styles.errorText}>{expError}</Text>
 
+                <Text style={styles.titleStyle}>Secondary Skills</Text>  
                 <TextInput
                     style={styles.inputStyle}
                     placeholder="Secondary Skills"
                     onChangeText={(sskills) => setSSkill(sskills)}
                 />
-
+                
+                <Text style={styles.titleStyle}>Address</Text>  
                 <TextInput
                     style={styles.inputStyle}
                     placeholder="Address"
                     onChangeText={(adr) => setAdr(adr)}
                 />
 
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Project Period"
-                    onChangeText={(pper) => setPper(pper)}
-                />
-
-
-
-                <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Project Rates"
-                    onChangeText={(prates) => setPrates(prates)}
-                />      
-          
-         {/* <Text style={{marginLeft:30,color:'white'}}>Start Date</Text>
-           <Button     
-             
-              onPress={input.showDatepicker}
-              title={input.date.toLocaleDateString()} />
+           <Text style={styles.titleStyle}>Start Date</Text>
+           
+                   <View style={styles.inputStyle}>
+            <Text onPress={input.showDatepicker}>{moment(input.date).format('YYYY-MM-DD')}</Text>
+            </View>
               {input.show && (
                    <DateTimePicker
                    style={styles.inputStyle}       
@@ -656,17 +633,18 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                    is24Hour={true}
                    display="default"
                    onChange={input.onChange}
+                   isDarkModeEnabled='false'                
                    />
                )}
 
-            <Text style={{marginLeft:30,color:'white'}}>End Date</Text>
-            <Button    
-                      
-              onPress={input2.showDatepicker}
-              title={input2.date.toLocaleDateString()} />
+            <Text style={styles.titleStyle}>End Date</Text>
+           
+                <View style={styles.inputStyle}>
+            <Text  onPress={input2.showDatepicker}>{moment(input2.date).format('YYYY-MM-DD')}</Text>
+            </View>
               {input2.show && (
                    <DateTimePicker
-                   style={styles.inputStyle}       
+                   style={styles.inputStyle}                       
                    testID="dateTimePicker2"
                    value={input2.date}
                    mode={input2.mode}
@@ -678,14 +656,30 @@ const RecPostAd = ({User,Token,route,navigation}) => {
             
               )}
 
-          <Text style={{marginLeft:30,color:'white'}}>Closed Date</Text>
-            <Button    
-                      
-              onPress={input3.showDatepicker}
-              title={input3.date.toLocaleDateString()} />
+
+                 <Text style={styles.titleStyle}>Project Period</Text>  
+                <TextInput
+                    style={styles.inputStyle}
+                    placeholder="Project Period"
+                    onChangeText={(pper) => setPper(pper)}
+                />
+
+
+                <Text style={styles.titleStyle}>Project Rates</Text>  
+                <TextInput
+                    style={styles.inputStyle}
+                    placeholder="Project Rates"
+                    onChangeText={(prates) => setPrates(prates)}
+                />    
+
+                 <Text style={styles.titleStyle}>Last Date to apply</Text>
+           
+                <View style={styles.inputStyle}>
+            <Text  onPress={input3.showDatepicker}>{moment(input3.date).format('YYYY-MM-DD')}</Text>
+            </View>
               {input3.show && (
                    <DateTimePicker
-                   style={styles.inputStyle}       
+                   style={styles.inputStyle}                       
                    testID="dateTimePicker3"
                    value={input3.date}
                    mode={input3.mode}
@@ -695,185 +689,128 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                     />
 
             
-              )}*/}
+              )}  
 
-
-             
- {/*<View>
- 
-      <DatePicker
-        onChange={(date) => handleDateChange(date)}
-        selectsStart={true}
-        selected={sdate}
-        startDate={sdate}
-        endDate={edate}
-        inline={true}
-      />
-    
-    </View>*/}
-
-        {/*<Text>{sdate}</Text>
-          <Button title="Show Date Picker" onPress={showDatePicker} />
-         <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"        
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-          />
-         <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Start Date"
-                    onChangeText={(sdate) => setSdate(sdate)}
-                    value={sdate}
-  />*/}
-
-
-               {/*<DateTimePickerModal                   
-                    mode="date"                    
-                />
-                <View style={{ flexDirection: "row" }}>
-                <TextInput placeholder="Start Date" 
-                        onChangeText={UserSdate => this.setSdate({ UserSdate})}
-                        // Making the Under line Transparent.
-                        underlineColorAndroid='transparent'
-                        style={styles.inputStyle} />
-
-                <TouchableOpacity style={{ position: "absolute", left: "75%", top: "25%" }}
-                       //</View> onPress={() => this.setState({ show: !this.state.show })}
-                       >
-                <AntDesign name="calendar" size={24} color="black" />
-                </TouchableOpacity>
-
-                </View>
-
-               
-                <DateTimePickerModal                   
-                    mode="date"                    
-                />
-                <View style={{ flexDirection: "row" }}>
-                <TextInput placeholder="End Date" 
-                        onChangeText={UserEdate => this.setSdate({ UserEdate})}
-                        // Making the Under line Transparent.
-                        underlineColorAndroid='transparent'
-                        style={styles.inputStyle} />
-
-                <TouchableOpacity style={{ position: "absolute", left: "75%", top: "25%" }}
-                       //</View> onPress={() => this.setState({ show: !this.state.show })}
-                       >
-                <AntDesign name="calendar" size={24} color="black" />
-                </TouchableOpacity>
-
-    </View>*/}
-
-                {/*<Text style={styles.inputStyle}>End Date: </Text>*/}
-
-
-                {/*<Button title="Login" 
-          onPress={LoginHandle}/>*/}
+           
                 <View style={styles.btnHolder}>
                     <Buttons text="Submit" onPress={Validate} />
                     <Buttons text="Cancel" />
                 </View>
 
-            </ScrollView>
-
-        </View>
 
 
-
-    )
+  </ScrollView>
+  </View>
+  )
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-      userId: (id) => dispatch(actions.action_userid(id)),  
-      TokenId:(token) => dispatch(actions.action_token(token)),
-  
-    }
-  }
-    
-  const mapStateToProps = (state /*, ownProps*/) => {
-   
-    return {
-      //GetGoalScore: state.appstate.GoalScore
-      User:state.appstate.userid,
-      Token:state.appstate.tokenid,
-    }
-  }
-  
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps  
-  )(RecPostAd)
-  
-const styles = StyleSheet.create({
-     screen: {
-            flex: 1,
-            margin: 20
-        },
-        headerStyle: {
-            justifyContent: 'center',
-            alignItems: 'center',
-    
-        },
-        headerTitle: {
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-        inputStyle: {
-            margin: 15,
-            width: 250,
-            height: 50,
-            borderColor: 'grey',
-            borderRadius: 4,
-            borderWidth: 1
-    
-        },
-        btnHolder: {
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            alignItems: 'stretch'  
-    
-        },
-        dropdown: {
-          margin: 16,
-          height: 50,
-          borderBottomColor: 'gray',
-          borderBottomWidth: 0.5,
-        }, 
+  return {
+    userId: (id) => dispatch(actions.action_userid(id)),  
+    TokenId:(token) => dispatch(actions.action_token(token)),
 
-        icon: {
-          marginRight: 5,
-        },
-        label: {
-          position: 'absolute',
-          backgroundColor: 'white',
-          left: 22,
-          top: 8,
-          zIndex: 999,
-          paddingHorizontal: 8,
-          fontSize: 14,
-        },
-        placeholderStyle: {
-          fontSize: 16,
-        },
-        selectedTextStyle: {
-          fontSize: 16,
-        },
-        iconStyle: {
-          width: 20,
-          height: 20,
-        },
-        inputSearchStyle: {
-          height: 40,
-          fontSize: 16,
-        },
-        errorText:{
-          fontSize:12,
-          fontFamily:'OpenSans-bold',
-          color:'red',
-          paddingLeft:20
-         }
+  }
+}
+  
+const mapStateToProps = (state /*, ownProps*/) => {
+ 
+  return {
+    //GetGoalScore: state.appstate.GoalScore
+    User:state.appstate.userid,
+    Token:state.appstate.tokenid,
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps  
+)(RecPostAd)
+
+const styles = StyleSheet.create({
+   screen: {
+          flex: 1,
+         
+      },
+      headerStyle: {
+          justifyContent: 'center',
+          alignItems: 'center',
+         
+      },
+      headerTitle: {
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontSize:16,
+          color:'black'
+      },
+      inputStyle: {
+          margin: 15,
+          width: 250,
+          height: 50,
+          borderColor: 'grey',
+          borderRadius: 4,
+          borderWidth: 1
+  
+      },
+      btnHolder: {
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          alignItems: 'stretch'  
+  
+      },
+      dropdown: {
+        margin: 16,
+        height: 50,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5,
+      }, 
+
+      icon: {
+        marginRight: 5,
+      },
+      label: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: 22,
+        top: 8,
+        zIndex: 999,
+        paddingHorizontal: 8,
+        fontSize: 14,
+      },
+      placeholderStyle: {
+        fontSize: 16,
+      },
+      selectedTextStyle: {
+        fontSize: 16,
+      },
+      iconStyle: {
+        width: 20,
+        height: 20,
+      },
+      inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+      },
+      errorText:{
+        fontSize:12,
+        fontFamily:'OpenSans-bold',
+        color:'red',
+        paddingLeft:20
+       },
+       textCont:{
+  
+        justifyContent:'center',
+        alignItems:'center'
+       },
+     
+       textStyle:{
+         fontFamily:'OpenSans-Bold',
+         fontSize:18,
+         fontWeight:'bold',
+         color:'#FC6C85'
+     
+     
+       },
 
 });
+
 

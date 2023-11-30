@@ -1,25 +1,40 @@
 import React from "react";
 import { StyleSheet,Text,View } from "react-native";
 import Header from "../../components/Header";
+import { connect } from "react-redux";
 
 const SuccessPage = () => {
 
 return(
 <View style={styles.screen}>    
-    <View style={styles.headerStyle}>
-                    {/* Header reusable component*/}
-    {/*<Header title="Freelancer Ad Post Successful" style={styles.headerTitle} />*/}
-    <Text style={styles.headerTitle}>Recruiter Ad Post Successful</Text>
+    <View style={styles.textCont}>
+     
+    <Text style={styles.textStyle}>Recruiter Ad Post Successful</Text>
     </View>
 </View>
 )
 }
 
-export default SuccessPage;
+const mapDispatchToProps = (dispatch) => {
+    return {
+      userId: (id) => dispatch(actions.action_userid(id)),
+      TokenId: (token) => dispatch(actions.action_token(token)),
+    };
+  };
+  
+  const mapStateToProps = (state) => {
+    return {
+      User: state.appstate.userid,
+      Token: state.appstate.tokenid,
+    };
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(SuccessPage);
 
 const styles = StyleSheet.create({
 screen:{
- flex:1
+ flex:1,
+ margin:20
 },
 headerStyle: {
     justifyContent: 'center',
@@ -35,6 +50,21 @@ headerTitle: {
     color:'white'
     
 },
+textCont:{
+  
+    justifyContent:'center',
+    alignItems:'center'
+   },
+  
+   textStyle:{
+     fontFamily:'OpenSans-Bold',
+     fontSize:18,
+     fontWeight:'bold',
+     color:'#FC6C85',
+     margin:20
+  
+  
+   },
 
 
 });

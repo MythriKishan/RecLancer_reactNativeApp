@@ -65,6 +65,7 @@ import Fdelete from './screens/Freelancer/Fdelete';
 import Raccount from './screens/Recruiter/Raccount';
 import RHide from './screens/Recruiter/RHide';
 import Rdelete from './screens/Recruiter/Rdelete';
+import RUploads from './screens/Recruiter/RUploads';
 
 
 const Stack = createNativeStackNavigator();
@@ -93,6 +94,41 @@ function DrawerNavigate(){
           drawerIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
           ),
+        }}
+       />
+
+<Drawar.Screen 
+        name="Recruiter Post Ad"
+        component={RecPostAd}
+        options={{
+          title: 'Recruiter Post Ad',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),
+        }}
+       />
+
+<Drawer.Screen
+        name="Uploads"
+        component={RUploads}
+        options={{
+          title: 'Upload Images',
+          drawerItemStyle: { display: 'none' },
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),
+        }}
+      />
+
+<Drawar.Screen 
+        name="Success"
+        component={SuccessPage}
+        options={{
+          title: 'Success',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),
+          drawerItemStyle: { display: 'none' }
         }}
        />
 
@@ -129,7 +165,7 @@ function DrawerNavigate(){
         }}
        />
 
-<Drawer.Screen
+<Drawar.Screen
         name="Recruiter Hide Profile"        
         component={RHide}
         options={{
@@ -141,7 +177,7 @@ function DrawerNavigate(){
         }}
       />
 
-<Drawer.Screen
+<Drawar.Screen
         name="Recruiter Delete Account"        
         component={Rdelete}
         options={{
@@ -153,7 +189,16 @@ function DrawerNavigate(){
         }}
       />
 
-
+<Drawar.Screen
+        name="Recruiter Logout"        
+        component={RLogout}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+         
+        }}
+      />
 
      
     </Drawar.Navigator>
@@ -209,7 +254,7 @@ function DrawerNavigator() {
         }}
       />*/}
 
-<Draw.Screen
+<Drawer.Screen
         name="Uploads"
         component={Fuploads}
         options={{

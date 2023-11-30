@@ -7,10 +7,9 @@ const Success = ({User,Token,route}) => {
 
 return(
 <View style={styles.screen}>    
-<View style={styles.headerStyle}>
-       {/* Header reusable component*/ }
-       {/*<Header title="Login Page" style={styles.headerTitle}/>*/}
-       <Text style={styles.headerTitle}>Freelancer Ad posted successfully</Text>
+<View style={styles.textCont}>
+      
+       <Text style={styles.textStyle}>Freelancer Ad posted successfully</Text>
        </View>
 </View>
 )
@@ -47,6 +46,22 @@ headerTitle:{
   fontWeight:'bold',
   color:'#967E76'
 },
+textCont:{
+  
+  justifyContent:'center',
+  alignItems:'center'
+ },
+
+ textStyle:{
+   fontFamily:'OpenSans-Bold',
+   fontSize:18,
+   fontWeight:'bold',
+   color:'#FC6C85',
+   margin:20
+
+
+ },
+
 
 
 });

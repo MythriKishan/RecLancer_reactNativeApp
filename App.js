@@ -67,6 +67,8 @@ import RHide from './screens/Recruiter/RHide';
 import Rdelete from './screens/Recruiter/Rdelete';
 import RUploads from './screens/Recruiter/RUploads';
 import RecMLogin from './screens/RecMLogin';
+import Fpostscreen1 from './screens/Freelancer/Fpostscreen1';
+import Fpostscreen2 from './screens/Freelancer/Fpostscreen2';
 
 
 const Stack = createNativeStackNavigator();
@@ -77,14 +79,13 @@ function DrawerNavigate(){
   return (
     <Drawar.Navigator    
     screenOptions={{       
-      headerStyle: { backgroundColor: '#351401' },
-      headerTintColor: 'white',
-      //sceneContainerStyle: { backgroundColor: '#3f2f25' },
-      sceneContainerStyle: { backgroundColor: '#FFFBE9' },
-      drawerContentStyle: { backgroundColor: '#351401' },       
+      headerStyle: { backgroundColor: '#413C69' },
+      headerTintColor: 'white',     
+      sceneContainerStyle: { backgroundColor: '#C5DFF8F' },
+      drawerContentStyle: { backgroundColor: '#413C69' },       
       drawerInactiveTintColor: 'white',
       drawerActiveTintColor: '#351401',
-      drawerActiveBackgroundColor: '#e4baa1',
+      drawerActiveBackgroundColor: '#E0F4FF',
     }}
   >
        <Drawar.Screen 
@@ -210,16 +211,15 @@ function DrawerNavigate(){
 function DrawerNavigator() {
   return (
     <Drawer.Navigator
-      screenOptions={{       
-        headerStyle: { backgroundColor: '#351401' },
-        headerTintColor: 'white',
-        //sceneContainerStyle: { backgroundColor: '#3f2f25' },
-        sceneContainerStyle: { backgroundColor: '#FFFBE9' },
-        drawerContentStyle: { backgroundColor: '#351401' },       
-        drawerInactiveTintColor: 'white',
-        drawerActiveTintColor: '#351401',
-        drawerActiveBackgroundColor: '#e4baa1',
-      }}
+    screenOptions={{       
+      headerStyle: { backgroundColor: '#413C69' },
+      headerTintColor: 'white',     
+      sceneContainerStyle: { backgroundColor: '#C5DFF8F' },
+      drawerContentStyle: { backgroundColor: '#413C69' },       
+      drawerInactiveTintColor: 'white',
+      drawerActiveTintColor: '#351401',
+      drawerActiveBackgroundColor: '#E0F4FF',
+    }}
     >
 
        <Drawer.Screen
@@ -243,17 +243,28 @@ function DrawerNavigator() {
         }}
       />
 
-{/*<Draw.Screen
-        name="Uploads"
-        component={UploadImages}
+   {/*<Drawer.Screen
+        name="Freelancer PostAd"
+        component={Fpostscreen1}
         options={{
-          title: 'Upload Images',
-          drawerItemStyle: { display: 'none' },
           drawerIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
           ),
         }}
       />*/}
+
+      {/*<Drawer.Screen
+        name="Freelancer PostAd Screen 2"
+        component={Fpostscreen2}       
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),
+          drawerItemStyle: { display: 'none' },
+        }}
+      />*/}
+
+
 
 <Drawer.Screen
         name="Uploads"
@@ -327,7 +338,7 @@ function DrawerNavigator() {
       />
 
 
-<Drawer.Screen
+{/*<Drawer.Screen
         name="Hide Profile"        
         component={Hide}
         options={{
@@ -337,9 +348,9 @@ function DrawerNavigator() {
           drawerItemStyle: { display: 'none' }
   
         }}
-      />
+      />*/}
 
-<Drawer.Screen
+{/*<Drawer.Screen
         name="Delete Account"        
         component={Fdelete}
         options={{
@@ -349,7 +360,7 @@ function DrawerNavigator() {
           drawerItemStyle: { display: 'none' }
   
         }}
-      />
+      />*/}
       
 
       {/*<Drawer.Screen
@@ -423,12 +434,12 @@ else{
       <StatusBar style="light" />
       <NavigationContainer>
        <Provider store={store}>
-        <Stack.Navigator
+       <Stack.Navigator
           screenOptions={{
-            headerStyle: { backgroundColor: '#351401' },
-            headerTintColor: 'white',
-           // contentStyle: { backgroundColor: '#3f2f25' },
-           contentStyle:{ backgroundColor: '#FFFBE9'}
+            headerStyle: { backgroundColor: '#413C69' },            
+            headerTintColor: 'white',         
+            contentStyle:{backgroundColor:'#C5DFF8F'}
+           
           }}
         >
           <Stack.Screen name="Home" component={Home} /> 
@@ -457,6 +468,7 @@ else{
           }}  
           />
 
+    <Stack.Screen name="Freelancer PostAd Screen 2" component={Fpostscreen2}/>
     <Stack.Screen name="Freelancer Result" component={FreeResults} />
     <Stack.Screen name="Freelancer Details" component={FDetails} />
     <Stack.Screen name="Recruiter Edit Ad" component={Redit_ad} />
@@ -468,6 +480,8 @@ else{
     <Stack.Screen name="Freelancer Edit Image" component={EditImage} />
     <Stack.Screen name="Recruiter Edit Image" component={REditImages} />
     <Stack.Screen name="ImageZoom" component={(ImageZoom)}/>
+    <Stack.Screen name="Hide Profile" component={Hide} />
+    <Stack.Screen name="Delete Account" component={Fdelete}/>
     
 
         </Stack.Navigator>

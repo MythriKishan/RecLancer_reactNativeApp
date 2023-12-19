@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { Alert, StyleSheet,Text,View } from "react-native";
+import { Alert, StyleSheet,Text,View,TouchableOpacity} from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
 import appstate from '../appreducers';
@@ -93,8 +93,7 @@ const RStatusAd = ({User,Token,route,navigation}) => {
        return(
         <View style={styles.screen}> 
         <View style={styles.headerStyle}>
-                        {/* Header reusable component*/}
-                        <Header title="Search" style={styles.headerTitle} />
+        <Text style={styles.headerText}>Change Status</Text>
                     </View>
 
                     
@@ -118,11 +117,10 @@ const RStatusAd = ({User,Token,route,navigation}) => {
                         />                 
                       
         
-        
-                    <View style={styles.btnHolder}>
-                            <Buttons text="Submit" onPress={validate}/>
-                            <Buttons text="Cancel" />
-                    </View>
+                      <View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={validate}><Text style={styles.btnText}>Submit</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     </View>     
         
         </View>
         )
@@ -148,7 +146,7 @@ const mapDispatchToProps = dispatch => {
   )(RStatusAd)
 
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     screen: {
         flex: 1,
         margin: 20
@@ -221,7 +219,39 @@ const styles = StyleSheet.create({
       fontFamily:'OpenSans-bold',
       color:'red',
       paddingLeft:20
-     }
+     },
+     headerText:{               
+      fontFamily:'OpenSans-Bold',
+      fontSize:20,
+      fontWeight:'bold',       
+      color:'#23211d'
+      //color:'#363062'      
+  },
+  btnText:{
+    color:'#FFFFFF',
+    fontWeight:'bold',
+    fontSize:16
+},
+btnCont:{
+    flexDirection:"row",
+    justifyContent:'space-evenly',
+    alignItems:'center'
+},
+ button: {
+  marginTop: 30,
+  width: '40%',
+  padding: 20,
+  justifyContent:'center',
+  alignItems:'center',        
+  //backgroundColor: '#413C69',
+  backgroundColor:'#413C69',
+  borderRadius:8,
+  shadowColor: 'rgba(0,0,0, .4)', // IOS
+  shadowOffset: { height: 1, width: 1 }, // IOS
+  shadowOpacity: 1, // IOS
+  shadowRadius: 1, //IOS        
+  elevation: 2, // Android
+},
 
 
 });

@@ -211,7 +211,7 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#E76161" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#C5DFF8F" }}>
     <ScrollView showsVerticalScrollIndicator={false}>
     <View
         style={{
@@ -332,12 +332,12 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
 
         <TouchableOpacity disabled={!load ? false : true} onPress={pickImage}>
           <View style={styles.ImageContainer}>
-          {image == "" ? <Text style={{color:'white',fontWeight:'600',fontSize:14}}>Select a Photo/Video</Text> : null}
+          {image == "" ? <Text style={{color:'#413C69',fontWeight:'600',fontSize:14}}>Select a Photo/Video</Text> : null}
           </View>
         </TouchableOpacity>
         <TouchableOpacity disabled={!load ? false : true} onPress={pickAudio}>
         <View style={[styles.ImageContainer, { marginTop: 20 }]}>
-            {image == "" ? <Text style={{color:'white',fontWeight:'600',fontSize:14}}>Select a Audio</Text> : null}
+            {image == "" ? <Text style={{color:'#413C69',fontWeight:'600',fontSize:14}}>Select a Audio</Text> : null}
           </View>
         </TouchableOpacity>
 
@@ -350,7 +350,7 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
           {load ? (
             <ActivityIndicator style={styles.load} size={"small"} />
           ) : (
-            <Text style={styles.TextStyle}>Upload</Text>
+            <Text style={styles.btnText}>Upload</Text>
           )}
         </TouchableOpacity>
       </View>
@@ -433,5 +433,10 @@ const styles = StyleSheet.create({
       shadowOffset: { width: 0, height: 2 },
       shadowRadius: 8,
       elevation: 3,
+  },
+  btnText:{
+    color:'#FFFFFF',
+    fontWeight:'bold',
+    fontSize:16
   },
 });

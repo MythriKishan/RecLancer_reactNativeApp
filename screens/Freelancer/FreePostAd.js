@@ -500,11 +500,9 @@ const FreePostAd = ({User,Token,route,navigation}) => {
         <View style={styles.screen}>
           
              <ScrollView>
-                <View style={styles.headerStyle}>
-                    {/* Header reusable component*/}
-                    <Header title="Freelancer Post Ad" style={styles.headerTitle} />
-
-                </View>
+             <View style={styles.headerStyle}>      
+       <Text style={styles.headerText}>Create ypur Profile</Text>
+       </View>
                  
                 <TextInput
                     style={styles.inputStyle}
@@ -810,6 +808,13 @@ const styles = StyleSheet.create({
             alignItems: 'center',
     
         },
+        headerText:{               
+          fontFamily:'OpenSans-Bold',
+          fontSize:20,
+          fontWeight:'bold',       
+          color:'#23211d'
+          //color:'#363062'      
+      },
         headerTitle: {
             justifyContent: 'center',
             alignItems: 'center',

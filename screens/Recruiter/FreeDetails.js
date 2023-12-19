@@ -208,9 +208,9 @@ card: {
   //alignItems: 'center', // Centered horizontally
 },
 labelTitle: {
-  fontSize:16,
+  fontSize:18,
   fontWeight:'700',
-  color:'black'
+  color:'#5F264A'
 
 }
 

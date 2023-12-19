@@ -104,7 +104,7 @@ const REditImage = ({ User, navigation, route, Token }) => {
           });
         } else {
           Alert.alert(
-            "Please select photo lessthen 4Mb and video lessthen 10Mb "
+            "Please select photo less then 4Mb and video lessthen 10Mb "
           );
         }
       });

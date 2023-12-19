@@ -87,37 +87,22 @@ const FDetails = ({ User, Token, navigation, route }) => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#bfdfb1" }}>
-      <View
+    <SafeAreaView style={{ flex: 1,backgroundColor: "#C5DFF8F"  }}>
+       <ScrollView showsVerticalScrollIndicator={false}>
+        <View
         style={{
           flex: 1,
-          backgroundColor: "#a5ef96",
-          marginHorizontal: 10,
-          marginBottom: 10,
-        }}
-      >
-        <ScrollView style={{ backgroundColor: "#fff", flex: 1, marginTop: 0 }}>
-          <View
-            style={{
-              margin: 10,
-              backgroundColor: "#4aa567",
-              height: 40,
-              width: 300,
-              borderRadius: 15,
-              justifyContent: "center",
-              alignSelf: "center",
-            }}
-            activeOpacity={0.5}
-          >
-            <Text
+        }}>      
+      
+           <Text
               style={{
-                fontSize: 16,
+                fontSize: 20,
                 textAlign: "center",
-                color: "#fff",
+                color: "#413C69",
                 fontWeight: "bold",
               }}
             >
-              Portfolio
+           Feelancer Profile
             </Text>
           </View>
           <FlatList
@@ -307,7 +292,7 @@ const FDetails = ({ User, Token, navigation, route }) => {
 
 
         </ScrollView>
-      </View>
+      
     </SafeAreaView>
   );
 
@@ -400,20 +385,20 @@ const styles = StyleSheet.create({
    sectionTitle: {
      fontSize: 14,
      fontWeight: '600',
-     color: Colors.white,
+     color: '#413C69',
    },
    card: {
      marginBottom:10,
      height:100,
      width: '100%',
-     backgroundColor: '#f18484',
+     backgroundColor: '#EEEEEE',
      //justifyContent: 'center', //Centered vertically
      //alignItems: 'center', // Centered horizontally
    },
    labelTitle: {
-     fontSize:16,
-     fontWeight:'700',
-     color:'black'
-   
-   }
+    fontSize:18,
+    fontWeight:'700',
+    color:'#5F264A'
+  
+  }
 });

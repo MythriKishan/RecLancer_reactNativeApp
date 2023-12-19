@@ -1,5 +1,5 @@
 import React, { Component,useEffect,useState,useRef } from "react";
-import { StyleSheet,View,Text,Button, Alert ,Pressable} from "react-native";
+import { StyleSheet,View,Text,Button, Alert ,Pressable,TouchableOpacity} from "react-native";
 import RegInput from "../components/RegInput";
 import Category from "../models/category";
 import Header from "../components/Header";
@@ -30,34 +30,7 @@ function FreeReg({route}){
 
    const RegHandler = () => {
 
-    /**Email Validation **/
-    /*let reg_mail = /^\S+@\S+\.\S+$/; 
-    if(email.trim() === "")
-    {
-      seteError('Email is Required!');
-    }
-    else if(reg_mail.test(email) === false)    
-    {
-      seteError('Enter Valid email Id!');
-      }  
-    else{
-      seteError('');
-    }*/
-
-    /**Mobile Validation **/
-   /* let reg_mob = /^[0-9]{10}$/;
-    if(mob.trim() === "")
-    {
-      setmError('Mobile is Required!');
-    }
-    else if(reg_mob.test(mob) === false)    
-    {
-      setmError('Enter Valid Mobile Number!');
-      }  
-    else{
-      setmError('');
-    }*/
-
+    
     /*Password Validation*/
     let reg_pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
     if(pass.trim() === "")
@@ -127,10 +100,10 @@ function FreeReg({route}){
 <View style={styles.headerStyle}>
        {/* Header reusable component*/ }
        {/*<Header title="Login Page" style={styles.headerTitle}/>*/}
-       <Text style={styles.headerTitle}>Freelancer Register</Text>
+       <Text style={styles.headerText}>Register As Freelancer</Text>
        </View>
 
-        <Text style={styles.titleStyle}>Mobile</Text>
+        <Text style={styles.titleStyle}>Mobile<Text style={{color: 'red'}}> *</Text></Text>
         <PhoneInput
         ref={phoneInput}
         defaultValue={phoneNumber}
@@ -156,17 +129,24 @@ function FreeReg({route}){
       />
       <Text style={styles.errorText}>{mError}</Text>
 
-      <Text style={styles.titleStyle}>Email</Text>
+      <Text style={styles.titleStyle}>Email<Text style={{color: 'red'}}> *</Text></Text>
         <TextInput
           style={styles.inputStyle}         
-          label="Email"
-          theme={{colors: {primary: '#069A8E'}}}
+          theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+       mode="outlined"
+       //label="Email"
+       label={
+        <Text>
+             Email
+             <Text style={{color: 'red'}}> *</Text>
+        </Text>
+       }
           //placeholder = "Enter Email"
           onChangeText={(email) => setEmail(email)}
           onFocus={()=>{
             if(phoneNumber != '')
             {
-              let reg_mob = /^[0-9]{10}$/;
+             let reg_mob = /^[0-9]{10}$/;
              if(reg_mob.test(phoneNumber) === false)    
               {
                 setmError('Enter Valid Mobile Number!');
@@ -210,12 +190,18 @@ function FreeReg({route}){
           }}
         />*/}
        
-       <Text style={styles.titleStyle}>Password</Text>
+       <Text style={styles.titleStyle}>Password<Text style={{color: 'red'}}> *</Text></Text>
          <TextInput
           style={styles.inputStyle}
-          label="Password"
-          theme={{colors: {primary: '#069A8E'}}}
-          //placeholder = "Enter Email"
+          theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+          mode="outlined"
+          //label="Email"
+          label={
+           <Text>
+                Password
+                <Text style={{color: 'red'}}> *</Text>
+           </Text>
+          }
           onChangeText={(pass) => setPass(pass)}
           onFocus={()=>{
             let reg_mail = /^\S+@\S+\.\S+$/;
@@ -259,16 +245,13 @@ function FreeReg({route}){
           onChangeText={(cpass) => setCPass(cpass)}
         />*/}
 
-          {/*<Button title="Login" 
-          onPress={LoginHandle}/>*/}
-          <View style={styles.btnHolder}>
-          {/*<Pressable style={styles.button} onPress={() => buttonPress()}>
-        <Text style={styles.continueText}>Get Phone Number</Text>
-        </Pressable>*/}
-          <Buttons text="Submit" onPress={RegHandler}/>
-          <Buttons text="Cancel" onPress={cancelHandler}/>
-          </View>
          
+<View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={RegHandler}><Text style={styles.btnText}>Register</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} onPress={cancelHandler}><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     </View>
+          
+        
  </View>
        
     )
@@ -276,70 +259,86 @@ function FreeReg({route}){
 
 }
 
-const styles = StyleSheet.create({
-
-    screen:{
-        flex:1,        
-        margin:20,
-        backgroundColor:'#F4EAD5'
-    },
-    headerStyle:{
-      justifyContent:'center',
-      alignItems:'center',      
+const styles= StyleSheet.create({
+  screen:{
+    flex:1,
+    margin:20
   },
-  headerTitle:{     
+  headerStyle:{    
+   justifyContent:'center',
+   alignItems:'center'
+  },
+  headerText:{               
       fontFamily:'OpenSans-Bold',
       fontSize:20,
-      fontWeight:'bold',
-      color:'#967E76'
+      fontWeight:'bold',       
+      color:'#23211d'
+      //color:'#363062'      
   },
-  inputStyle:{
-    margin:15,
-    width:'80%',
-    height:40,
-    borderColor:'#D7C0AE',
-    borderBottomColor: "#65451F",
-    borderRadius:10,
-    underlineColorAndroid:"transparent",
-    borderWidth:1,
-    backgroundColor:'#FFFFFF',
-
-},
-    btnHolder:{
-    flexDirection:'row',
-    justifyContent:'space-evenly',
-    alignItems:'stretch'
+  formCont:{       
+      justifyContent:'center',
+      alignItems:'center',
+      borderColor:'blue',
+  },
+  phoneContainer: {
+      width: '80%',
+      height: 50,
+      borderRadius:4
     },
-    errorText:{
-        fontSize:12,
-        fontFamily:'OpenSans-bold',
-        color:'red'
-       },
-       phoneContainer: {
-        width: '75%',
-        height: 50,
-      },
-      button: {
-        marginTop: 30,
-        width: '75%',
-        padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'green',
-      },
-      textInput: {
-        paddingVertical: 0,
-      },
-      titleStyle:{
-        margin:20,
-        color:'#6B240C',
-        fontFamily:'OpenSans-Bold',
-        fontSize:18,
-        fontWeight:'bold'
+    button: {
+      marginTop: 30,
+      width: '40%',
+      padding: 20,
+      justifyContent:'center',
+      alignItems:'center',        
+      //backgroundColor: '#413C69',
+      backgroundColor:'#413C69',
+      borderRadius:8,
+      shadowColor: 'rgba(0,0,0, .4)', // IOS
+      shadowOffset: { height: 1, width: 1 }, // IOS
+      shadowOpacity: 1, // IOS
+      shadowRadius: 1, //IOS        
+      elevation: 2, // Android
+    },
+    textInput: {
+      paddingVertical: 0,
+    },
+    titleStyle:{
+      margin:12,
+      //color:'#413C69',
+      fontStyle: 'italic',
+      color:'#23211d',
+      fontFamily:'OpenSans-Bold',
+      fontSize:18,
+      fontWeight:'800'
+    },
+    inputStyle:{            
+      width:'80%',
+      height:50,        
+      backgroundColor:'#FFFFFF',
+      outlineColor:'white',
+      activeoutlineColor:'#6B240C',
+      borderRadius:1,
+      borderColor:'#C5DFF8'    
+  },
+  btnText:{
+      color:'#FFFFFF',
+      fontWeight:'bold',
+      fontSize:16
+  },
+  btnCont:{
+      flexDirection:"row",
+      justifyContent:'space-evenly',
+      alignItems:'center'
+  },
+  errorText:{
+    fontSize:12,
+    fontFamily:'OpenSans-bold',
+    color:'red'
+   }
 
-      }
 
-});
 
+})
 export default FreeReg;
  

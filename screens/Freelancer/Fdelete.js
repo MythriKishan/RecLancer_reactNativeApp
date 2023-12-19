@@ -53,16 +53,19 @@ const Fdelete = ({User,Token,route,navigation}) => {
 
           <Text style={styles.errorStyle}>User {User} are you sure you want to Delete this Account?</Text>
 
-      <View style={styles.Btnrow}>
+     {/* <View style={styles.Btnrow}>
 
         <TouchableOpacity onPress={DeleteHandler} style={styles.btnStyle}>
           <Text style={styles.textStyle}>Yes</Text>
-        </TouchableOpacity> 
+    </TouchableOpacity> */}
         {/*<TouchableOpacity onPress={cancelHandler} style={styles.btnStyle}>
           <Text style={styles.textStyle}>No</Text>
     </TouchableOpacity>*/}
-      </View>
-   
+
+<View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={DeleteHandler}><Text style={styles.btnText}>Yes</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>No</Text></TouchableOpacity>
+     </View>   
           
        
 
@@ -145,6 +148,31 @@ const styles = StyleSheet.create({
         fontSize: 16
     
       },
-     
+      btnText:{
+        color:'#FFFFFF',
+        fontWeight:'bold',
+        fontSize:16
+    },
+    btnCont:{
+        flexDirection:"row",
+        justifyContent:'space-evenly',
+        alignItems:'center'
+    },
+   
+     button: {
+      marginTop: 30,
+      width: '40%',
+      padding: 20,
+      justifyContent:'center',
+      alignItems:'center',        
+      //backgroundColor: '#413C69',
+      backgroundColor:'#413C69',
+      borderRadius:8,
+      shadowColor: 'rgba(0,0,0, .4)', // IOS
+      shadowOffset: { height: 1, width: 1 }, // IOS
+      shadowOpacity: 1, // IOS
+      shadowRadius: 1, //IOS        
+      elevation: 2, // Android
+    },
 });
 

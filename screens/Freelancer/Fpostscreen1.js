@@ -23,7 +23,7 @@ import axios from 'axios';
 //import "react-datepicker/dist/react-datepicker.css";
 //import MultipleDatePicker from 'react-multiple-datepicker';
 
-const FreePostAd = ({User,Token,route,navigation}) => {
+const Fpostscreen1 = ({User,Token,route,navigation}) => {
 
   const [datastate,setDatastate] =  useState([]);
   const [datagen,setDatagen] = useState([]);
@@ -416,26 +416,13 @@ const FreePostAd = ({User,Token,route,navigation}) => {
 
     if((name != "") || (email != "") || (mobile != ""))   {
     
-        navigation.navigate('Uploads',
+        navigation.navigate('Freelancer PostAd Screen 2',
             {id : User,       
             name: name,
             email : email,       
-            mobile :mobile,              
-            prof : ptitle,
+            mobile :mobile,            
             st : st,
-            ct : cat,
-            sub:sub,
-            gen: gen, 
-            wt : wt,
-            pskill : pskills,
-            ex : exp,
-            sskill : sskills,         
-            pr : prates,       
-            pre : pref,
-            s_date:startDate,
-            e_date:endDate
-
-            });
+       });
 
     }
   }
@@ -474,6 +461,7 @@ const FreePostAd = ({User,Token,route,navigation}) => {
        {/* Header reusable component*/ }
        {/*<Header title="Login Page" style={styles.headerTitle}/>*/}
        <Text style={styles.headerText}>Create your Profile</Text>
+       <Text style={styles.headerText}>1/3</Text>
        </View>
        <Text style={styles.titleStyle}>Name<Text style={{color: 'red'}}> *</Text></Text>
                 <TextInput
@@ -541,7 +529,39 @@ const FreePostAd = ({User,Token,route,navigation}) => {
                   }
                 }
                 />
-                <Text style={styles.errorText}>{mobileError}</Text>
+<Text style={styles.errorText}>{mobileError}</Text>
+
+<Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>
+                <Dropdown
+                     style={styles.selectStyle}
+                     placeholderStyle={styles.placeholderStyle}
+                     //selectedTextStyle={styles.selectedTextStyle}          
+                     iconStyle={styles.iconStyle}
+                     data={datagen}         
+                     maxHeight={300}
+                     labelField="label"
+                     valueField="value"
+                     placeholder='Select Gender'
+                     //searchPlaceholder="Search..."
+                     onChange={item => 
+                       setGen(item.value)}   
+                       onFocus={()=>{
+                        if(cat === null)
+                        {
+                          setCatError('Select Category');
+                        }                      
+                       
+                        else{
+                            setCatError('');
+                            
+                        }
+
+                      }} 
+
+                       value={gen}
+                />
+                 <Text style={styles.errorText}>{gError}</Text>
+                
                 <Text style={styles.titleStyle}>Professional Title</Text>
                 <TextInput
                     style={styles.textInputStyle}
@@ -603,13 +623,7 @@ const FreePostAd = ({User,Token,route,navigation}) => {
            />       
           <Text style={styles.errorText}>{stError}</Text>
 
-                {/*<Dropdown
-                    placeholder="Select City"
-                    onChangeText={(city) => setCt(city)}
-                    style={styles.inputStyle}
-          />*/}
-
-               <Text style={styles.titleStyle}>Category<Text style={{color: 'red'}}> *</Text></Text>
+          <Text style={styles.titleStyle}>Category<Text style={{color: 'red'}}> *</Text></Text>
                 <Dropdown
                    style={styles.selectStyle}
                     placeholderStyle={styles.placeholderStyle}
@@ -656,244 +670,6 @@ const FreePostAd = ({User,Token,route,navigation}) => {
                     }}    
 
                 />
-              <Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>
-                <Dropdown
-                     style={styles.selectStyle}
-                     placeholderStyle={styles.placeholderStyle}
-                     //selectedTextStyle={styles.selectedTextStyle}          
-                     iconStyle={styles.iconStyle}
-                     data={datagen}         
-                     maxHeight={300}
-                     labelField="label"
-                     valueField="value"
-                     placeholder='Select Gender'
-                     //searchPlaceholder="Search..."
-                     onChange={item => 
-                       setGen(item.value)}   
-                       onFocus={()=>{
-                        if(cat === null)
-                        {
-                          setCatError('Select Category');
-                        }                      
-                       
-                        else{
-                            setCatError('');
-                            
-                        }
-
-                      }} 
-
-                       value={gen}
-                />
-                 <Text style={styles.errorText}>{gError}</Text>
-
-                 <Text style={styles.titleStyle}>WorkType<Text style={{color: 'red'}}> *</Text></Text>
-                <Dropdown
-                   style={styles.selectStyle}
-                   placeholderStyle={styles.placeholderStyle}
-                   //selectedTextStyle={styles.selectedTextStyle}          
-                   iconStyle={styles.iconStyle}
-                   data={datawt}         
-                   maxHeight={300}
-                   labelField="label"
-                   valueField="value"
-                   placeholder='Select Worktype'
-                   //searchPlaceholder="Search..."
-                   onChange={item => 
-                     setWt(item.value)} 
-                     onFocus={()=>{
-                      if(gen === null || gen === '' || gen === 'Select Gender')
-                      {
-                        setGError('Select Gender');
-                      }    
-                      else if(wt === null || wt === '' || wt === 'Select Worktype')                 
-                     {
-                      setWtError('eelect WorkType');
-                     }
-                      else{
-                          
-                          setGError('');
-                          setWtError('');
-                      }
-                    }
-                  }
-                     value={wt}
-                />
-                   <Text style={styles.errorText}>{wtError}</Text>
-
-                <Text style={styles.titleStyle}>Primary Skills<Text style={{color: 'red'}}> *</Text></Text>
-                <TextInput
-                    style={styles.textInputStyle}                   
-                    label="Primary Skills"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(pskills) => setPSkill(pskills)}
-                    onFocus={()=>{
-                      if(wt === null || wt === '' || wt === 'Select Worktype')
-                      {
-                        setWtError('Select Worktype');
-                      }                     
-                     
-                      else{
-                          
-                          setWtError('');
-                      }
-                    }
-                  }
-                />
-                <Text style={styles.errorText}>{psError}</Text>
-
-                <Text style={styles.titleStyle}>Experience<Text style={{color: 'red'}}> *</Text></Text>
-                <TextInput
-                    style={styles.textInputStyle}                    
-                    label="Experience"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(exp) => setExp(exp)}
-                />
-                <Text style={styles.errorText}>{expError}</Text>
-
-                <Text style={styles.titleStyle}>Secondary Skills</Text>
-                <TextInput
-                    style={styles.textInputStyle}                    
-                    label="Secondary Skills"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(sskills) => setSSkill(sskills)}
-                />
-                <Text style={styles.titleStyle}>Project Rates<Text style={{color: 'red'}}> *</Text></Text>
-                <TextInput
-                    style={styles.textInputStyle}                    
-                    label="Project Rates"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(prates) => setPrates(prates)}
-                />      
-          
-          <Text style={styles.titleStyle}>Start Date<Text style={{color: 'red'}}> *</Text></Text>
-          <Text style={{marginLeft:30,color:'white'}}>Start Date</Text>
-           {/*<Button     
-             
-              onPress={input.showDatepicker}
-                   title={input.date.toLocaleDateString()} />*/}
-                   <View style={styles.inputStyle}>
-            <Text onPress={input.showDatepicker}>{moment(input.date).format('YYYY-MM-DD')}</Text>
-            </View>
-              {input.show && (
-                   <DateTimePicker
-                   style={styles.inputStyle}                  
-                   testID="dateTimePicker1"
-                   value={input.date}
-                   mode={input.mode}
-                   is24Hour={true}
-                   display="default"
-                   onChange={input.onChange}
-                   isDarkModeEnabled='false'                
-                   />
-               )}
-
-<Text style={styles.titleStyle}>End Date<Text style={{color: 'red'}}> *</Text></Text>
-            <Text style={{marginLeft:30,color:'white'}}>End Date</Text>
-           {/* <Button    
-                      
-              onPress={input2.showDatepicker}
-              title={input2.date.toLocaleDateString()} />*/}
-                <View style={styles.inputStyle}>
-            <Text  onPress={input2.showDatepicker}>{moment(input2.date).format('YYYY-MM-DD')}</Text>
-            </View>
-              {input2.show && (
-                   <DateTimePicker
-                   style={styles.inputStyle}                       
-                   testID="dateTimePicker2"
-                   value={input2.date}
-                   mode={input2.mode}
-                   is24Hour={true}
-                   display="default"
-                   onChange={input2.onChange}
-                    />
-
-            
-              )}
-
-<Text style={styles.titleStyle}>Project References</Text>
-            <TextInput
-                    style={styles.textInputStyle}
-                    placeholder="Project References"
-                    label="Project References"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(pref) => setPref(pref)}
-                /> 
-
-             
- {/*<View>
- 
-      <DatePicker
-        onChange={(date) => handleDateChange(date)}
-        selectsStart={true}
-        selected={sdate}
-        startDate={sdate}
-        endDate={edate}
-        inline={true}
-      />
-    
-    </View>*/}
-
-        {/*<Text>{sdate}</Text>
-          <Button title="Show Date Picker" onPress={showDatePicker} />
-         <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"        
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-          />
-         <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Start Date"
-                    onChangeText={(sdate) => setSdate(sdate)}
-                    value={sdate}
-  />*/}
-
-
-               {/*<DateTimePickerModal                   
-                    mode="date"                    
-                />
-                <View style={{ flexDirection: "row" }}>
-                <TextInput placeholder="Start Date" 
-                        onChangeText={UserSdate => this.setSdate({ UserSdate})}
-                        // Making the Under line Transparent.
-                        underlineColorAndroid='transparent'
-                        style={styles.inputStyle} />
-
-                <TouchableOpacity style={{ position: "absolute", left: "75%", top: "25%" }}
-                       //</View> onPress={() => this.setState({ show: !this.state.show })}
-                       >
-                <AntDesign name="calendar" size={24} color="black" />
-                </TouchableOpacity>
-
-                </View>
-
-               
-                <DateTimePickerModal                   
-                    mode="date"                    
-                />
-                <View style={{ flexDirection: "row" }}>
-                <TextInput placeholder="End Date" 
-                        onChangeText={UserEdate => this.setSdate({ UserEdate})}
-                        // Making the Under line Transparent.
-                        underlineColorAndroid='transparent'
-                        style={styles.inputStyle} />
-
-                <TouchableOpacity style={{ position: "absolute", left: "75%", top: "25%" }}
-                       //</View> onPress={() => this.setState({ show: !this.state.show })}
-                       >
-                <AntDesign name="calendar" size={24} color="black" />
-                </TouchableOpacity>
-
-    </View>*/}
-
-                {/*<Text style={styles.inputStyle}>End Date: </Text>*/}
-
 
               
 
@@ -933,7 +709,7 @@ const mapDispatchToProps = dispatch => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps  
-  )(FreePostAd)
+  )(Fpostscreen1)
   
 const styles = StyleSheet.create({
      screen: {

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import { StyleSheet,Text,View,Button,Alert } from "react-native";
+import { StyleSheet,Text,View,Button,Alert,TouchableOpacity } from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
 import appstate from '../appreducers';
@@ -173,22 +173,20 @@ return(
 <View style={styles.screen}>  
 <ScrollView>  
     <View style={styles.headerStyle}>
-                    {/* Header reusable component*/}
-    {/*<Header title="Freelancer Ad Post Successful" style={styles.headerTitle} />*/}
-    <Text style={styles.headerTitle}>Freelancer Edit Ad</Text>
+                 
+    <Text style={styles.headerText}>Freelancer Edit Ad</Text>
     </View>
     
-       <Text style={styles.textStyle}>Name</Text>
+       <Text style={styles.titleStyle}>Name</Text>
         <TextInput
              style={styles.textInputRN}
-             //label="Name"
-             theme={{ colors: { primary: '#069A8E' } }}
+             theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}             
              defaultValue = {data.name} 
              editable = {false}
              onChangeText={(name) => setName(name)}
         />
 
-        <Text style={styles.textStyle}>Email</Text>
+        <Text style={styles.titleStyle}>Email</Text>
           <TextInput
                     style={styles.textInputRN}                
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -352,10 +350,16 @@ return(
            
              )}*/}
 
-<View style={styles.btnHolder}>
+{/*<View style={styles.btnHolder}>
                     <Buttons text="Submit" onPress={Validate} />
                     <Buttons text="Cancel" />
-                </View>
+            </View>*/}
+
+<View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={Validate}><Text style={styles.btnText}>Submit</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     </View>
+
 
 
 
@@ -435,22 +439,27 @@ const styles = StyleSheet.create({
     },
 
 inputStyle: {
-    margin: 15,
-    width: 250,
-    height: 50,
-    borderColor: 'grey',
-    borderRadius: 4,
-    borderWidth: 1
-
+  margin: 15,
+  width: '80%',
+  height: 50,
+  borderColor: 'grey',
+  borderRadius: 1,
+  borderWidth: 1, 
+  borderColor:'#C5DFF8',
+  outlineColor:'white',
+    activeoutlineColor:'#6B240C',   
 },
 textInputRN:{
-  margin: 15,
-    width: 250,
+    margin: 15,
+    width: '80%',
     height: 50,
     borderColor: 'grey',
-    borderRadius: 4,
+    borderRadius: 1,
     borderWidth: 1,
-    backgroundColor:'lightgreen'
+    backgroundColor:'#D3D3D3',
+    borderColor:'#C5DFF8',
+    outlineColor:'white',
+      activeoutlineColor:'#6B240C',   
 },
 btnHolder: {
     flexDirection: 'row',
@@ -496,7 +505,50 @@ errorText:{
   fontFamily:'OpenSans-bold',
   color:'red',
   paddingLeft:20
- }
+ },
+ headerText:{               
+  fontFamily:'OpenSans-Bold',
+  fontSize:20,
+  fontWeight:'bold',       
+  color:'#23211d'
+  //color:'#363062'      
+},
+titleStyle:{
+  marginTop:8,
+  //color:'#413C69',
+  fontStyle: 'italic',
+  color:'#23211d',
+  fontFamily:'OpenSans-Bold',
+  fontSize:18,
+  fontWeight:'800'
+},
+btnText:{
+  color:'#FFFFFF',
+  fontWeight:'bold',
+  fontSize:16
+},
+btnCont:{
+  flexDirection:"row",
+  justifyContent:'space-evenly',
+  alignItems:'center'
+},
+
+button: {
+marginTop: 30,
+width: '40%',
+padding: 20,
+justifyContent:'center',
+alignItems:'center',        
+//backgroundColor: '#413C69',
+backgroundColor:'#413C69',
+borderRadius:8,
+shadowColor: 'rgba(0,0,0, .4)', // IOS
+shadowOffset: { height: 1, width: 1 }, // IOS
+shadowOpacity: 1, // IOS
+shadowRadius: 1, //IOS        
+elevation: 2, // Android
+},
+  
 
 
 

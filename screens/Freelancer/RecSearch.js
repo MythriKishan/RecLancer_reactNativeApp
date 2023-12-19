@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from "react";
-import { StyleSheet,Text,View,Alert} from "react-native";
+import { StyleSheet,Text,View,Alert,TouchableOpacity} from "react-native";
 import SearchForm from "../../components/SearchForm";
 import RecResults from "./RecResults";
 import * as actions from '../actions';
@@ -187,7 +187,7 @@ return(
                 {/* Header reusable component*/}
                 {/*<Header title="Search" style={styles.headerTitle} />*/}
 
-                <Text style={styles.headerTitle}>Job Search</Text>
+                <Text style={styles.headerText}>Job Search</Text>
             </View>
 
             <Dropdown
@@ -223,8 +223,14 @@ return(
            />
 
             <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Primary Skills"
+                    style={styles.textInputStyle}
+                    label={ <Text>
+                      Primary Skills
+                      <Text style={{color: 'red'}}> *</Text>
+                 </Text>
+          }
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(pskills) => setPSkill(pskills)}
             />
 
@@ -244,10 +250,15 @@ return(
                      value={wt}
                 />
 
-            <View style={styles.btnHolder}>
+            {/*<View style={styles.btnHolder}>
                     <Buttons text="Submit" onPress={Validate} />
                     <Buttons text="Cancel" />
-            </View>
+                   </View>*/}
+
+<View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={Validate}><Text style={styles.btnText}>Search</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     </View>
 
 </View>
 )
@@ -285,13 +296,20 @@ const mapDispatchToProps = dispatch => {
            alignItems: 'center',
    
        },
+       headerText:{               
+        fontFamily:'OpenSans-Bold',
+        fontSize:20,
+        fontWeight:'bold',       
+        color:'#23211d'
+        //color:'#363062'      
+    },
        headerTitle: {
            justifyContent: 'center',
            alignItems: 'center',
        },
        inputStyle: {
            margin: 15,
-           width: 250,
+           width: '80%',
            height: 50,
            borderColor: 'grey',
            borderRadius: 4,
@@ -299,6 +317,16 @@ const mapDispatchToProps = dispatch => {
            backgroundColor:'#FFFFFF',
    
        },
+      textInputStyle:{  
+        margin: 15,          
+        width:'80%',
+        height:50,        
+        backgroundColor:'#FFFFFF',
+        outlineColor:'white',
+        activeoutlineColor:'#6B240C',
+        borderRadius:1,
+        borderColor:'#C5DFF8'    
+    },
        btnHolder: {
            flexDirection: 'row',
            justifyContent: 'space-evenly',
@@ -350,6 +378,32 @@ const mapDispatchToProps = dispatch => {
           fontWeight:'bold',
           color:'#967E76'
       },
+      btnText:{
+        color:'#FFFFFF',
+        fontWeight:'bold',
+        fontSize:16
+    },
+    btnCont:{
+        flexDirection:"row",
+        justifyContent:'space-evenly',
+        alignItems:'center'
+    },
+    button: {
+      marginTop: 30,
+      width: '40%',
+      padding: 20,
+      justifyContent:'center',
+      alignItems:'center',        
+      //backgroundColor: '#413C69',
+      backgroundColor:'#413C69',
+      borderRadius:8,
+      shadowColor: 'rgba(0,0,0, .4)', // IOS
+      shadowOffset: { height: 1, width: 1 }, // IOS
+      shadowOpacity: 1, // IOS
+      shadowRadius: 1, //IOS        
+      elevation: 2, // Android
+    },
+  
       
 
 });

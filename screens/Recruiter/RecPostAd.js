@@ -370,26 +370,30 @@ const RecPostAd = ({User,Token,route,navigation}) => {
   return(
   <View style={styles.screen}>
     <ScrollView>
-   <View style={styles.textCont}>   
+   <View style={styles.headerStyle}>   
 
-    <Text style={styles.textStyle}>Post your Ad here</Text>
+    <Text style={styles.headerText}>Post your Ad here</Text>
   </View>
-              <Text style={styles.titleStyle}>Job Title</Text>
+              <Text style={styles.titleStyle}>Job Title<Text style={{color: 'red'}}> *</Text></Text>
              <TextInput
-                    style={styles.inputStyle}
+                    style={styles.textInputStyle}
                     label="Job Title"
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    //theme={{ colors: { primary: '#069A8E' } }}
                     //placeholder = "Enter Email"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(title) => setTitle(title)}
                 />
                  <Text style={styles.errorText}>{titleError}</Text>
 
-                <Text style={styles.titleStyle}>Name</Text> 
+                <Text style={styles.titleStyle}>Name<Text style={{color: 'red'}}> *</Text></Text> 
                 <TextInput
-                    style={styles.inputStyle}
+                    style={styles.textInputStyle}
                     label="Name"
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    //theme={{ colors: { primary: '#069A8E' } }}
                     //placeholder = "Enter Email"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(name) => setName(name)}
                     onFocus={()=>{
                       if(name === '')
@@ -403,12 +407,14 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                 />
                  <Text style={styles.errorText}>{nameError}</Text>
 
-                 <Text style={styles.titleStyle}>Email</Text>
+                 <Text style={styles.titleStyle}>Email<Text style={{color: 'red'}}> *</Text></Text>
                 <TextInput
-                    style={styles.inputStyle}
+                    style={styles.textInputStyle}
                     label="Email"
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    //theme={{ colors: { primary: '#069A8E' } }}
                     //placeholder = "Enter Email"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(email) => setEmail(email)}
                     onFocus={()=>{
                       let reg_name = /^[a-zA-Z ]*$/;
@@ -434,10 +440,14 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                  <Text style={styles.errorText}>{eError}</Text>
 
                 
-                 <Text style={styles.titleStyle}>Mobile</Text>              
+                 <Text style={styles.titleStyle}>Mobile<Text style={{color: 'red'}}> *</Text></Text>              
                 <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Mobile"
+                    style={styles.textInputStyle}
+                    label="Mobile"
+                    //theme={{ colors: { primary: '#069A8E' } }}
+                    //placeholder = "Enter Email"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(mobile) => setMob(mobile)}
                     onFocus={()=>{
                     let reg_mail = /^\S+@\S+\.\S+$/;
@@ -462,9 +472,9 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                 />
                 <Text style={styles.errorText}>{mobileError}</Text>
 
-                <Text style={styles.titleStyle}>State</Text>      
+                <Text style={styles.titleStyle}>State<Text style={{color: 'red'}}> *</Text></Text>      
                 <Dropdown
-          style={styles.inputStyle}
+          style={styles.selectStyle}
           placeholderStyle={styles.placeholderStyle}
           //selectedTextStyle={styles.selectedTextStyle}          
           iconStyle={styles.iconStyle}
@@ -490,9 +500,9 @@ const RecPostAd = ({User,Token,route,navigation}) => {
            />
             <Text style={styles.errorText}>{stError}</Text>
 
-            <Text style={styles.titleStyle}>Category</Text>   
+            <Text style={styles.titleStyle}>Category<Text style={{color: 'red'}}> *</Text></Text>   
             <Dropdown
-                    style={styles.inputStyle}
+                    style={styles.selectStyle}
                     placeholderStyle={styles.placeholderStyle}
                     //selectedTextStyle={styles.selectedTextStyle}          
                     iconStyle={styles.iconStyle}
@@ -517,9 +527,9 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                 />
                 <Text style={styles.errorText}>{catError}</Text>
 
-                <Text style={styles.titleStyle}>Gender</Text>   
+                <Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>   
                 <Dropdown
-                     style={styles.inputStyle}
+                     style={styles.selectStyle}
                      placeholderStyle={styles.placeholderStyle}
                      //selectedTextStyle={styles.selectedTextStyle}          
                      iconStyle={styles.iconStyle}
@@ -544,9 +554,9 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                 />
                  <Text style={styles.errorText}>{gError}</Text>
 
-                 <Text style={styles.titleStyle}>Work Type</Text>  
+                 <Text style={styles.titleStyle}>Work Type<Text style={{color: 'red'}}> *</Text></Text>  
                  <Dropdown
-                   style={styles.inputStyle}
+                   style={styles.selectStyle}
                    placeholderStyle={styles.placeholderStyle}
                    //selectedTextStyle={styles.selectedTextStyle}          
                    iconStyle={styles.iconStyle}
@@ -571,10 +581,14 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                 />
                 <Text style={styles.errorText}>{wtError}</Text>
 
-                <Text style={styles.titleStyle}>Primary Skills</Text>  
+                <Text style={styles.titleStyle}>Primary Skills<Text style={{color: 'red'}}> *</Text></Text>  
                 <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Primary Skills"
+                    style={styles.textInputStyle}
+                    label="Primary Skills"
+                    //theme={{ colors: { primary: '#069A8E' } }}
+                    //placeholder = "Enter Email"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(pskills) => setPSkill(pskills)}
                     onFocus={()=>{
                       if(pskills === '')
@@ -588,10 +602,14 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                 />
                 <Text style={styles.errorText}>{psError}</Text>
 
-                <Text style={styles.titleStyle}>Experience</Text>  
+                <Text style={styles.titleStyle}>Experience<Text style={{color: 'red'}}> *</Text></Text>  
                 <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Experience"
+                    style={styles.textInputStyle}
+                    label="Education"
+                    //theme={{ colors: { primary: '#069A8E' } }}
+                    //placeholder = "Enter Email"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(exp) => setExp(exp)}
                     onFocus={()=>{
                       if(exp === '')
@@ -607,19 +625,27 @@ const RecPostAd = ({User,Token,route,navigation}) => {
 
                 <Text style={styles.titleStyle}>Secondary Skills</Text>  
                 <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Secondary Skills"
+                    style={styles.textInputStyle}
+                    label="Secondary Skills"
+                    //theme={{ colors: { primary: '#069A8E' } }}
+                    //placeholder = "Enter Email"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(sskills) => setSSkill(sskills)}
                 />
                 
                 <Text style={styles.titleStyle}>Address</Text>  
                 <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Address"
+                    style={styles.textInputStyle}
+                    label="Address"
+                    //theme={{ colors: { primary: '#069A8E' } }}
+                    //placeholder = "Enter Email"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(adr) => setAdr(adr)}
                 />
 
-           <Text style={styles.titleStyle}>Start Date</Text>
+           <Text style={styles.titleStyle}>Start Date<Text style={{color: 'red'}}> *</Text></Text>
            
                    <View style={styles.inputStyle}>
             <Text onPress={input.showDatepicker}>{moment(input.date).format('YYYY-MM-DD')}</Text>
@@ -637,7 +663,7 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                    />
                )}
 
-            <Text style={styles.titleStyle}>End Date</Text>
+            <Text style={styles.titleStyle}>End Date<Text style={{color: 'red'}}> *</Text></Text>
            
                 <View style={styles.inputStyle}>
             <Text  onPress={input2.showDatepicker}>{moment(input2.date).format('YYYY-MM-DD')}</Text>
@@ -659,20 +685,24 @@ const RecPostAd = ({User,Token,route,navigation}) => {
 
                  <Text style={styles.titleStyle}>Project Period</Text>  
                 <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Project Period"
+                    style={styles.textInputStyle}
+                    label="Project Period"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(pper) => setPper(pper)}
                 />
 
 
                 <Text style={styles.titleStyle}>Project Rates</Text>  
                 <TextInput
-                    style={styles.inputStyle}
-                    placeholder="Project Rates"
+                    style={styles.textInputStyle}
+                    label="Project Rates"
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+                    mode="outlined"
                     onChangeText={(prates) => setPrates(prates)}
                 />    
 
-                 <Text style={styles.titleStyle}>Last Date to apply</Text>
+                 <Text style={styles.titleStyle}>Last Date to apply<Text style={{color: 'red'}}> *</Text></Text>
            
                 <View style={styles.inputStyle}>
             <Text  onPress={input3.showDatepicker}>{moment(input3.date).format('YYYY-MM-DD')}</Text>
@@ -692,10 +722,16 @@ const RecPostAd = ({User,Token,route,navigation}) => {
               )}  
 
            
-                <View style={styles.btnHolder}>
+                {/*<View style={styles.btnHolder}>
                     <Buttons text="Submit" onPress={Validate} />
                     <Buttons text="Cancel" />
-                </View>
+              </View>*/}
+
+<View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={Validate}><Text style={styles.btnText}>Next</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     </View>
+
 
 
 
@@ -806,10 +842,87 @@ const styles = StyleSheet.create({
          fontFamily:'OpenSans-Bold',
          fontSize:18,
          fontWeight:'bold',
-         color:'#FC6C85'
-     
+         color:'#FC6C85'    
      
        },
+
+       headerText:{               
+        fontFamily:'OpenSans-Bold',
+        fontSize:20,
+        fontWeight:'bold',       
+        color:'#23211d'
+        //color:'#363062'      
+    },
+    headerStyle: {
+      justifyContent: 'center',
+      alignItems: 'center',
+
+  },
+  inputStyle: {
+    margin: 15,
+    width: '80%',
+    height: 50,
+    borderColor: 'grey',
+    borderRadius: 4,
+    borderWidth: 1
+
+},
+titleStyle:{
+  marginTop:8,
+  //color:'#413C69',
+  fontStyle: 'italic',
+  color:'#23211d',
+  fontFamily:'OpenSans-Bold',
+  fontSize:18,
+  fontWeight:'800'
+},
+textInputStyle:{  
+  margin: 15,          
+  width:'80%',
+  height:50,        
+  backgroundColor:'#FFFFFF',
+  outlineColor:'white',
+  activeoutlineColor:'#6B240C',
+  borderRadius:1,
+  borderColor:'#C5DFF8'    
+},
+selectStyle:
+  {
+    margin: 15,
+    width: '80%',
+    height: 50,
+    borderColor: 'grey',
+    borderRadius: 4,
+    borderWidth: 1,
+    backgroundColor:'#FFFFFF',
+  },
+  btnText:{
+    color:'#FFFFFF',
+    fontWeight:'bold',
+    fontSize:16
+},
+btnCont:{
+    flexDirection:"row",
+    justifyContent:'space-evenly',
+    alignItems:'center'
+},
+
+ button: {
+  marginTop: 30,
+  width: '40%',
+  padding: 20,
+  justifyContent:'center',
+  alignItems:'center',        
+  //backgroundColor: '#413C69',
+  backgroundColor:'#413C69',
+  borderRadius:8,
+  shadowColor: 'rgba(0,0,0, .4)', // IOS
+  shadowOffset: { height: 1, width: 1 }, // IOS
+  shadowOpacity: 1, // IOS
+  shadowRadius: 1, //IOS        
+  elevation: 2, // Android
+},
+  
 
 });
 

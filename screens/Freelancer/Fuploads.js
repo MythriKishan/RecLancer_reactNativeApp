@@ -210,7 +210,7 @@ const Fuploads = ({ User, Token ,navigation, route }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#E76161" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#C5DFF8F" }}>
     <ScrollView showsVerticalScrollIndicator={false}>
     <View
         style={{
@@ -331,12 +331,12 @@ const Fuploads = ({ User, Token ,navigation, route }) => {
 
         <TouchableOpacity disabled={!load ? false : true} onPress={pickImage}>
           <View style={styles.ImageContainer}>
-          {image == "" ? <Text style={{color:'white',fontWeight:'600',fontSize:14}}>Select a Photo/Video</Text> : null}
+          {image == "" ? <Text style={{color:'#413C69',fontWeight:'600',fontSize:14}}>Select a Photo/Video</Text> : null}
           </View>
         </TouchableOpacity>
         <TouchableOpacity disabled={!load ? false : true} onPress={pickAudio}>
         <View style={[styles.ImageContainer, { marginTop: 20 }]}>
-            {image == "" ? <Text style={{color:'white',fontWeight:'600',fontSize:14}}>Select a Audio</Text> : null}
+            {image == "" ? <Text style={{color:'#413C69',fontWeight:'600',fontSize:14}}>Select a Audio</Text> : null}
           </View>
         </TouchableOpacity>
 
@@ -349,7 +349,7 @@ const Fuploads = ({ User, Token ,navigation, route }) => {
           {load ? (
             <ActivityIndicator style={styles.load} size={"small"} />
           ) : (
-            <Text style={styles.TextStyle}>Upload</Text>
+            <Text style={styles.btnText}>Upload</Text>
           )}
         </TouchableOpacity>
       </View>
@@ -380,7 +380,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 250,
     height: 50,
-    backgroundColor: "#565e5e",
+    backgroundColor: "#EEEEEE",
     justifyContent: "center",
     alignSelf: "center",
     alignItems: "center",
@@ -390,12 +390,28 @@ const styles = StyleSheet.create({
   shadowOffset: { width: 0, height: 2 },
   shadowRadius: 8
   },
-  button: {
+  /*button: {
     width: 250,
     backgroundColor: "lightgreen",
     borderRadius: 8,
     alignSelf: "center",
     marginTop: 20,
+  },*/
+  button: {
+    marginTop: 30,
+    width: '40%',
+    padding: 20,
+    alignSelf:'center',
+    justifyContent:'center',
+    alignItems:'center',        
+    //backgroundColor: '#413C69',
+    backgroundColor:'#413C69',
+    borderRadius:8,
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS        
+    elevation: 2, // Android
   },
   TextStyle: {
     color: "black",
@@ -433,4 +449,16 @@ const styles = StyleSheet.create({
       shadowRadius: 8,
       elevation: 3,
   },
+  title:{
+    fontSize:18,
+    fontWeight:'bold',
+    color:'#413C69',      
+    fontStyle: 'italic',
+    textAlign:'center'
+},
+btnText:{
+  color:'#FFFFFF',
+  fontWeight:'bold',
+  fontSize:16
+},
 });

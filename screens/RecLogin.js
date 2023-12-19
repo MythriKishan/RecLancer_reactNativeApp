@@ -1,5 +1,5 @@
 import React, { Component,useEffect,useState } from "react";
-import { StyleSheet,View,Text,Button,Alert } from "react-native";
+import { StyleSheet,View,Text,Button,Alert ,TouchableOpacity} from "react-native";
 import LoginInput from "../components/LoginInput";
 import Category from "../models/category";
 import { TextInput } from "react-native-paper";
@@ -85,24 +85,41 @@ function RecLogin({navigation,route,props}){
     <View style={styles.screen}>
 
     <View style={styles.headerStyle}>
-    {/* Header reusable component*/ }
-    <Header title="Login Page" style={styles.headerTitle}/>
+    <Text style={styles.headerText}>Login as Recruiter</Text>
     </View>
 
     <Text style={styles.errorText}>{error}</Text>
 
+    <Text style={styles.titleStyle}>Email<Text style={{color: 'red'}}> *</Text></Text>
     <TextInput
       style={styles.inputStyle}
-      placeholder = "Enter Email"
-      theme={{colors: {primary: '#069A8E'}}}
-      //placeholder = "Enter Email"
+      theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+       mode="outlined"
+       //label="Email"
+       label={
+        <Text>
+             Email
+             <Text style={{color: 'red'}}> *</Text>
+        </Text>
+        }
+      
       onChangeText={(email) => setEmail(email)}
       />
       <Text style={styles.errorText}>{eError}</Text>          
       
+
+      <Text style={styles.titleStyle}>Password<Text style={{color: 'red'}}> *</Text></Text>
       <TextInput
       style={styles.inputStyle}
-      placeholder = "Enter Password"
+      theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+       mode="outlined"
+       //label="Password"
+       label={
+        <Text>
+             Password
+             <Text style={{color: 'red'}}> *</Text>
+        </Text>
+       }
       secureTextEntry={true}
       onChangeText={(password) => setPass(password)}
       onFocus={()=>{
@@ -135,12 +152,10 @@ function RecLogin({navigation,route,props}){
       />
      <Text style={styles.errorText}>{pError}</Text>
 
-      {/*<Button title="Login" 
-      onPress={LoginHandle}/>*/}
-      <View style={styles.btnHolder}>
-      <Buttons text="Submit" onPress={LoginHandler}/>
-      <Buttons text="Cancel"/>
-      </View>    
+     <View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={LoginHandler}><Text style={styles.btnText}>Login</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     </View>
          
 </View>
    
@@ -172,42 +187,84 @@ mapDispatchToProps
 )(RecLogin)
 
 
-const styles = StyleSheet.create({
-
-    screen:{
-        flex:1,        
-        margin:20
+const styles= StyleSheet.create({
+  screen:{
+    flex:1,
+    margin:20
+  },
+  headerStyle:{    
+   justifyContent:'center',
+   alignItems:'center'
+  },
+  headerText:{               
+      fontFamily:'OpenSans-Bold',
+      fontSize:20,
+      fontWeight:'bold',       
+      color:'#23211d'
+      //color:'#363062'      
+  },
+  formCont:{       
+      justifyContent:'center',
+      alignItems:'center',
+      borderColor:'blue',
+  },
+  phoneContainer: {
+      width: '80%',
+      height: 50,
+      borderRadius:4
     },
-    headerStyle:{
-        justifyContent:'center',
-        alignItems:'center',
-       
+    button: {
+      marginTop: 30,
+      width: '40%',
+      padding: 20,
+      justifyContent:'center',
+      alignItems:'center',        
+      //backgroundColor: '#413C69',
+      backgroundColor:'#413C69',
+      borderRadius:8,
+      shadowColor: 'rgba(0,0,0, .4)', // IOS
+      shadowOffset: { height: 1, width: 1 }, // IOS
+      shadowOpacity: 1, // IOS
+      shadowRadius: 1, //IOS        
+      elevation: 2, // Android
     },
-    headerTitle:{
-        justifyContent:'center',
-        alignItems:'center',
+    textInput: {
+      paddingVertical: 0,
     },
-    inputStyle:{
-      margin:15,
+    titleStyle:{
+      margin:12,
+      //color:'#413C69',
+      fontStyle: 'italic',
+      color:'#23211d',
+      fontFamily:'OpenSans-Bold',
+      fontSize:18,
+      fontWeight:'800'
+    },
+    inputStyle:{            
       width:'80%',
-      height:40,
-      borderColor:'#D7C0AE',
-      borderBottomColor: "#65451F",
-      borderRadius:10,
-      underlineColorAndroid:"transparent",
-      borderWidth:1,
+      height:50,        
       backgroundColor:'#FFFFFF',
+      outlineColor:'white',
+      activeoutlineColor:'#6B240C',
+      borderRadius:1,
+      borderColor:'#C5DFF8'    
+  },
+  btnText:{
+      color:'#FFFFFF',
+      fontWeight:'bold',
+      fontSize:18
+  },
+  btnCont:{
+      flexDirection:"row",
+      justifyContent:'space-evenly',
+      alignItems:'center'
+  },
+  errorText:{
+    fontSize:12,
+    fontFamily:'OpenSans-bold',
+    color:'red'
+   }
 
- },
-    btnHolder:{
-    flexDirection:'row',
-    justifyContent:'space-evenly',
-    alignItems:'stretch'
-    },
-    errorText:{
-     fontSize:12,
-     fontFamily:'OpenSans-bold',
-     color:'red'
-    }
- 
- });
+
+
+})

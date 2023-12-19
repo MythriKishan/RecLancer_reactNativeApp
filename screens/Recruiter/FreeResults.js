@@ -27,10 +27,10 @@ const FreeResults = ({User,Token,route,navigation}) => {
   
     return(
         <TouchableOpacity style={styles.listItem} onPress={()=> getItem(item.ad_id)}>              
-                    <Text style={styles.itemText}>{item.ad_id}</Text>
-                    <Text style={styles.itemText}>{item.name}</Text>
-                    <Text style={styles.itemText}>{item.email}</Text>
-                    <Text style={styles.itemText}>{item.skills}</Text>                                
+                    <Text style={styles.itemText}>AdId:<Text style={styles.title}>{item.ad_id}</Text></Text>
+                    <Text style={styles.itemText}>Name:<Text style={styles.title}>{item.name}</Text></Text>
+                    <Text style={styles.itemText}>Email:<Text style={styles.title}>{item.email}</Text></Text>
+                    <Text style={styles.itemText}>Skills:<Text style={styles.title}>{item.skills}</Text></Text>                                
          </TouchableOpacity>
     )
   }
@@ -138,13 +138,24 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     marginVertical: 4,
     marginHorizontal: 12,
-    backgroundColor: '#e2b497',
+    backgroundColor: '#EEEEEE',
   },
   itemText: {
-    color: '#351401',
-    textAlign: 'center',
+    color: '#65451F',
+    fontSize:20,
+    fontStyle:'normal',
+    fontWeight:'bold',
+    textAlign: 'left',
   },
+ 
   flatlist:{
     padding:0
- }
+ },
+ title:{
+  fontSize:18,
+  fontWeight:'bold',
+  color:'#413C69',      
+  fontStyle: 'italic',
+  textAlign:'center'
+}
 });

@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { StyleSheet,Text,View,Button,Image, Alert } from "react-native";
+import { StyleSheet,Text,View,Button,Image, Alert,TouchableOpacity } from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
 import appstate from '../appreducers';
@@ -42,22 +42,28 @@ return(
 <View style={styles.screen}>
 <View style={{ marginTop: 50 }}>
       <RadioButtonGroup
-        containerStyle={{ marginBottom: 10 }}
+        containerStyle={{ marginBottom: 20 }}
         selected={current}
         onSelected={(value) => setCurrent(value)}
-        radioBackground="green"
+        radioBackground="#413C69"
       >
-        <RadioButtonItem value="1" label="Hide Profile" />
+        <RadioButtonItem value="1" label={ <Text style={{ color: "#000000",fontSize:18,fontWeight:'bold' }}>Hide Profile</Text>} />
         <RadioButtonItem
           value="2"
           label={
-            <Text style={{ color: "red" }}>Delete Account</Text>
+            <Text style={{ color: "#000000",fontSize:18,fontWeight:'bold' }}>Delete Account</Text>
           }
         />
       </RadioButtonGroup>
     </View>
 
-    <Button title="Submit" onPress={submitHandler}></Button>
+    {/*<Button title="Submit" onPress={submitHandler}></Button>*/}
+
+    <View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={submitHandler}><Text style={styles.btnText}>Submit</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     </View>
+
   
 </View>
 )
@@ -119,6 +125,33 @@ const styles = StyleSheet.create({
       color:'#65451F'
       //color:'#FC6C85'    
     },
+    btnText:{
+      color:'#FFFFFF',
+      fontWeight:'bold',
+      fontSize:16
+    },
+    btnCont:{
+      flexDirection:"row",
+      justifyContent:'space-evenly',
+      alignItems:'center'
+    },
+    
+    button: {
+    marginTop: 30,
+    width: '40%',
+    padding: 20,
+    justifyContent:'center',
+    alignItems:'center',        
+    //backgroundColor: '#413C69',
+    backgroundColor:'#413C69',
+    borderRadius:8,
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS        
+    elevation: 2, // Android
+    },
+      
     
     
     });

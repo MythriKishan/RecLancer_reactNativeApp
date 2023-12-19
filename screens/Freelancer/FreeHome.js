@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { StyleSheet,Text,View,Button,Image } from "react-native";
+import { StyleSheet,Text,View,Button,Image,ScrollView,SafeAreaView} from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
 import appstate from '../appreducers';
 import { connect } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
 import RecSearch from "./RecSearch";
-
+import Card from '../../components/Card';
 
 const FreeHome = ({User,Token,route,navigation}) => {
 
@@ -52,6 +52,7 @@ const FreeHome = ({User,Token,route,navigation}) => {
 return(
   
 <View style={styles.screen}>
+  <ScrollView>
 <View style={styles.textCont}>
       <Image
           source={require('../../assets/HomeImg.jpg')}
@@ -64,6 +65,17 @@ return(
       Opportunities don't happen, you create them
       </Text>
      </View>
+
+     <SafeAreaView style={styles.container}>
+        <Card style={styles.card}>          
+          <Text style={styles.sectionTitle}>Mythri</Text>
+          <Text style={styles.sectionTitle}>mythri.kishan4@gmail.com</Text>
+          <Text style={styles.sectionTitle}>+918050929944</Text>
+        </Card>
+        
+
+      </SafeAreaView>
+    
       
 {/*<View style={styles.headerStyle}>
         
@@ -74,6 +86,7 @@ return(
 <Button title="Search Recruiter" onPress={searchPage}/>*/}
       
 </View>
+</ScrollView>
 </View>
 )
 }
@@ -136,6 +149,31 @@ const styles = StyleSheet.create({
       color:'#65451F'
       //color:'#FC6C85'    
     },
+
+    container: {
+      flex: 1,
+      margin: 10,
+      alignItems: 'center', // Centered horizontally
+    },
+    sectionTitle: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: "#413C69",
+    },
+    card: {
+      marginBottom:10,
+      height:100,
+      width: '100%',
+      backgroundColor: '#EEEEEE',
+      //justifyContent: 'center', //Centered vertically
+      //alignItems: 'center', // Centered horizontally
+    },
+    labelTitle: {
+      fontSize:16,
+      fontWeight:'700',
+      color:'black'
+    
+    }
     
     
     });

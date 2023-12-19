@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import { StyleSheet,Text,View,Button,Alert } from "react-native";
+import { StyleSheet,Text,View,Button,Alert,TouchableOpacity } from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
 import appstate from '../appreducers';
@@ -178,147 +178,144 @@ return(
 <View style={styles.screen}>  
 <ScrollView>  
     <View style={styles.headerStyle}>
-                    {/* Header reusable component*/}
-    {/*<Header title="Freelancer Ad Post Successful" style={styles.headerTitle} />*/}
-    <Text style={styles.headerTitle}>Recruiter Edit Ad</Text>
+    <Text style={styles.headerText}>Recruiter Edit Ad</Text>
     </View>
 
-       <Text style={styles.textStyle}>Job Title</Text>
+       <Text style={styles.titleStyle}>Job Title</Text>
        <TextInput
                     style={styles.inputStyle}                   
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.job_title} 
                     onChangeText={(title) => setTitle(title)}
                 />
                  <Text style={styles.errorText}>{titleError}</Text>
     
-       <Text style={styles.textStyle}>Name</Text>
+       <Text style={styles.titleStyle}>Name</Text>
         <TextInput
              style={styles.textInputRN}
-             //label="Name"
-             theme={{ colors: { primary: '#069A8E' } }}
+             theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
              defaultValue = {data.name} 
              editable = {false}
              onChangeText={(name) => setName(name)}
         />
 
-        <Text style={styles.textStyle}>Email</Text>
+        <Text style={styles.titleStyle}>Email</Text>
           <TextInput
                     style={styles.textInputRN}                
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.email} 
                     editable = {false}
                     onChangeText={(email) => setEmail(email)}
                 />
 
-          <Text style={styles.textStyle}>Mobile</Text>
+          <Text style={styles.titleStyle}>Mobile</Text>
           <TextInput
                     style={styles.textInputRN} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.mobilenumber} 
                     editable = {false}
                     onChangeText={(mobile) => setMob(mobile)}
                 />          
             
-          <Text style={styles.textStyle}>State</Text>
+          <Text style={styles.titleStyle}>State</Text>
           <TextInput
                     style={styles.textInputRN} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.Name} 
                     editable = {false}
                     onChangeText={(st) => setSt(st)}
                 />
 
-          <Text style={styles.textStyle}>City</Text>
+          <Text style={styles.titleStyle}>City</Text>
           <TextInput
                     style={styles.inputStyle} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.city_name}  
                     onChangeText={(city) => setCity(city)}                
                 />
 
-          <Text style={styles.textStyle}>Category</Text>
+          <Text style={styles.titleStyle}>Category</Text>
           <TextInput
                     style={styles.textInputRN} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.category} 
                     editable = {false}
                     onChangeText={(cat) => setCat(cat)}
                 />
 
-          <Text style={styles.textStyle}>Subcategory</Text>
+          <Text style={styles.titleStyle}>Subcategory</Text>
           <TextInput
                     style={styles.inputStyle} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.subcategory}                   
                     onChangeText={(sub) => setSub(sub)}
                 />
 
 
-          <Text style={styles.textStyle}>Work Type</Text>
+          <Text style={styles.titleStyle}>Work Type</Text>
           <TextInput
                     style={styles.textInputRN} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.type}
                     editable = {false}                   
                     onChangeText={(wt) => setWt(wt)}
                 />
 
-          <Text style={styles.textStyle}>Gender</Text>
+          <Text style={styles.titleStyle}>Gender</Text>
           <TextInput
                     style={styles.textInputRN} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.gender_type}
                     editable = {false}                   
                     onChangeText={(gen) => setGen(gen)}
                 />
 
-            <Text style={styles.textStyle}>Primary Skills</Text>
+            <Text style={styles.titleStyle}>Primary Skills</Text>
             <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.skills}
                     onChangeText={(pskills) => setPSkill(pskills)}
                 />
              
-             <Text style={styles.textStyle}>Experience</Text>
+             <Text style={styles.titleStyle}>Experience</Text>
                 <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.exp}
                     onChangeText={(exp) => setExp(exp)}
                 />
                 
 
-              <Text style={styles.textStyle}>Secondary Skills</Text>
+              <Text style={styles.titleStyle}>Secondary Skills</Text>
                 <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.sskills}
                     onChangeText={(sskills) => setSSkill(sskills)}
                 />
 
-               <Text style={styles.textStyle}>Project Address</Text>
+               <Text style={styles.titleStyle}>Project Address</Text>
                <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.project_address}
                     onChangeText={(adr) => setAdr(adr)}
                 />
 
-               <Text style={styles.textStyle}>Project Period</Text>
+               <Text style={styles.titleStyle}>Project Period</Text>
                <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.project_period}
                     onChangeText={(pper) => setPper(pper)}
                 />              
                 
 
-              <Text style={styles.textStyle}>Project Rates</Text>
+              <Text style={styles.titleStyle}>Project Rates</Text>
                 <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.project_rates}
                     onChangeText={(prates) => setPrates(prates)}
                 />
@@ -377,10 +374,15 @@ return(
               )}
 
 
-<View style={styles.btnHolder}>
+{/*<View style={styles.btnHolder}>
                     <Buttons text="Submit" onPress={Validate} />
                     <Buttons text="Cancel" />
-                </View>
+              </View>*/}
+
+<View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={Validate}><Text style={styles.btnText}>Submit</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     </View>
 
 
 
@@ -459,24 +461,29 @@ const styles = StyleSheet.create({
      marginLeft:20
     },
 
-inputStyle: {
-    margin: 15,
-    width: 250,
-    height: 50,
-    borderColor: 'grey',
-    borderRadius: 4,
-    borderWidth: 1
-
-},
-textInputRN:{
-  margin: 15,
-    width: 250,
-    height: 50,
-    borderColor: 'grey',
-    borderRadius: 4,
-    borderWidth: 1,
-    backgroundColor:'lightgreen'
-},
+    inputStyle: {
+      margin: 15,
+      width: '80%',
+      height: 50,
+      borderColor: 'grey',
+      borderRadius: 1,
+      borderWidth: 1, 
+      borderColor:'#C5DFF8',
+      outlineColor:'white',
+      activeoutlineColor:'#6B240C',   
+    },
+    textInputRN:{
+        margin: 15,
+        width: '80%',
+        height: 50,
+        borderColor: 'grey',
+        borderRadius: 1,
+        borderWidth: 1,
+        backgroundColor:'#D3D3D3',
+        borderColor:'#C5DFF8',
+        outlineColor:'white',
+          activeoutlineColor:'#6B240C',   
+    },
 btnHolder: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
@@ -521,7 +528,58 @@ errorText:{
   fontFamily:'OpenSans-bold',
   color:'red',
   paddingLeft:20
- }
+ },
+ headerText:{               
+  fontFamily:'OpenSans-Bold',
+  fontSize:20,
+  fontWeight:'bold',       
+  color:'#23211d'
+  //color:'#363062'      
+},
+titleStyle:{
+  marginTop:8,
+  //color:'#413C69',
+  fontStyle: 'italic',
+  color:'#23211d',
+  fontFamily:'OpenSans-Bold',
+  fontSize:18,
+  fontWeight:'800'
+},
+btnText:{
+  color:'#FFFFFF',
+  fontWeight:'bold',
+  fontSize:16
+},
+btnCont:{
+  flexDirection:"row",
+  justifyContent:'space-evenly',
+  alignItems:'center'
+},
+
+button: {
+marginTop: 30,
+width: '40%',
+padding: 20,
+justifyContent:'center',
+alignItems:'center',        
+//backgroundColor: '#413C69',
+backgroundColor:'#413C69',
+borderRadius:8,
+shadowColor: 'rgba(0,0,0, .4)', // IOS
+shadowOffset: { height: 1, width: 1 }, // IOS
+shadowOpacity: 1, // IOS
+shadowRadius: 1, //IOS        
+elevation: 2, // Android
+},
+headerText:{               
+  fontFamily:'OpenSans-Bold',
+  fontSize:20,
+  fontWeight:'bold',       
+  color:'#23211d'
+  //color:'#363062'      
+},
+  
+
 
 
 

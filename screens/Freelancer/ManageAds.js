@@ -78,17 +78,23 @@ const ManageAds = ({User,Token,route,navigation}) =>
   
         return(
             <TouchableOpacity style={styles.listItem} >              
-                        <Text style={styles.itemText}>{item.ad_id}</Text>
-                        <Text style={styles.itemText}>{item.name}</Text>                        
-                        <Text style={styles.itemText}>{item.skills}</Text>
+                        <Text style={styles.itemText}>AdId:<Text style={styles.title}>{item.ad_id}</Text></Text>
+                        <Text style={styles.itemText}>Name:<Text style={styles.title}>{item.name}</Text></Text>                        
+                        <Text style={styles.itemText}>Skills:<Text style={styles.title}>{item.skills}</Text></Text>
                        {/* <Button title="Edit Ad" onPress={()=> editAd(item.ad_id)}/>
                         <Button title="Change Status" onPress={()=> statusAd(item.ad_id)}/> */}
 
-                         <View style={styles.btnHolder}>
-             <Buttons text="Edit Ad" onPress={()=> editAd(item.ad_id)}/>
-             {/*<Buttons text="Status" onPress={()=> statusAd(item.ad_id)}/>*/}
+                         {/*<View style={styles.btnHolder}>
+             <Buttons text="Edit Ad" onPress={()=> editAd(item.ad_id)}/>            
              <Buttons text="Edit Images" onPress={()=> editImg(item.ad_id)}/>
-         </View>                               
+         </View>  */}    
+
+<View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={()=> editAd(item.ad_id)}><Text style={styles.btnText}>Edit Ad</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} onPress={()=> editImg(item.ad_id)}><Text style={styles.btnText}>Edit Image</Text></TouchableOpacity>
+     </View>
+
+
              </TouchableOpacity>
             
         )
@@ -154,14 +160,17 @@ headerTitle: {
 listItem: {
     borderRadius: 6,
     paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingVertical: 8,
     marginVertical: 4,
     marginHorizontal: 12,
-    backgroundColor: '#e2b497',
+    backgroundColor: '#EEEEEE',
   },
   itemText: {
-    color: '#351401',
-    textAlign: 'center',
+    color: '#65451F',
+    fontSize:20,
+    fontStyle:'normal',
+    fontWeight:'bold',
+    textAlign: 'left',
   },
   flatlist:{
     padding:0
@@ -171,7 +180,41 @@ listItem: {
   justifyContent: 'space-evenly',
   alignItems: 'stretch'  
 
+}, 
+title:{
+  fontSize:18,
+  fontWeight:'bold',
+  color:'#413C69',      
+  fontStyle: 'italic',
+  textAlign:'center'
 },
+btnText:{
+  color:'#FFFFFF',
+  fontWeight:'bold',
+  fontSize:16
+},
+btnCont:{
+  flexDirection:"row",
+  justifyContent:'space-evenly',
+  alignItems:'center'
+},
+button: {
+marginTop: 30,
+width: '40%',
+padding: 20,
+justifyContent:'center',
+alignItems:'center',        
+//backgroundColor: '#413C69',
+backgroundColor:'#413C69',
+borderRadius:8,
+shadowColor: 'rgba(0,0,0, .4)', // IOS
+shadowOffset: { height: 1, width: 1 }, // IOS
+shadowOpacity: 1, // IOS
+shadowRadius: 1, //IOS        
+elevation: 2, // Android
+},
+
+
 
 
 });

@@ -26,11 +26,10 @@ const FLogout = ({User,Token,route,navigation}) => {
       
         </View>      
           
-        <View style={styles.btnHolder}>
-                    <Buttons text="Logout" onPress={LogoutHandler} />
-                    
-                </View>
-
+        <View style={styles.btnCont}>
+     <TouchableOpacity style={styles.button} onPress={LogoutHandler}><Text style={styles.btnText}>Logout</Text></TouchableOpacity>
+     
+     </View>   
           
         </View>
        
@@ -72,7 +71,33 @@ const styles = StyleSheet.create({
         fontSize:12,
         fontFamily:'OpenSans-bold',
         color:'red'
-       }
+       },
+       btnText:{
+        color:'#FFFFFF',
+        fontWeight:'bold',
+        fontSize:16
+    },
+    btnCont:{
+        flexDirection:"row",
+        justifyContent:'space-evenly',
+        alignItems:'center'
+    },
+   
+     button: {
+      marginTop: 30,
+      width: '40%',
+      padding: 20,
+      justifyContent:'center',
+      alignItems:'center',        
+      //backgroundColor: '#413C69',
+      backgroundColor:'#413C69',
+      borderRadius:8,
+      shadowColor: 'rgba(0,0,0, .4)', // IOS
+      shadowOffset: { height: 1, width: 1 }, // IOS
+      shadowOpacity: 1, // IOS
+      shadowRadius: 1, //IOS        
+      elevation: 2, // Android
+    },
 
 });
 

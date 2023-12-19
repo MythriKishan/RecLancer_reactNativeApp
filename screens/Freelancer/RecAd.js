@@ -95,7 +95,7 @@ const RDetails = ({ User, Token, navigation, route }) => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#E76161" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#C5DFF8F" }}>
         <ScrollView showsVerticalScrollIndicator={false}>
         <View
         style={{
@@ -106,7 +106,7 @@ const RDetails = ({ User, Token, navigation, route }) => {
               style={{
                 fontSize: 20,
                 textAlign: "center",
-                color: "#fff",
+                color: "#413C69",
                 fontWeight: "bold",
               }}
             >
@@ -306,7 +306,7 @@ const RDetails = ({ User, Token, navigation, route }) => {
      </Card>
      <Card style={styles.card}>
        <Text style={styles.sectionTitle}><Text style={styles.labelTitle}>Project Address:</Text>{data.project_address}</Text>
-       <Text style={styles.sectionTitle}><Text style={styles.labelTitle}>Project Period:</Text>{data.project_period}</Text>
+       <Text style={styles.sectionTitle}><Text style={styles.labelTitle}>Project Period in Months:</Text>{data.project_period}</Text>
        <Text style={styles.sectionTitle}><Text style={styles.labelTitle}>Project Rates/hour:</Text>{data.project_rates}</Text>
      </Card>
      <Card style={styles.card}>
@@ -426,20 +426,20 @@ const styles = StyleSheet.create({
    sectionTitle: {
      fontSize: 14,
      fontWeight: '600',
-     color: Colors.white,
+     color: '#413C69',
    },
    card: {
      marginBottom:10,
      height:100,
      width: '100%',
-     backgroundColor: '#f18484',
+     backgroundColor: '#EEEEEE',
      //justifyContent: 'center', //Centered vertically
      //alignItems: 'center', // Centered horizontally
    },
    labelTitle: {
-     fontSize:16,
+     fontSize:18,
      fontWeight:'700',
-     color:'black'
+     color:'#5F264A'
    
    }
 });

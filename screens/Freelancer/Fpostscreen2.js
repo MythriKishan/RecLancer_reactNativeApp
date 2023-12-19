@@ -23,7 +23,7 @@ import axios from 'axios';
 //import "react-datepicker/dist/react-datepicker.css";
 //import MultipleDatePicker from 'react-multiple-datepicker';
 
-const FreePostAd = ({User,Token,route,navigation}) => {
+const Fpostscreen2 = ({User,Token,route,navigation}) => {
 
   const [datastate,setDatastate] =  useState([]);
   const [datagen,setDatagen] = useState([]);
@@ -474,218 +474,11 @@ const FreePostAd = ({User,Token,route,navigation}) => {
        {/* Header reusable component*/ }
        {/*<Header title="Login Page" style={styles.headerTitle}/>*/}
        <Text style={styles.headerText}>Create your Profile</Text>
-       </View>
-       <Text style={styles.titleStyle}>Name<Text style={{color: 'red'}}> *</Text></Text>
-                <TextInput
-                    style={styles.textInputStyle}
-                    label="Name"
-                    //theme={{ colors: { primary: '#069A8E' } }}
-                    //placeholder = "Enter Email"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(name) => setName(name)}
-                />
-                 <Text style={styles.errorText}>{nameError}</Text>
+       <Text style={styles.headerText}>2/3</Text>
+       </View>     
 
-                 <Text style={styles.titleStyle}>Email<Text style={{color: 'red'}}> *</Text></Text>
-                <TextInput
-                    style={styles.textInputStyle}
-                    label="Email"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(email) => setEmail(email)}
-                    onFocus={()=>{
-                      let reg_name = /^[a-zA-Z ]*$/;
-                  if(reg_name.test(name) === false) {
-                    setNameError("Only Alphabets and Space allowed");   
-                  }
-                  else if(!name){
-                    setNameError("Please enter name");   
-                  }    
-                  else {
-                    setNameError("");   
-                    setName(name);
-                  }
-                
-                      let reg_mail = /^\S+@\S+\.\S+$/;
-                      if (reg_mail.test(email) == false) {
-                        seteError("Enter Valid email ID.");                
-                      }else if(!name){
-                        seteError("Please enter name");      
-                      }else{
-                        setmError("");
-                        setNameError(""); 
-                      }
-                    }
-                    }
-                />
-                 <Text style={styles.errorText}>{eError}</Text>
-
-                 <Text style={styles.titleStyle}>Mobile<Text style={{color: 'red'}}> *</Text></Text>
-                <TextInput
-                    style={styles.textInputStyle}
-                    label="Mobile"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(mobile) => setMob(mobile)}
-                    onFocus={() =>{
-                    let reg_mail = /^\S+@\S+\.\S+$/;
-                    if (reg_mail.test(email) == false) {
-                      seteError("Enter Valid email ID.");                
-                    }else if(!mobile){
-                      seteError("Please enter valid number");      
-                    }else{
-                      seteError("");
-                      setNameError(""); 
-                    }
-                  }
-                }
-                />
-                <Text style={styles.errorText}>{mobileError}</Text>
-                <Text style={styles.titleStyle}>Professional Title</Text>
-                <TextInput
-                    style={styles.textInputStyle}
-                    label="Professional Title"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(ptitle) => setPtitle(ptitle)}
-                    onFocus={() =>{
-                      let reg_mob = /^[0-9]{10}$/;
-                      if(mobile === "")
-                      {
-                        setmError('Enter Mobile number');
-                      }
-                        else if(reg_mob.test(mobile) === false) {
-                          setmError('Enter 10 digit valid Mobile Number!');
-                        }
-                        else {
-                          setmError('');
-                        }
-                      }                     
-                    
-                  }
-                />
-           <Text style={styles.titleStyle}>State<Text style={{color: 'red'}}> *</Text></Text>             
-        <Dropdown
-          style={styles.selectStyle}
-          placeholderStyle={styles.placeholderStyle}             
-          iconStyle={styles.iconStyle}          
-          data={datastate}
-          //data={StateDate}         
-          maxHeight={300}
-          labelField="label"
-          valueField="value"
-          placeholder='Select State'
-          //searchPlaceholder="Search..."
-          onChange={item => 
-           setSt(item.value)} 
-           onFocus={() => {
-            let reg_mob = /^[0-9]{10}$/;
-           if(mobile != "")
-           {
-             setmError('');
-             if(reg_mob.test(mobile) === false) {
-               setmError('Enter 10 digit valid Mobile Number!');
-             }
-             else {
-               setmError('');
-             }
-           }
-           else{
-             setmError('Enter Valid mobile number');
-           }
-           }}
-           
-            //onChange={handleState(item=>item.value)}            
-            //value={item=>item.value}
-            value={st}
-
-           />       
-          <Text style={styles.errorText}>{stError}</Text>
-
-                {/*<Dropdown
-                    placeholder="Select City"
-                    onChangeText={(city) => setCt(city)}
-                    style={styles.inputStyle}
-          />*/}
-
-               <Text style={styles.titleStyle}>Category<Text style={{color: 'red'}}> *</Text></Text>
-                <Dropdown
-                   style={styles.selectStyle}
-                    placeholderStyle={styles.placeholderStyle}
-                    //selectedTextStyle={styles.selectedTextStyle}          
-                    iconStyle={styles.iconStyle}
-                    data={datacat}         
-                    maxHeight={300}
-                    labelField="label"
-                    valueField="value"
-                    placeholder='Select Category'
-                    //searchPlaceholder="Search..."
-                    onChange={item => 
-                      setCat(item.value)} 
-                      onFocus={()=>{
-                        if(st === null || st === '' || st === 'Select State')
-                        {
-                          setStError('Select State');
-                        }
-                        else{
-                          setStError('');
-                        }
-
-                      }}      
-                      value={cat}
-                />
-                    <Text style={styles.errorText}>{catError}</Text>
-
-                <Text style={styles.titleStyle}>Subcatgory</Text>
-                <TextInput
-                    style={styles.textInputStyle}
-                    label="Subcategory"
-                    theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    mode="outlined"
-                    onChangeText={(sub) => setSub(sub)}
-                    onFocus={()=>{
-                      if(cat === null || cat === '' || cat === 'Select Category')
-                      {
-                        setCatError('Select Category');
-                      }
-                      else{
-                        setCatError('');
-                      }
-
-                    }}    
-
-                />
-              <Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>
-                <Dropdown
-                     style={styles.selectStyle}
-                     placeholderStyle={styles.placeholderStyle}
-                     //selectedTextStyle={styles.selectedTextStyle}          
-                     iconStyle={styles.iconStyle}
-                     data={datagen}         
-                     maxHeight={300}
-                     labelField="label"
-                     valueField="value"
-                     placeholder='Select Gender'
-                     //searchPlaceholder="Search..."
-                     onChange={item => 
-                       setGen(item.value)}   
-                       onFocus={()=>{
-                        if(cat === null)
-                        {
-                          setCatError('Select Category');
-                        }                      
-                       
-                        else{
-                            setCatError('');
-                            
-                        }
-
-                      }} 
-
-                       value={gen}
-                />
-                 <Text style={styles.errorText}>{gError}</Text>
+             
+             
 
                  <Text style={styles.titleStyle}>WorkType<Text style={{color: 'red'}}> *</Text></Text>
                 <Dropdown
@@ -898,7 +691,7 @@ const FreePostAd = ({User,Token,route,navigation}) => {
               
 
                 <View style={styles.btnCont}>
-     <TouchableOpacity style={styles.button} onPress={Validate}><Text style={styles.btnText}>Next</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} onPress={Validate}><Text style={styles.btnText}>Register</Text></TouchableOpacity>
      <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
      </View>
 
@@ -933,7 +726,7 @@ const mapDispatchToProps = dispatch => {
   export default connect(
     mapStateToProps,
     mapDispatchToProps  
-  )(FreePostAd)
+  )(Fpostscreen2)
   
 const styles = StyleSheet.create({
      screen: {

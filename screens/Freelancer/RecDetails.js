@@ -146,7 +146,8 @@ const mapDispatchToProps = dispatch => {
 
 const styles = StyleSheet.create({
 screen:{
- flex:1
+ flex:1,
+
 },
 
 details: {
@@ -161,6 +162,7 @@ details: {
   },
   rootContainer: {
     marginBottom: 32,
+    
   },
   image: {
     width: '100%',

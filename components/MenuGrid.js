@@ -46,10 +46,12 @@ function MenuGrid({title,color,onPress}) {
         flex:1
     },
     title:{
-        fontSize:12,
-        fontWeight:'bold'
+        fontSize:18,
+        fontWeight:'bold',
+        color:'#413C69',      
+        fontStyle: 'italic',
+        textAlign:'center'
     }
-    
     })
 
 /*class MenuGrid extends Component{

@@ -113,7 +113,8 @@ const styles = StyleSheet.create({
             height: 50,
             borderColor: 'grey',
             borderRadius: 4,
-            borderWidth: 1
+            borderWidth: 1,
+            
     
         },
         btnHolder: {

@@ -25,7 +25,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import VideoPlayer from "expo-video-player";
 import { ResizeMode } from "expo-av";
 import AudioSlider from "../../audio/AudioSlider";
-
+let im =[];
+let vdo =[];
 
 const FDetails = ({ User, Token, navigation, route }) => {
   const { adid } = route.params;
@@ -51,6 +52,7 @@ const FDetails = ({ User, Token, navigation, route }) => {
     })
       .then((response) => response.json())
       .then((responseJson) => {
+        setData(responseJson[0]);
         var images = [];
         var images22 = [];
        console.log("cshdashjsgjshdgshdghsghdsd", responseJson);
@@ -59,7 +61,7 @@ const FDetails = ({ User, Token, navigation, route }) => {
           images22.push({ name: e.trim(), id: i + 1 });
         });
         setImageShow(images22);
-        setData(responseJson[0]);
+       
       })
       .catch((error) => {
         //console.error(error);
@@ -269,7 +271,7 @@ const FDetails = ({ User, Token, navigation, route }) => {
         <Card style={styles.card}>
         <Text style={styles.sectionTitle}><Text style={styles.labelTitle}>Primary Skills:</Text> {data.skills}</Text>
           <Text style={styles.sectionTitle}><Text style={styles.labelTitle}>Secondary Skills:</Text>{data.secskill}</Text>
-          <Text style={styles.sectionTitle}><Text style={styles.labelTitle}>Experience:</Text>{data.experience}</Text>
+          <Text style={styles.sectionTitle}><Text style={styles.labelTitle}>Experience:</Text>{data.exp}</Text>
           
 
         </Card>

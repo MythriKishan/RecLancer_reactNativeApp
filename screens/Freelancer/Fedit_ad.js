@@ -195,7 +195,7 @@ return(
                     onChangeText={(email) => setEmail(email)}
                 />
 
-          <Text style={styles.textStyle}>Mobile</Text>
+          <Text style={styles.titleStyle}>Mobile</Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -204,14 +204,14 @@ return(
                     onChangeText={(mobile) => setMob(mobile)}
                 />
 
-           <Text style={styles.textStyle}>Professional Title</Text>
+           <Text style={styles.titleStyle}>Professional Title</Text>
            <TextInput
                     style={styles.inputStyle}
                     defaultValue = {data.profession_title} 
                     onChangeText={(ptitle) => setPtitle(ptitle)}
                 />
             
-          <Text style={styles.textStyle}>State</Text>
+          <Text style={styles.titleStyle}>State</Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -220,33 +220,33 @@ return(
                     onChangeText={(st) => setSt(st)}
                 />
 
-          <Text style={styles.textStyle}>City</Text>
+          <Text style={styles.titleStyle}>City</Text>
           <TextInput
                     style={styles.inputStyle} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    //theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.city_name}  
                     onChangeText={(city) => setCity(city)}                
                 />
 
-          <Text style={styles.textStyle}>Category</Text>
+          <Text style={styles.titleStyle}>Category</Text>
           <TextInput
                     style={styles.textInputRN} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    //theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.category_name} 
                     editable = {false}
                     onChangeText={(cat) => setCat(cat)}
                 />
 
-          <Text style={styles.textStyle}>Subcategory</Text>
+          <Text style={styles.titleStyle}>Subcategory</Text>
           <TextInput
                     style={styles.inputStyle} 
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    //theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.subcategory}                   
                     onChangeText={(sub) => setSub(sub)}
                 />
 
 
-          <Text style={styles.textStyle}>Work Type</Text>
+          <Text style={styles.titleStyle}>Work Type</Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -255,7 +255,7 @@ return(
                     onChangeText={(wt) => setWt(wt)}
                 />
 
-          <Text style={styles.textStyle}>Gender</Text>
+          <Text style={styles.titleStyle}>Gender</Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -264,39 +264,40 @@ return(
                     onChangeText={(gen) => setGen(gen)}
                 />
 
-            <Text style={styles.textStyle}>Primary Skills</Text>
+            <Text style={styles.titleStyle}>Primary Skills</Text>
             <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    //theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.skills}
                     onChangeText={(pskills) => setPSkill(pskills)}
                 />
              
-             <Text style={styles.textStyle}>Experience</Text>
+             <Text style={styles.titleStyle}>Experience</Text>
                 <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    //theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.exp}
                     onChangeText={(exp) => setExp(exp)}
                 />
                 
 
-              <Text style={styles.textStyle}>Secondary Skills</Text>
+              <Text style={styles.titleStyle}>Secondary Skills</Text>
                 <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                    //theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.sskills}
                     onChangeText={(sskills) => setSSkill(sskills)}
                 />
 
-              <Text style={styles.textStyle}>Project Rates</Text>
+              <Text style={styles.titleStyle}>Project Rates</Text>
                 <TextInput
                     style={styles.inputStyle}
-                    theme={{ colors: { primary: '#069A8E' } }}
+                   // theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.project_rates}
                     onChangeText={(prates) => setPrates(prates)}
                 />
 
+             <Text style={styles.titleStyle}>Start Date</Text>
             <View style={styles.inputStyle}>
             <Text onPress={input.showDatepicker}>{moment(input.date).format('YYYY-MM-DD')}</Text>
             </View>
@@ -442,12 +443,13 @@ inputStyle: {
   margin: 15,
   width: '80%',
   height: 50,
-  borderColor: 'grey',
+  backgroundColor:'#FFFFFF',
+  borderColor:'#C5DFF8',
   borderRadius: 1,
   borderWidth: 1, 
   borderColor:'#C5DFF8',
   outlineColor:'white',
-    activeoutlineColor:'#6B240C',   
+  activeoutlineColor:'#6B240C',  
 },
 textInputRN:{
     margin: 15,
@@ -459,7 +461,7 @@ textInputRN:{
     backgroundColor:'#D3D3D3',
     borderColor:'#C5DFF8',
     outlineColor:'white',
-      activeoutlineColor:'#6B240C',   
+    activeoutlineColor:'#6B240C',   
 },
 btnHolder: {
     flexDirection: 'row',

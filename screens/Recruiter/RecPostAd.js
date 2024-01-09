@@ -374,7 +374,7 @@ const RecPostAd = ({User,Token,route,navigation}) => {
 
     <Text style={styles.headerText}>Post your Ad here</Text>
   </View>
-              <Text style={styles.titleStyle}>Job Title<Text style={{color: 'red'}}> *</Text></Text>
+            <Text style={styles.titleStyle}>Job Title<Text style={{color: 'red'}}> *</Text></Text>
              <TextInput
                     style={styles.textInputStyle}
                     label="Job Title"
@@ -383,6 +383,16 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     mode="outlined"
                     onChangeText={(title) => setTitle(title)}
+                    onFocus={()=>{
+                     
+                      if(title === '')
+                      {
+                        setTitleError('Enter Job Title');
+                      }
+                      else{
+                        setTitleError('');
+                      }
+                    }}
                 />
                  <Text style={styles.errorText}>{titleError}</Text>
 
@@ -395,13 +405,26 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     mode="outlined"
                     onChangeText={(name) => setName(name)}
-                    onFocus={()=>{
-                      if(name === '')
+                    onFocus={()=>{                    
+                      if(name != '')
                       {
+                        let reg_name = /^[a-zA-Z ]*$/;
+                       if(reg_name.test(name) === false) 
+                       {
+                       setNameError("Only Alphabets and Space allowed");   
+                       }
+                       else{
+                        setNameError(" "); 
+                       }
                         setNameError('Enter Name');
+                      }
+                      else if(title === '')
+                      {
+                        setTitleError('Enter Job Title');
                       }
                       else{
                         setNameError('');
+                        setTitleError('');
                       }
                     }}
                 />
@@ -416,25 +439,24 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     mode="outlined"
                     onChangeText={(email) => setEmail(email)}
-                    onFocus={()=>{
+                    onFocus={()=>{               
                       let reg_name = /^[a-zA-Z ]*$/;
                   if(reg_name.test(name) === false) {
                     setNameError("Only Alphabets and Space allowed");   
                   }
                   else if(!name){
                     setNameError("Please enter name");   
-                  }    
+                  }   
+                  else if(email === '')
+                  {
+                    seteError('Enter Email ID');
+                  } 
                   else {
                     setNameError("");   
                     setName(name);
-                  }
-                  if(email === '')
-                  {
-                    seteError('Enter Email ID');
-                  }
-                  else{
                     seteError('');
-                  }
+                  }                
+                 
                 }}
                 />
                  <Text style={styles.errorText}>{eError}</Text>
@@ -488,7 +510,7 @@ const RecPostAd = ({User,Token,route,navigation}) => {
             setSt(item.value)}       
             value={st}
             onFocus={()=>{
-              if(st === '')
+              if(st === "" || st === null || st === 'Select State')
               {
                 setStError('Select State');
               }
@@ -516,12 +538,17 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                       setCat(item.value)}       
                       value={cat}
                       onFocus={()=>{
-                        if(cat === '')
+                        if(cat === '' || cat === null || cat === 'Select Category')
                         {
                           setCatError('Select Category');
                         }
+                        else if( st === '' || st === null || st === 'Select State')
+                        {
+                          setStError('Select State');
+                        }
                         else{
                           setCatError('');
+                          setStError('');
                         }
                       }} 
                 />
@@ -543,12 +570,18 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                        setGen(item.value)}       
                        value={gen}
                        onFocus={()=>{
-                        if(gen === '')
+                        if(gen === '' || gen === null || gen === 'Select Gender')
                         {
                           setGError('Select Gender');
                         }
-                        else{
+                        else if(cat === '' || cat === null || cat === 'Select Category')
+                        {
+                          setCatError('Select Category');
+                        }
+                        else
+                        {
                           setGError('');
+                          setCatError('');
                         }
                        }}
                 />
@@ -570,12 +603,17 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                      setWt(item.value)}       
                      value={wt}
                      onFocus={()=>{
-                      if(wt === '')
+                      if(wt === '' || wt === null || wt === 'Select Worktype')
                       {
                         setWtError('Select Worktype')
                       }
+                      else if(gen === '' || gen === null || gen === 'Select Gender')
+                      {
+                        setGError('Select Gender');
+                      }
                       else{
-                        setWtError('')
+                        setWtError('');
+                        setGError('');
                       }
                      }}
                 />
@@ -595,8 +633,13 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                       {
                         setPsError('Enter Primary Skills');
                       }
+                      else if(wt === '' || wt === null || wt === 'Select Worktype')
+                      {
+                        setWtError('Select Worktype')
+                      }
                       else{
                         setPsError('');
+                        setWtError('');
                       }
                     }}
                 />
@@ -616,8 +659,12 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                       {
                         setExpError('Enter Experience')
                       }
+                      else if(pskills === ''){
+                        setPsError('Enter Primary Skills');
+                      }
                       else{
-                        setExpError('')
+                        setExpError('');
+                        setPsError('');
                       }
                     }}
                 />

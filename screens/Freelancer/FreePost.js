@@ -63,6 +63,7 @@ const FreePostAd = ({User,Token,route,navigation}) => {
   const[gError,setGError] = useState("");
   const[psError,setPsError] =useState("");
   const[expError,setExpError] = useState("");
+  const[prError,setPrError] = useState('');
 
 
   const showDatePicker = () => {
@@ -414,7 +415,7 @@ const FreePostAd = ({User,Token,route,navigation}) => {
      }
     }
 
-    if((name != "") || (email != "") || (mobile != ""))   {
+    if((name != "") && (email != "") && (mobile != "") && ((st != "") || (st != null)) && ((cat != '') || (cat != null)) && ((gen != '') || (gen = null)) && ((wt != '') || (wt != null)) && (pskills != '') && (exp != '') && (prates !='')) {
     
         navigation.navigate('Uploads',
             {id : User,       
@@ -708,7 +709,7 @@ const FreePostAd = ({User,Token,route,navigation}) => {
                       }    
                       else if(wt === null || wt === '' || wt === 'Select Worktype')                 
                      {
-                      setWtError('eelect WorkType');
+                      setWtError('Select WorkType');
                      }
                       else{
                           
@@ -750,6 +751,18 @@ const FreePostAd = ({User,Token,route,navigation}) => {
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     mode="outlined"
                     onChangeText={(exp) => setExp(exp)}
+                    onFocus={()=>{
+                      if(pskills === '')
+                      {
+                        setPsError('Enter Primary Skills');
+                      }                     
+                     
+                      else{
+                          
+                          setPsError('');
+                      }
+                    }
+                    }
                 />
                 <Text style={styles.errorText}>{expError}</Text>
 
@@ -760,6 +773,18 @@ const FreePostAd = ({User,Token,route,navigation}) => {
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     mode="outlined"
                     onChangeText={(sskills) => setSSkill(sskills)}
+                    onFocus={()=>{
+                      if(exp === '')
+                      {
+                        setExpError('Enter experience in years');
+                      }                     
+                     
+                      else{
+                          
+                          setExpError('');
+                      }
+                    }
+                    }
                 />
                 <Text style={styles.titleStyle}>Project Rates<Text style={{color: 'red'}}> *</Text></Text>
                 <TextInput
@@ -768,7 +793,21 @@ const FreePostAd = ({User,Token,route,navigation}) => {
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     mode="outlined"
                     onChangeText={(prates) => setPrates(prates)}
-                />      
+                    onFocus={()=>{
+                      if(exp === '' || prates === '')
+                      {
+                        setExpError('Enter experience in years');
+                        setPrError('Enter Project rates per hour');
+                      }                 
+
+                      else{
+                        setPrError('');
+                        setExpError('');
+                      }
+                    }
+                    }
+                />   
+                  <Text style={styles.errorText}>{prError}</Text>   
           
           <Text style={styles.titleStyle}>Start Date<Text style={{color: 'red'}}> *</Text></Text>
           <Text style={{marginLeft:30,color:'white'}}>Start Date</Text>
@@ -788,7 +827,18 @@ const FreePostAd = ({User,Token,route,navigation}) => {
                    is24Hour={true}
                    display="default"
                    onChange={input.onChange}
-                   isDarkModeEnabled='false'                
+                   isDarkModeEnabled='false'  
+                   onFocus={()=>{
+                   if(prates === '')
+                    {
+                      setPrError('Enter Project rates per hour');
+                    }
+                    else{
+                      setPrError('');
+                      
+                    }
+                  }
+                  }
                    />
                )}
 

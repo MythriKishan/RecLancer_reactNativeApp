@@ -62,7 +62,6 @@ const DashBoard = ({User,Token,route,navigation}) =>
           navigation.navigate('Recruiter Edit Image',{id:userid});  
         }
 
-
        _renderItem=({item,index})=>{
   
         return(

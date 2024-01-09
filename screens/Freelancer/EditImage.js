@@ -387,7 +387,7 @@ const EditImage = ({ User, navigation, route, Token }) => {
           )}
           <TouchableOpacity disabled={!load ? false : true} onPress={pickImage}>
             <View style={styles.ImageContainer}>
-              {image == "" ? <Text>Select a Photos</Text> : null}
+              {image == "" ? <Text style={{color:'#413C69',fontWeight:'600',fontSize:14}}>Select a Photos</Text> : null}
             </View>
             <ImageEditor
               visible={editorVisible}
@@ -412,7 +412,7 @@ const EditImage = ({ User, navigation, route, Token }) => {
 
           <TouchableOpacity disabled={!load ? false : true} onPress={pickAudio}>
             <View style={[styles.ImageContainer, { marginTop: 20 }]}>
-              {image == "" ? <Text>Select a Audio</Text> : null}
+              {image == "" ? <Text style={{color:'#413C69',fontWeight:'600',fontSize:14}}>Select a Audio</Text> : null}
             </View>
           </TouchableOpacity>
 
@@ -425,7 +425,7 @@ const EditImage = ({ User, navigation, route, Token }) => {
             {load ? (
               <ActivityIndicator style={styles.load} size={"small"} />
             ) : (
-              <Text style={styles.TextStyle}>Upload</Text>
+              <Text style={styles.btnText}>Upload</Text>
             )}
           </TouchableOpacity>
         </View>
@@ -452,22 +452,35 @@ export default connect(mapStateToProps, mapDispatchToProps)(EditImage);
 
 const styles = StyleSheet.create({
   ImageContainer: {
+    marginTop:8,
     borderRadius: 8,
     width: 250,
     height: 50,
-    borderColor: "black",
-    backgroundColor: "lightblue",
-    borderWidth: 1 / PixelRatio.get(),
+    backgroundColor: "#EEEEEE",
     justifyContent: "center",
     alignSelf: "center",
     alignItems: "center",
+    elevation:3,
+  shadowColor: 'black',
+  shadowOpacity: 0.26,
+  shadowOffset: { width: 0, height: 2 },
+  shadowRadius: 8
   },
   button: {
-    width: 250,
-    backgroundColor: "lightblue",
-    borderRadius: 8,
-    alignSelf: "center",
-    marginTop: 20,
+    marginTop: 30,
+    width: '40%',
+    padding: 20,
+    alignSelf:'center',
+    justifyContent:'center',
+    alignItems:'center',        
+    //backgroundColor: '#413C69',
+    backgroundColor:'#413C69',
+    borderRadius:8,
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS        
+    elevation: 2, // Android
   },
   TextStyle: {
     color: "black",
@@ -477,5 +490,10 @@ const styles = StyleSheet.create({
   load: {
     alignSelf: "center",
     marginVertical: 10,
+  },
+  btnText:{
+    color:'#FFFFFF',
+    fontWeight:'bold',
+    fontSize:16
   },
 });

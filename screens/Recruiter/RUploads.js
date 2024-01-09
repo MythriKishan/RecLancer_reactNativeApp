@@ -381,7 +381,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 250,
     height: 50,
-    backgroundColor: "#565e5e",
+    backgroundColor: "#EEEEEE",
     justifyContent: "center",
     alignSelf: "center",
     alignItems: "center",
@@ -392,11 +392,20 @@ const styles = StyleSheet.create({
   shadowRadius: 8
   },
   button: {
-    width: 250,
-    backgroundColor: "lightgreen",
-    borderRadius: 8,
-    alignSelf: "center",
-    marginTop: 20,
+    marginTop: 30,
+    width: '40%',
+    padding: 20,
+    alignSelf:'center',
+    justifyContent:'center',
+    alignItems:'center',        
+    //backgroundColor: '#413C69',
+    backgroundColor:'#413C69',
+    borderRadius:8,
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS        
+    elevation: 2, // Android
   },
   TextStyle: {
     color: "black",

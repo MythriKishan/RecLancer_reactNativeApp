@@ -43,6 +43,10 @@ const Redit_ad = ({User,Token,route,navigation}) => {
   const[titleError,setTitleError] = useState("");
   const[psError,setPsError] = useState("");
   const[expError,setExpError] = useState("");
+  const[stError,setStError] = useState("");
+  const[catError,setCatError] = useState("");
+  const[wtError,setWtError] = useState('');
+  const[gError,setGError] = useState("");
 
   useEffect(()=>{
     fetch('https://reclancer.com/reclancerapi/app_recad.php',
@@ -183,7 +187,7 @@ return(
 
        <Text style={styles.titleStyle}>Job Title</Text>
        <TextInput
-                    style={styles.inputStyle}                   
+                    style={styles.textInputRN}                   
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.job_title} 
                     onChangeText={(title) => setTitle(title)}
@@ -217,14 +221,25 @@ return(
                     onChangeText={(mobile) => setMob(mobile)}
                 />          
             
-          <Text style={styles.titleStyle}>State</Text>
+          <Text style={styles.titleStyle}>State<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.Name} 
                     editable = {false}
                     onChangeText={(st) => setSt(st)}
+                    onFocus={()=>{
+                      if(st === "" || st === null || st === 'Select State')
+                      {
+                        setStError('Select State');
+                      }
+                      else{
+                        setStError('');
+                      }
+                    }}
+                    
                 />
+                <Text style={styles.errorText}>{stError}</Text>
 
           <Text style={styles.titleStyle}>City</Text>
           <TextInput
@@ -234,14 +249,30 @@ return(
                     onChangeText={(city) => setCity(city)}                
                 />
 
-          <Text style={styles.titleStyle}>Category</Text>
+          <Text style={styles.titleStyle}>Category<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.category} 
                     editable = {false}
                     onChangeText={(cat) => setCat(cat)}
+                    onFocus={()=>{
+                      if(cat === '' || cat === null || cat === 'Select Category')
+                      {
+                        setCatError('Select Category');
+                      }
+                      else if( st === '' || st === null || st === 'Select State')
+                      {
+                        setStError('Select State');
+                      }
+                      else{
+                        setCatError('');
+                        setStError('');
+                      }
+                    }}
+                    
                 />
+                <Text style={styles.errorText}>{catError}</Text>
 
           <Text style={styles.titleStyle}>Subcategory</Text>
           <TextInput
@@ -252,39 +283,98 @@ return(
                 />
 
 
-          <Text style={styles.titleStyle}>Work Type</Text>
+          <Text style={styles.titleStyle}>Work Type<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.type}
                     editable = {false}                   
                     onChangeText={(wt) => setWt(wt)}
+                    onFocus={()=>{
+                      if(wt === '' || wt === null || wt === 'Select Worktype')
+                      {
+                        setWtError('Select Worktype')
+                      }
+                      else if(cat === '' || cat === null || cat === 'Select Category')
+                      {
+                        setCatError('Select Gender');
+                      }
+                      else{
+                        setWtError('');
+                        setCatError('');
+                      }
+                     }}
                 />
+                <Text style={styles.errorText}>{wtError}</Text>
 
-          <Text style={styles.titleStyle}>Gender</Text>
+          <Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.gender_type}
                     editable = {false}                   
                     onChangeText={(gen) => setGen(gen)}
+                    onFocus={()=>{
+                      if(wt === '' || wt === null || wt === 'Select Worktype')
+                      {
+                        setWtError('Select Worktype')
+                      }
+                      else if(gen === '' || gen === null || gen === 'Select Gender')
+                      {
+                        setGError('Select Gender');
+                      }
+                      else{
+                        setWtError('');
+                        setGError('');
+                      }
+                     }}
                 />
+                <Text style={styles.errorText}>{gError}</Text>
 
-            <Text style={styles.titleStyle}>Primary Skills</Text>
+            <Text style={styles.titleStyle}>Primary Skills<Text style={{color: 'red'}}> *</Text></Text>
             <TextInput
                     style={styles.inputStyle}
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.skills}
                     onChangeText={(pskills) => setPSkill(pskills)}
+                    onFocus={()=>{
+                      if(pskills === '')
+                      {
+                        setPsError('Enter Primary Skills');
+                      }
+                      else if(gen === '' || gen === null || gen === 'Select Gender')
+                      {
+                        setGError('Select Gender');
+                      }
+                      else{
+                        setPsError('');
+                        setGError('');
+                      }
+                    }}
                 />
+                <Text style={styles.errorText}>{psError}</Text>
              
-             <Text style={styles.titleStyle}>Experience</Text>
+             <Text style={styles.titleStyle}>Experience<Text style={{color: 'red'}}> *</Text></Text>
                 <TextInput
                     style={styles.inputStyle}
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.exp}
                     onChangeText={(exp) => setExp(exp)}
+                    onFocus={()=>{
+                      if(exp === '')
+                      {
+                        setExpError('Enter Experience')
+                      }
+                      else if(pskills === ''){
+                        setPsError('Enter Primary Skills');
+                      }
+                      else{
+                        setExpError('');
+                        setPsError('');
+                      }
+                    }}
                 />
+                <Text style={styles.errorText}>{expError}</Text>
                 
 
               <Text style={styles.titleStyle}>Secondary Skills</Text>
@@ -319,8 +409,10 @@ return(
                     defaultValue = {data.project_rates}
                     onChangeText={(prates) => setPrates(prates)}
                 />
+
+
           
-          <Text style={styles.textStyle}>Start Date</Text>
+         {/* <Text style={styles.textStyle}>Start Date</Text>
           <Button     
              
              onPress={input.showDatepicker}
@@ -335,9 +427,27 @@ return(
                   display="default"
                   onChange={input.onChange}
                   />
-              )}
+             )}*/}
 
-            <Text style={styles.textStyle}>End Date</Text>
+           <Text style={styles.titleStyle}>Start Date</Text>
+            <View style={styles.inputStyle}>
+            <Text onPress={input.showDatepicker}>{moment(input.date).format('YYYY-MM-DD')}</Text>
+            </View>
+              {input.show && (
+                   <DateTimePicker
+                   style={styles.inputStyle}       
+                   testID="dateTimePicker1"   
+                   defaultValue={st}                
+                   value={input.date}
+                   mode={input.mode}
+                   is24Hour={true}
+                   //display="default"
+                   onChange={input.onChange}
+                   isDarkModeEnabled='false'                
+                   />
+               )}
+
+            {/*<Text style={styles.textStyle}>End Date</Text>
            <Button   
                      
              onPress={input2.showDatepicker}
@@ -354,9 +464,28 @@ return(
                    />
 
            
-             )}
+             )}*/}
 
-              <Text style={styles.textStyle}>Last Date</Text>
+<Text style={styles.titleStyle}>End Date<Text style={{color: 'red'}}> *</Text></Text>
+           
+           <View style={styles.inputStyle}>
+       <Text  onPress={input2.showDatepicker}>{moment(input2.date).format('YYYY-MM-DD')}</Text>
+       </View>
+         {input2.show && (
+              <DateTimePicker
+              style={styles.inputStyle}                       
+              testID="dateTimePicker2"
+              value={input2.date}
+              mode={input2.mode}
+              is24Hour={true}
+              display="default"
+              onChange={input2.onChange}
+               />
+
+       
+         )}
+
+              {/*<Text style={styles.textStyle}>Last Date</Text>
               <Button    
                       
               onPress={input3.showDatepicker}
@@ -378,6 +507,25 @@ return(
                     <Buttons text="Submit" onPress={Validate} />
                     <Buttons text="Cancel" />
               </View>*/}
+
+<Text style={styles.titleStyle}>Last Date to apply<Text style={{color: 'red'}}> *</Text></Text>
+           
+           <View style={styles.inputStyle}>
+       <Text  onPress={input3.showDatepicker}>{moment(input3.date).format('YYYY-MM-DD')}</Text>
+       </View>
+         {input3.show && (
+              <DateTimePicker
+              style={styles.inputStyle}                       
+              testID="dateTimePicker3"
+              value={input3.date}
+              mode={input3.mode}
+              is24Hour={true}
+              display="default"
+              onChange={input3.onChange}
+               />
+
+       
+         )}  
 
 <View style={styles.btnCont}>
      <TouchableOpacity style={styles.button} onPress={Validate}><Text style={styles.btnText}>Submit</Text></TouchableOpacity>

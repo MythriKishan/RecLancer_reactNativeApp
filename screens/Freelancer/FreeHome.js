@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import { StyleSheet,Text,View,Button,Image,ScrollView,SafeAreaView} from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
@@ -9,45 +9,39 @@ import RecSearch from "./RecSearch";
 import Card from '../../components/Card';
 
 const FreeHome = ({User,Token,route,navigation}) => {
-
-  
-  useEffect(()=>{
-    console.log("Inside useEffect");
-    const {id,token} = route.params;
-    
+  const {id,token} = route.params;
+    const[data,setData] = useState("");
+    const dispatch = useDispatch();
     dispatch(actions.action_userid(id));    
     dispatch(actions.action_token(token));   
+  
+  useEffect(()=>{
+    fetch('https://reclancer.com/reclancerapi/Fuser_profile.php',
+    {
+      method: 'POST',    
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + Token
+      },    
+      body: JSON.stringify({      
+        id : User,
+
+      })
+     
+    }).then((response) => response.json())
+    .then((responseJson) => {     
+      //console.log(responseJson[0]);  
+      setData(responseJson);
+      //console.log(data[0].firstname)
+          
+         }).catch((error) => {
+           console.error(error);
+         });    
 
   },[])
 
-  const dispatch = useDispatch();
   
-   /*passValues=()=>{
-    console.log(User);
-    console.log(Token);
-    navigation.navigate('Drawer',
-        {screen: 'Freelancer PostAd',
-        params:{          
-           id:User,
-           token:Token
-          },            
-        });
-
-   }
-
-   searchPage=()=>{
-    console.log(User);
-    console.log(Token);
-    navigation.navigate('Drawer',
-        {screen: 'Recruiter Search',
-        params:{          
-           id:User,
-           token:Token
-          },            
-        });
-
-   }*/
-
 
 return(
   
@@ -58,19 +52,19 @@ return(
           source={require('../../assets/HomeImg.jpg')}
           style={styles.transImage}
         />   
+</View>
 
-
-<View style={styles.textCont}>
+{/*<View style={styles.textCont}>
       <Text style={styles.textStyle}>
       Opportunities don't happen, you create them
-      </Text>
-     </View>
+</Text>*
+</View>*/}
 
      <SafeAreaView style={styles.container}>
         <Card style={styles.card}>          
-          <Text style={styles.sectionTitle}>Mythri</Text>
-          <Text style={styles.sectionTitle}>mythri.kishan4@gmail.com</Text>
-          <Text style={styles.sectionTitle}>+918050929944</Text>
+          <Text style={styles.sectionTitle}>{data.firstname}{' '}{data.lastname}</Text>
+          <Text style={styles.sectionTitle}>{data.email}</Text>
+          <Text style={styles.sectionTitle}>{data.mobilenumber}</Text>
         </Card>
         
 
@@ -85,7 +79,7 @@ return(
       <Button title="Freelancer Post Ad" onPress={passValues}/>
 <Button title="Search Recruiter" onPress={searchPage}/>*/}
       
-</View>
+
 </ScrollView>
 </View>
 )
@@ -100,11 +94,9 @@ const mapDispatchToProps = dispatch => {
   }
     
   const mapStateToProps = (state /*, ownProps*/) => {
-    console.log(state);
-    //console.log(state.appstate.userid+"userjkdjfasdkjfakj")
-    //console.log(state.appstate.tokenid+"userjkdjfasdkjfakj")
+    
     return {
-      //GetGoalScore: state.appstate.GoalScore
+     
       User:state.appstate.userid,
       Token:state.appstate.tokenid,
     }

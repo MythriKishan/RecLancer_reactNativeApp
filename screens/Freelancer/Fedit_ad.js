@@ -40,6 +40,7 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
 
   const[psError,setPsError] = useState("");
   const[expError,setExpError] = useState("");
+  const[pratesError,setPratesError] = useState("");
 
   useEffect(()=>{
     fetch('https://reclancer.com/reclancerapi/app_freead.php',
@@ -270,7 +271,20 @@ return(
                     //theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.skills}
                     onChangeText={(pskills) => setPSkill(pskills)}
+                    onFocus={()=>{
+                      if(pskills === '')
+                      {
+                        setPsError('Enter Primary Skills');
+                      }                     
+                     
+                      else{
+                          
+                          setPsError('');
+                      }
+                    }
+                    }
                 />
+                 <Text style={styles.errorText}>{psError}</Text>  
              
              <Text style={styles.titleStyle}>Experience</Text>
                 <TextInput
@@ -278,7 +292,25 @@ return(
                     //theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.exp}
                     onChangeText={(exp) => setExp(exp)}
+                    onFocus={()=>{
+                      if(pskills === '')
+                      {
+                        setPsError('Enter Primary Skills');
+                      }  
+                      if(exp === '')  
+                      {
+                        setExpError('Enter Experience in Years');
+                      }                 
+                     
+                      else{
+                          
+                          setPsError('');
+                          setExpError('');
+                      }
+                    }
+                    }
                 />
+                 <Text style={styles.errorText}>{expError}</Text>  
                 
 
               <Text style={styles.titleStyle}>Secondary Skills</Text>
@@ -295,7 +327,24 @@ return(
                    // theme={{ colors: { primary: '#069A8E' } }}
                     defaultValue = {data.project_rates}
                     onChangeText={(prates) => setPrates(prates)}
+                    onFocus={()=>{
+                      if(exp === '')
+                      {
+                        setExpError('Enter Experience in years');
+                      }  
+                      else if(prates === '')
+                      {
+                        setPratesError('Enter Project rates per month');
+                      }                     
+                      else{
+                          
+                          setExpError('');
+                          setPratesError('');
+                      }
+                    }
+                    }
                 />
+                 <Text style={styles.errorText}>{pratesError}</Text>  
 
              <Text style={styles.titleStyle}>Start Date</Text>
             <View style={styles.inputStyle}>
@@ -312,6 +361,19 @@ return(
                    //display="default"
                    onChange={input.onChange}
                    isDarkModeEnabled='false'                
+                   onFocus={()=>{
+                    if(prates === '')
+                    {
+                      setPratesError('Enter Project Rates per hour');
+                    }  
+
+                   
+                    else{
+                        
+                        setPratesError('');
+                    }
+                  }
+                  }
                    />
                )}
           

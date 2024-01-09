@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { StyleSheet,Text,View,ScrollView,SafeAreaView } from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
@@ -12,7 +12,7 @@ const RecHome = ({User,Token,route,navigation}) => {
     //const dispatch = useDispatch();
 
     const {id,token} = route.params;
-        
+    const[data,setData] = useState("");
     const dispatch = useDispatch();
     dispatch(actions.action_userid(id));    
     dispatch(actions.action_token(token));   
@@ -23,25 +23,26 @@ const RecHome = ({User,Token,route,navigation}) => {
         
         //dispatch(actions.action_userid(id));    
        // dispatch(actions.action_token(token));   
-    
+
+       
       },[])  
       
      
 
 
       return(
-  
+       
         <View style={styles.screen}>
           <ScrollView>
         <View style={styles.headerStyle}>
         <Text style={styles.headerText}>Recruiter Home</Text>
-        </View>
+      </View>
         <SafeAreaView style={styles.container}>
-        <Card style={styles.card}>          
-          <Text style={styles.sectionTitle}>Mythri</Text>
-          <Text style={styles.sectionTitle}>mythri.kishan4@gmail.com</Text>
-          <Text style={styles.sectionTitle}>+918050929944</Text>
-        </Card>
+        {/*<Card style={styles.card}>          
+          <Text style={styles.sectionTitle}>{data.firstname}{' '}{data.lastname}</Text>
+          <Text style={styles.sectionTitle}>{data.email}</Text>
+          <Text style={styles.sectionTitle}>{data.mobilenumber}</Text>
+    </Card>*/}
         
 
       </SafeAreaView>

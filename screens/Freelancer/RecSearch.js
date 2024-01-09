@@ -16,6 +16,7 @@ const RecSearch = ({User,Token,route,navigation}) => {
   const [datastate,setDatastate] =  useState([]);  
   const [datacat,setDatacat] = useState([]);
   const [datawt,setDatawt] = useState([]);
+ 
 
 
 useEffect(()=>{
@@ -45,8 +46,8 @@ const dispatch = useDispatch();
   const[st,setSt] = useState("");
   const[cat,setCat] = useState("");
   const[wt,setWt] = useState("");
-  const[pskills,setPSkill] = useState("");
-  
+  const [pskills,setPSkill] = useState('');
+ 
     const getState= () => {
       fetch('https://reclancer.com/reclancerapi/getstate.php',{
         method: "Get",
@@ -136,6 +137,9 @@ const dispatch = useDispatch();
     }
   
     const Validate=()=>{
+
+      if(pskills != '')
+      {
       fetch('https://reclancer.com/reclancerapi/apprec_search.php',
       {
         method: 'POST',    
@@ -179,7 +183,13 @@ const dispatch = useDispatch();
              console.error(error);
            });
           }  
-    
+
+          else
+          {
+            Alert.alert('Enter the Mandatory field');
+          }
+        }
+       
 
 return(
 <View style={styles.screen}> 
@@ -248,6 +258,18 @@ return(
                    onChange={item => 
                      setWt(item.value)}       
                      value={wt}
+                     onFocus={()=>{
+                      if(pskills === '')
+                      {
+                        setPsError('Enter Primary Skills');
+                      }                     
+                     
+                      else{
+                          
+                          setPsError('');
+                      }
+                    }
+                    }
                 />
 
             {/*<View style={styles.btnHolder}>

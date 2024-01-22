@@ -25,25 +25,26 @@ let images = [];
 const Ruploads = ({ User, Token ,navigation, route }) => {
   //const { adid } = route.params;
   //console.log(adid);
-  const {id,name,email,mobile,ptitle,pskill,ex,sskill,st,ct,wt,gen,prates,addr,sd,ed,cd,ppre} = route.params;
+  const {id,ptitle,name,email,mobile,st,ct,gen,wt,pskill,ex,sskill,addr,sd,ed,ppre,prates,cd} = route.params;
   console.log(id);
+  console.log(ptitle);
   console.log(name);
   console.log(email);
   console.log(mobile);
-  console.log(ptitle);
-  console.log(pskill);
-  console.log(ex);
-  console.log(sskill); 
   console.log(st);
   console.log(ct);  
   console.log(gen);
-  console.log(wt);  
-  console.log(prates);
+  console.log(wt);   
+  console.log(pskill);
+  console.log(ex);
+  console.log(sskill);   
   console.log(addr);
   console.log(sd);
   console.log(ed);
-  console.log(cd);
   console.log(ppre);
+  console.log(prates);
+  console.log(cd);
+  
   const [image, setImage] = useState([]);
   const [uploadShow, setUpload] = useState([]);
   const [load, setLoading] = useState(false);
@@ -95,24 +96,25 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
     setTimeout(() => {
       setLoading(true);
       let formData = new FormData();
-      formData.append("id", User);     
+      formData.append("id", User); 
+      formData.append("ptitle",ptitle);    
       formData.append("name",name);
       formData.append("email",email);
-      formData.append("mobile",mobile);
-      formData.append("ptitle",ptitle);
+      formData.append("mobile",mobile);      
       formData.append("st",st);
-      formData.append("ct",ct);      
-      formData.append("gen",gen);
+      formData.append("ct",ct); 
       formData.append("wt",wt);
+      formData.append("gen",gen);
       formData.append("pskill",pskill);
       formData.append("ex",ex);
       formData.append("sskill",sskill);
-      formData.append("prates",prates);
-      formData.append("addr",addr);
+      formData.append("addr",addr);   
       formData.append("sd",sd);
       formData.append("ed",ed);
-      formData.append("cd",cd);
       formData.append("ppre",ppre);
+      formData.append("prates",prates);
+      formData.append("cd",cd);
+     
       
       internal.forEach((item, i) => {
         if (item.type == "video") {
@@ -145,7 +147,7 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
         }
       });
       console.log("data", formData);
-      fetch("https://reclancer.com/reclancerapi/ruploads.php", {
+      fetch("https://reclancer.com/reclancerapi/createRecad.php", {
         method: "POST",
         headers: {
           'Accept': "application/json",

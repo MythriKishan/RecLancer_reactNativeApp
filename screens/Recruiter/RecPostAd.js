@@ -317,24 +317,25 @@ const RecPostAd = ({User,Token,route,navigation}) => {
         }  */
 
         navigation.navigate('Uploads',{
-          id : User,       
+         id : User,  
+         ptitle : title,     
          name: name,
          email : email,       
-         mobile :mobile, 
-         ptitle : title,
+         mobile :mobile,  
+         st : st,
+         ct : cat, 
+         gen: gen,      
+         wt : wt,                 
          pskill : pskills,
          ex : exp,
-         sskill : sskills,
-         st : st,
-         ct : cat,      
-         wt : wt,
-         gen: gen,         
-         prates : prates,
+         sskill : sskills,             
          addr:adr,
          sd:startDate,
          ed:endDate,
+         ppre:pper,
+         prates : prates,       
          cd:lastDate,
-         ppre:pper  
+          
         })
       }
   }
@@ -554,7 +555,7 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                 />
                 <Text style={styles.errorText}>{catError}</Text>
 
-                <Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>   
+                {/*<Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>   
                 <Dropdown
                      style={styles.selectStyle}
                      placeholderStyle={styles.placeholderStyle}
@@ -585,7 +586,7 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                         }
                        }}
                 />
-                 <Text style={styles.errorText}>{gError}</Text>
+                      <Text style={styles.errorText}>{gError}</Text>*/}
 
                  <Text style={styles.titleStyle}>Work Type<Text style={{color: 'red'}}> *</Text></Text>  
                  <Dropdown
@@ -607,13 +608,13 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                       {
                         setWtError('Select Worktype')
                       }
-                      else if(gen === '' || gen === null || gen === 'Select Gender')
-                      {
-                        setGError('Select Gender');
-                      }
+                      else if(cat === '' || cat === null || cat === 'Select Category')
+                        {
+                          setCatError('Select Category');
+                        }
                       else{
                         setWtError('');
-                        setGError('');
+                        setCatError('');
                       }
                      }}
                 />
@@ -648,7 +649,7 @@ const RecPostAd = ({User,Token,route,navigation}) => {
                 <Text style={styles.titleStyle}>Experience<Text style={{color: 'red'}}> *</Text></Text>  
                 <TextInput
                     style={styles.textInputStyle}
-                    label="Education"
+                    label="Experience"
                     //theme={{ colors: { primary: '#069A8E' } }}
                     //placeholder = "Enter Email"
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}

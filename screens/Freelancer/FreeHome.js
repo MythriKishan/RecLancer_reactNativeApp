@@ -16,7 +16,7 @@ const FreeHome = ({User,Token,route,navigation}) => {
     dispatch(actions.action_token(token));   
   
   useEffect(()=>{
-    fetch('https://reclancer.com/reclancerapi/Fuser_profile.php',
+    {/*fetch('https://reclancer.com/reclancerapi/Fuser_profile.php',
     {
       method: 'POST',    
       headers: {
@@ -37,7 +37,7 @@ const FreeHome = ({User,Token,route,navigation}) => {
           
          }).catch((error) => {
            console.error(error);
-         });    
+         });   */} 
 
   },[])
 
@@ -46,7 +46,7 @@ const FreeHome = ({User,Token,route,navigation}) => {
 return(
   
 <View style={styles.screen}>
-  <ScrollView>
+ <ScrollView>
 <View style={styles.textCont}>
       <Image
           source={require('../../assets/HomeImg.jpg')}
@@ -54,13 +54,13 @@ return(
         />   
 </View>
 
-{/*<View style={styles.textCont}>
+<View style={styles.textCont}>
       <Text style={styles.textStyle}>
       Opportunities don't happen, you create them
-</Text>*
-</View>*/}
+</Text>
+</View>
 
-     <SafeAreaView style={styles.container}>
+    {/* <SafeAreaView style={styles.container}>
         <Card style={styles.card}>          
           <Text style={styles.sectionTitle}>{data.firstname}{' '}{data.lastname}</Text>
           <Text style={styles.sectionTitle}>{data.email}</Text>
@@ -68,7 +68,7 @@ return(
         </Card>
         
 
-      </SafeAreaView>
+</SafeAreaView>*/}
     
       
 {/*<View style={styles.headerStyle}>

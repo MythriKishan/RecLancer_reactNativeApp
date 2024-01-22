@@ -241,19 +241,19 @@ return(
                 />
                 <Text style={styles.errorText}>{stError}</Text>
 
-          <Text style={styles.titleStyle}>City</Text>
+          {/*<Text style={styles.titleStyle}>City</Text>
           <TextInput
                     style={styles.inputStyle} 
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.city_name}  
                     onChangeText={(city) => setCity(city)}                
-                />
+                  />*/}
 
           <Text style={styles.titleStyle}>Category<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    defaultValue = {data.category} 
+                    defaultValue = {data.category_name} 
                     editable = {false}
                     onChangeText={(cat) => setCat(cat)}
                     onFocus={()=>{
@@ -307,7 +307,7 @@ return(
                 />
                 <Text style={styles.errorText}>{wtError}</Text>
 
-          <Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>
+         {/* <Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
@@ -329,7 +329,7 @@ return(
                       }
                      }}
                 />
-                <Text style={styles.errorText}>{gError}</Text>
+                    <Text style={styles.errorText}>{gError}</Text>*/}
 
             <Text style={styles.titleStyle}>Primary Skills<Text style={{color: 'red'}}> *</Text></Text>
             <TextInput
@@ -342,13 +342,13 @@ return(
                       {
                         setPsError('Enter Primary Skills');
                       }
-                      else if(gen === '' || gen === null || gen === 'Select Gender')
+                      if(wt === '' || wt === null || wt === 'Select Worktype')
                       {
-                        setGError('Select Gender');
+                        setWtError('Select Worktype')
                       }
                       else{
                         setPsError('');
-                        setGError('');
+                        setWtError('');
                       }
                     }}
                 />
@@ -358,7 +358,7 @@ return(
                 <TextInput
                     style={styles.inputStyle}
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    defaultValue = {data.exp}
+                    defaultValue = {data.experience}
                     onChangeText={(exp) => setExp(exp)}
                     onFocus={()=>{
                       if(exp === '')
@@ -381,7 +381,7 @@ return(
                 <TextInput
                     style={styles.inputStyle}
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-                    defaultValue = {data.sskills}
+                    defaultValue = {data.secskill}
                     onChangeText={(sskills) => setSSkill(sskills)}
                 />
 

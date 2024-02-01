@@ -1,12 +1,12 @@
 import React,{useEffect,useState} from "react";
-import { StyleSheet,Text,View,Button,Alert,TouchableOpacity } from "react-native";
+import { StyleSheet,Text,View,Button,Alert,TouchableOpacity,ScrollView } from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
 import appstate from '../appreducers';
 import { connect } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextInput } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
+//import { ScrollView } from "react-native-gesture-handler";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from "moment";
 import Buttons from "../../components/Buttons";
@@ -32,6 +32,7 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
   const[exp,setExp] = useState("");
   const[sskills,setSSkill] = useState("");
   const[prates,setPrates] = useState("");
+  const[pref,setPref] = useState("");
   const[sdate,setSdate] = useState(new Date());
   const[edate,setEdate] = useState(new Date());
   
@@ -64,11 +65,15 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
       
       
       setData(responseJson[0])
-
+      setPtitle(data.profession_title)
       setCity(data.city)
       setSub(data.subcategory)
+      setPSkill(data.skills)
+      setExp(data.exp)
       setSSkill(data.sskills)
-      setSt(data.start_date)
+      setPrates(data.project_rates)
+      setSt(data.start_date)     
+      setPref(data.ref)
       
           
          }).catch((error) => {
@@ -87,9 +92,10 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
    
     let startDate = moment(input.date).utc().format('YYYY-MM-DD');   
     let endDate = moment(input2.date).utc().format('YYYY-MM-DD');
+    console.log(endDate);
 
-    let reg_psk = /^[a-zA-Z]{1,}/;
-    if (pskills.trim() === "") {
+    {/*let reg_psk = /^[a-zA-Z]{1,}/;
+    if (pskills === "") {
       setPsError("Primary Skills is Required Field.");  
     } 
     else
@@ -106,14 +112,14 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
      }
     }
 
-    /**Experience Validation**/
+   
     let reg_expr = /^(\d+(?:\.\d+)?\+?)\s*(years?)/;
-    if (exp.trim() === "") {
+    if (exp === "") {
       setExpError("Experience is Required Field.");  
     } 
     else
     {
-     // let reg_name = /^[a-zA-Z ]*$/;
+     
       if(reg_expr.test(exp) === false)
     {
       setExpError("Enter Valid Experience.");
@@ -123,7 +129,7 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
      else{      
       setExpError("");
      }
-    }
+    }*/}
 
     fetch('https://reclancer.com/reclancerapi/appfreead_update.php',
    {
@@ -135,13 +141,17 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
      },    
      body: JSON.stringify({   
 
-       adid : adid,        
+       adid : adid, 
+       ptitle:ptitle,  
+       ct:city,     
        subcat: sub,
-       ct:city, 
-       sskill : sskills,      
+       pskill:pskills,
+       sskill : sskills,
+       exp:exp,      
        sd : startDate,
        pr : prates,
        ed : endDate,
+       pre:pref
              
      })
     
@@ -376,6 +386,25 @@ return(
                   }
                    />
                )}
+
+<Text style={styles.titleStyle}>End Date<Text style={{color: 'red'}}> *</Text></Text>
+           
+           <View style={styles.inputStyle}>
+       <Text  onPress={input2.showDatepicker}>{moment(input2.date).format('YYYY-MM-DD')}</Text>
+       </View>
+         {input2.show && (
+              <DateTimePicker
+              style={styles.inputStyle}                       
+              testID="dateTimePicker2"
+              value={input2.date}
+              mode={input2.mode}
+              is24Hour={true}
+              display="default"
+              onChange={input2.onChange}
+               />
+
+       
+         )}
           
           {/*<Text style={styles.textStyle}>Start Date</Text>
           <Button     
@@ -412,6 +441,13 @@ return(
 
            
              )}*/}
+
+<Text style={styles.titleStyle}>Project References</Text>
+            <TextInput
+                    style={styles.inputStyle}
+                    defaultValue = {data.ref}                  
+                    onChangeText={(pref) => setPref(pref)}
+                /> 
 
 {/*<View style={styles.btnHolder}>
                     <Buttons text="Submit" onPress={Validate} />

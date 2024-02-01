@@ -82,9 +82,9 @@ const RecMLogin = ({route,navigation}) =>{
   
             if (responseJson.code === 200) {
   
-            Alert.alert("Success");
+           
             const phoneProvider = new firebase.auth.PhoneAuthProvider();
-            phoneProvider.verifyPhoneNumber('+919986634719', recaptchaVerifier.current)
+            phoneProvider.verifyPhoneNumber(mobile, recaptchaVerifier.current)
               .then(setVerificationId);
               setMobile('');
               //setMobile('');
@@ -161,10 +161,10 @@ const RecMLogin = ({route,navigation}) =>{
        
         <View style={styles.screen}>
  
-        <View style={styles.headerStyle}>
-        {/* Header reusable component*/ }
-        <Header title="Mobile Login Page" style={styles.headerTitle}/>
-        </View>
+ <View style={styles.headerStyle}>
+                 
+                 <Text style={styles.headerText}>Freelancer Mobile Login</Text>
+                 </View>
  
         <Text style={styles.errorText}>{error}</Text>
         <FirebaseRecaptchaVerifierModal
@@ -182,7 +182,9 @@ const RecMLogin = ({route,navigation}) =>{
           />
           <Text style={styles.errorText}>{merror}</Text>
 
-          <Buttons text="Send OTP" onPress={LoginHandler}/>
+          <View style={styles.btnCont}>
+          <TouchableOpacity style={styles.button} onPress={LoginHandler}><Text style={styles.btnText}>Send OTP</Text></TouchableOpacity>
+          </View>
          
             <TextInput
           style={styles.inputStyle}
@@ -193,7 +195,10 @@ const RecMLogin = ({route,navigation}) =>{
           keyboardType="number-pad"
         />
         <Text style={styles.errorStyle}>{merror}</Text>
-        <Buttons text="Confirm OTP" onPress={confirmCode}/>
+        <View style={styles.btnCont}>
+        
+        <TouchableOpacity style={styles.button} onPress={confirmCode}><Text style={styles.btnText}>Confirm OTP</Text></TouchableOpacity>
+        </View>
         </View>        
  
        
@@ -288,7 +293,52 @@ const mapDispatchToProps = dispatch => {
      fontSize:12,
      fontFamily:'OpenSans-bold',
      color:'red'
-    }
+    },
+    btnText:{
+      color:'#FFFFFF',
+      fontWeight:'bold',
+      fontSize:16
+    },
+    btnCont:{
+      flexDirection:"row",
+      justifyContent:'space-evenly',
+      alignItems:'center'
+    },
+    
+    button: {
+    marginTop: 30,
+    width: '40%',
+    padding: 20,
+    justifyContent:'center',
+    alignItems:'center',        
+    //backgroundColor: '#413C69',
+    backgroundColor:'#413C69',
+    borderRadius:8,
+    shadowColor: 'rgba(0,0,0, .4)', // IOS
+    shadowOffset: { height: 1, width: 1 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 1, //IOS        
+    elevation: 2, // Android
+    },
+    headerStyle: {
+      justifyContent: 'center',
+      alignItems: 'center',
+
+  },
+  headerTitle: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      color:'white',
+      fontFamily:'OpenSans-bold'
+  },
+  headerText:{               
+    fontFamily:'OpenSans-Bold',
+    fontSize:20,
+    fontWeight:'bold',       
+    color:'#23211d'
+    //color:'#363062'      
+  },
+      
  
  });
  

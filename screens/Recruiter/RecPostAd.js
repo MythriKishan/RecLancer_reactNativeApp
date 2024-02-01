@@ -259,7 +259,11 @@ const RecPostAd = ({User,Token,route,navigation}) => {
     console.log(endDate);
     let lastDate = moment(input3.date).utc().format('YYYY-MM-DD');
     console.log(lastDate);
-    if((name != ""))   
+
+    let reg_name = /^[a-zA-Z ]*$/;
+    let reg_mail = /^\S+@\S+\.\S+$/;
+    let reg_mob = /^[0-9]{10}$/;
+    if((title!="") && (name != "") && (reg_name.test(name) === true) && (email != "") && (reg_mail.test(email) === true) && (mobile != "") && (reg_mob.test(mobile) === true)  && ((st != "") || (st != null)) && ((cat != '') || (cat != null)) && ((wt != '') || (wt != null)) && (pskills != '') && (exp != '') )  
        {
        
         /*fetch('https://reclancer.com/reclancerapi/apprec_postad.php',
@@ -321,10 +325,9 @@ const RecPostAd = ({User,Token,route,navigation}) => {
          ptitle : title,     
          name: name,
          email : email,       
-         mobile :mobile,  
+         mobile :'+91'+mobile,  
          st : st,
-         ct : cat, 
-         gen: gen,      
+         ct : cat,
          wt : wt,                 
          pskill : pskills,
          ex : exp,

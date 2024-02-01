@@ -25,7 +25,7 @@ let images = [];
 const Ruploads = ({ User, Token ,navigation, route }) => {
   //const { adid } = route.params;
   //console.log(adid);
-  const {id,ptitle,name,email,mobile,st,ct,gen,wt,pskill,ex,sskill,addr,sd,ed,ppre,prates,cd} = route.params;
+  const {id,ptitle,name,email,mobile,st,ct,wt,pskill,ex,sskill,addr,sd,ed,ppre,prates,cd} = route.params;
   console.log(id);
   console.log(ptitle);
   console.log(name);
@@ -33,7 +33,7 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
   console.log(mobile);
   console.log(st);
   console.log(ct);  
-  console.log(gen);
+  
   console.log(wt);   
   console.log(pskill);
   console.log(ex);
@@ -103,8 +103,7 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
       formData.append("mobile",mobile);      
       formData.append("st",st);
       formData.append("ct",ct); 
-      formData.append("wt",wt);
-      formData.append("gen",gen);
+      formData.append("wt",wt);      
       formData.append("pskill",pskill);
       formData.append("ex",ex);
       formData.append("sskill",sskill);
@@ -174,7 +173,13 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
           setInternal([]);
           setClick(true);
           //Alert.alert('Posted Successfully');
-         navigation.navigate('Success');
+         //navigation.navigate('Success');
+         navigation.navigate('Success',{
+          id:User,
+          wt : wt,
+          pskill : pskill,
+          ex : ex,
+        });
         })
         .catch((err) => {
          // console.log("Error", err);

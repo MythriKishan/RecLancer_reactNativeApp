@@ -1,11 +1,11 @@
 import React,{useState,useEffect}from "react";
-import { StyleSheet,Text,View,FlatList,TouchableOpacity,Alert,Button } from "react-native";
+import { StyleSheet,Text,View,FlatList,TouchableOpacity,Alert,Button,ScrollView } from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
 import appstate from '../appreducers';
 import { connect } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
-import { ScrollView } from 'react-native-gesture-handler';
+//import { ScrollView } from 'react-native-gesture-handler';
 import Buttons from "../../components/Buttons";
 
 const Hide = ({User,Token,route,navigation}) => 

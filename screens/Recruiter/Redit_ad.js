@@ -1,12 +1,12 @@
 import React,{useEffect,useState} from "react";
-import { StyleSheet,Text,View,Button,Alert,TouchableOpacity } from "react-native";
+import { StyleSheet,Text,View,Button,Alert,TouchableOpacity,ScrollView } from "react-native";
 import Header from "../../components/Header";
 import * as actions from '../actions';
 import appstate from '../appreducers';
 import { connect } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextInput } from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
+//import { ScrollView } from "react-native-gesture-handler";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from "moment";
 import Buttons from "../../components/Buttons";
@@ -73,7 +73,10 @@ const Redit_ad = ({User,Token,route,navigation}) => {
 
       setCity(data.city)
       setSub(data.subcategory)
+      setAdr(data.project_address)
       setSSkill(data.sskills)
+      setPrates(data.project_rates)
+      setPper(data.project_period)
       
           
          }).catch((error) => {
@@ -144,10 +147,11 @@ const Redit_ad = ({User,Token,route,navigation}) => {
 
        adid : adid,        
        subcat: sub,
-       ct:city, 
+       adr:adr, 
        sskill : sskills,      
        sd : startDate,
-       pr : prates,       
+       pr : prates, 
+       pper:pper,    
        ed : endDate,
        ldate : lastDate
              
@@ -333,7 +337,7 @@ return(
 
             <Text style={styles.titleStyle}>Primary Skills<Text style={{color: 'red'}}> *</Text></Text>
             <TextInput
-                    style={styles.inputStyle}
+                    style={styles.textInputRN}
                     theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
                     defaultValue = {data.skills}
                     onChangeText={(pskills) => setPSkill(pskills)}

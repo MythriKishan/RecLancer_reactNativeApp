@@ -1,5 +1,5 @@
 import React, { Component,useEffect,useState,useRef } from "react";
-import { StyleSheet,View,Text,Button,TouchableOpacity } from "react-native";
+import { StyleSheet,View,Text,Button,TouchableOpacity,Alert } from "react-native";
 import RegInput from "../components/RegInput";
 import Category from "../models/category";
 import Header from "../components/Header";
@@ -7,7 +7,7 @@ import Buttons from "../components/Buttons";
 import PhoneInput from 'react-native-phone-number-input';
 import { TextInput } from "react-native-paper";
 
-function RecReg({route}){
+function RecReg({route,navigation}){
    const catId = route.params.categoryId;
    const [Mode,setMode] = useState(false)
    const [error,setError] = useState("");
@@ -74,7 +74,8 @@ function RecReg({route}){
    }*/
 
    let reg_mail = /^\S+@\S+\.\S+$/;
-   if((reg_mail.test(email) === true) && (reg_pass.test(pass) === true))  
+   let reg_mob= /^[0-9]{10}$/;
+   if((reg_mail.test(email) === true) && (reg_pass.test(pass) === true)  && (reg_mob.test(phoneNumber)))
     {
     fetch('https://reclancer.com/reclancerapi/apprec_reg.php', {
      method: 'POST',
@@ -84,7 +85,7 @@ function RecReg({route}){
   },
   body: JSON.stringify({ 
     email: email,
-    num : phoneNumber,     
+    num : '+91'+phoneNumber,     
     password: pass
  
   })
@@ -93,14 +94,25 @@ function RecReg({route}){
       .then((responseJson) => { 
 
       console.log(responseJson)
-      Alert.alert('Successfully Registered');
+      if(responseJson.code === 400)
+      {
+        Alert.alert("Email or Mobile is already Registered!!")
+      }
+      else if(responseJson.code === 200)
+      {
+        Alert.alert("Successful! Check your email for Activation email");
+      }
+      else{
+       Alert.alert('Error in registration.Retry!!')
+      }
+
       
       }).catch((error) => {
         console.error(error);
       });
       }
    else{
-    setError('Fill in all required fields!')
+    setError('Fill in Valid Data!')
 
   }
     
@@ -109,9 +121,8 @@ function RecReg({route}){
   
   
    const cancelHandler = () => {
-
-    console.log("Cancel Function")
-    
+    navigation.navigate('Home')
+   
    }
 
 
@@ -125,7 +136,7 @@ function RecReg({route}){
 
         <Text style={styles.errorText}>{error}</Text>
         <Text style={styles.titleStyle}>Mobile<Text style={{color: 'red'}}> *</Text></Text>
-        <PhoneInput
+        {/*<PhoneInput
         ref={phoneInput}
         defaultValue={phoneNumber}
         defaultCode="IN"
@@ -147,7 +158,41 @@ function RecReg({route}){
             setmError('');
           }
         }}
-      />
+      />*/}
+      <TextInput
+          style={styles.inputStyle} 
+          //style={focus ? styles.inputOnFocus : styles.inputOnBlur}        
+          theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+         mode="outlined"
+       //label="Email"
+       label={
+        <Text>
+             Mobile
+             <Text style={{color: 'red'}}> *</Text>
+        </Text>
+       }
+          //placeholder = "Enter Email"
+          onChangeText={(phoneNumber) => setphoneNumber(phoneNumber)
+            }
+         // onBlur={() => setFocus(false)}
+          onFocus={()=>{
+            //setFocus(true)
+            if(phoneNumber != '')
+            {
+             let reg_mob = /^[0-9]{10}$/;
+             if(reg_mob.test(phoneNumber) === false)    
+              {
+                setmError('Enter Valid Mobile Number!');
+                }  
+              else{
+                setmError('');
+              }
+            }
+            else{
+              setmError('Enter 10 digit Mobile Number')
+            }
+          }}
+          />
       <Text style={styles.errorText}>{mError}</Text>
 
       <Text style={styles.titleStyle}>Email<Text style={{color: 'red'}}> *</Text></Text>

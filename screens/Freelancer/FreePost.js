@@ -415,13 +415,13 @@ const FreePostAd = ({User,Token,route,navigation}) => {
      }
     }
 
-    if((name != "") && (email != "") && (mobile != "") && ((st != "") || (st != null)) && ((cat != '') || (cat != null)) && ((gen != '') || (gen = null)) && ((wt != '') || (wt != null)) && (pskills != '') && (exp != '') && (prates !='')) {
+    if((name != "") && (reg_name.test(name) === true) && (email != "") && (reg_mail.test(email) === true) && (mobile != "") && (reg_mob.test(mobile) ===  true) && ((st != "") || (st != null)) && ((cat != '') || (cat != null)) && ((gen != '') || (gen = null)) && ((wt != '') || (wt != null)) && (pskills != '') && (exp != '') && (prates !='')) {
     
         navigation.navigate('Uploads',
             {id : User,       
             name: name,
             email : email,       
-            mobile :mobile,              
+            mobile : '+91'+mobile,              
             prof : ptitle,
             st : st,
             ct : cat,

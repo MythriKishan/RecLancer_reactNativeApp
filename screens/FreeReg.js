@@ -9,7 +9,7 @@ import PhoneInput from 'react-native-phone-number-input';
 import { useFocusEffect } from '@react-navigation/native';
 
 
-function FreeReg({route}){
+function FreeReg({route,navigation}){
    const catId = route.params.categoryId;
    const [Mode,setMode] = useState(false)
 
@@ -21,6 +21,9 @@ function FreeReg({route}){
    const [eError, seteError] = useState("");
    const [mError,setmError] = useState("");
    const [pError,setpError] = useState("");  
+   const [focus, setFocus] = useState(false);
+
+
    
    const [phoneNumber, setphoneNumber] = useState('');
   const phoneInput = useRef(null);
@@ -53,7 +56,9 @@ function FreeReg({route}){
    }*/
 
    let reg_mail = /^\S+@\S+\.\S+$/;
-   if((reg_mail.test(email) === true) && (reg_pass.test(pass) === true))  
+   //let reg_mob=/^[+]{1}(?:[0-9\-\\(\\)\\/.]\s?){6,15}[0-9]{1}$/;
+   let reg_mob= /^[0-9]{10}$/;
+   if((reg_mail.test(email) === true) && (reg_pass.test(pass) === true) && (reg_mob.test(phoneNumber)))  
     {
     fetch('https://reclancer.com/reclancerapi/appfree_reg.php', {
      method: 'POST',
@@ -63,7 +68,7 @@ function FreeReg({route}){
   },
   body: JSON.stringify({ 
     email: email,
-    num : phoneNumber,     
+    num : '+91'+phoneNumber,     
     password: pass
  
   })
@@ -71,14 +76,27 @@ function FreeReg({route}){
 }).then((response) => response.json())
       .then((responseJson) => { 
 
-      console.log(responseJson)
+      console.log(responseJson.code)
+      
+      if(responseJson.code === 400)
+      {
+        Alert.alert("Email or Mobile is already Registered!!")
+      }
+      else if(responseJson.code === 200)
+      {
+        Alert.alert("Successful! Check your email for Activation email");
+      }
+      else{
+       Alert.alert('Error in registration.Retry!!')
+      }
+
       
       }).catch((error) => {
         console.error(error);
       });
       }
    else{
-    setError('Fill in all required fields!')
+    setError('Fill in Valid Data!')
 
   }
     
@@ -87,9 +105,8 @@ function FreeReg({route}){
   
   
    const cancelHandler = () => {
-
-    
-    
+    navigation.navigate('Home')
+   
    }
 
 
@@ -103,8 +120,10 @@ function FreeReg({route}){
        <Text style={styles.headerText}>Register As Freelancer</Text>
        </View>
 
+      
+
         <Text style={styles.titleStyle}>Mobile<Text style={{color: 'red'}}> *</Text></Text>
-        <PhoneInput
+        {/*<PhoneInput
         ref={phoneInput}
         defaultValue={phoneNumber}
         defaultCode="IN"
@@ -126,14 +145,51 @@ function FreeReg({route}){
             setmError('');
           }
         }}
-      />
+      />*/}
+
+<TextInput
+          style={styles.inputStyle} 
+          //style={focus ? styles.inputOnFocus : styles.inputOnBlur}        
+          theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
+         mode="outlined"
+       //label="Email"
+       label={
+        <Text>
+             Mobile
+             <Text style={{color: 'red'}}> *</Text>
+        </Text>
+       }
+          //placeholder = "Enter Email"
+          onChangeText={(phoneNumber) => setphoneNumber(phoneNumber)
+            }
+         // onBlur={() => setFocus(false)}
+          onFocus={()=>{
+            //setFocus(true)
+            if(phoneNumber != '')
+            {
+             let reg_mob = /^[0-9]{10}$/;
+             if(reg_mob.test(phoneNumber) === false)    
+              {
+                setmError('Enter Valid Mobile Number!');
+                }  
+              else{
+                setmError('');
+              }
+            }
+            else{
+              setmError('Enter 10 digit Mobile Number')
+            }
+          }}
+          />
+
       <Text style={styles.errorText}>{mError}</Text>
 
       <Text style={styles.titleStyle}>Email<Text style={{color: 'red'}}> *</Text></Text>
         <TextInput
-          style={styles.inputStyle}         
+          style={styles.inputStyle} 
+          //style={focus ? styles.inputOnFocus : styles.inputOnBlur}        
           theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
-       mode="outlined"
+         mode="outlined"
        //label="Email"
        label={
         <Text>
@@ -143,7 +199,9 @@ function FreeReg({route}){
        }
           //placeholder = "Enter Email"
           onChangeText={(email) => setEmail(email)}
+         // onBlur={() => setFocus(false)}
           onFocus={()=>{
+            //setFocus(true)
             if(phoneNumber != '')
             {
              let reg_mob = /^[0-9]{10}$/;
@@ -245,6 +303,8 @@ function FreeReg({route}){
           onChangeText={(cpass) => setCPass(cpass)}
         />*/}
 
+<Text style={styles.errorText}>{error}</Text>
+
          
 <View style={styles.btnCont}>
      <TouchableOpacity style={styles.button} onPress={RegHandler}><Text style={styles.btnText}>Register</Text></TouchableOpacity>
@@ -316,10 +376,10 @@ const styles= StyleSheet.create({
       width:'80%',
       height:50,        
       backgroundColor:'#FFFFFF',
-      outlineColor:'white',
-      activeoutlineColor:'#6B240C',
-      borderRadius:1,
-      borderColor:'#C5DFF8'    
+      //outlineColor:'white',
+      //activeoutlineColor:'#6B240C',
+      borderRadius:2,
+      borderColor: 'blue',
   },
   btnText:{
       color:'#FFFFFF',
@@ -335,8 +395,9 @@ const styles= StyleSheet.create({
     fontSize:12,
     fontFamily:'OpenSans-bold',
     color:'red'
-   }
-
+   },
+   inputOnFocus: { borderColor: '#C0C0C0' },
+   inputOnBlur: { borderColor: '#4b6cd5' }
 
 
 })

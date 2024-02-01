@@ -204,7 +204,10 @@ const EditImage = ({ User, navigation, route, Token }) => {
 
   var pickAudio = async () => {
     let result = await DocumentPicker.getDocumentAsync({ type: "audio/mpeg" });
+    console.log(result);
     if (result.type != "cancel") {
+      console.log(result.uri);
+      //const fileInfo = await FileSystem.getInfoAsync(result.uri);
       const fileInfo = await FileSystem.getInfoAsync(result.uri);
       if (fileInfo.size < 4000000) {
         var obj = {
@@ -387,7 +390,7 @@ const EditImage = ({ User, navigation, route, Token }) => {
           )}
           <TouchableOpacity disabled={!load ? false : true} onPress={pickImage}>
             <View style={styles.ImageContainer}>
-              {image == "" ? <Text style={{color:'#413C69',fontWeight:'600',fontSize:14}}>Select a Photos</Text> : null}
+              {image == "" ? <Text style={{color:'#413C69',fontWeight:'600',fontSize:14}}>Select a Photos/Videos</Text> : null}
             </View>
             <ImageEditor
               visible={editorVisible}

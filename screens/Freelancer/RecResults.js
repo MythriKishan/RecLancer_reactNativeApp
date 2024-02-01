@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
-import { View, Text, StyleSheet,FlatList,TouchableOpacity,Alert,Button} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet,FlatList,TouchableOpacity,Alert,Button,ScrollView} from 'react-native';
+//import { ScrollView } from 'react-native-gesture-handler';
 import * as actions from '../actions';
 import appstate from '../appreducers';
 import { connect } from 'react-redux';

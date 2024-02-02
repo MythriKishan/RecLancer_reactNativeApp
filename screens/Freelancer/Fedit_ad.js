@@ -65,15 +65,16 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
       
       
       setData(responseJson[0])
-      setPtitle(data.profession_title)
-      setCity(data.city)
-      setSub(data.subcategory)
-      setPSkill(data.skills)
-      setExp(data.exp)
-      setSSkill(data.sskills)
-      setPrates(data.project_rates)
-      setSt(data.start_date)     
-      setPref(data.ref)
+
+      setPtitle(responseJson[0].profession_title)
+      setCity(responseJson[0].city)
+      setSub(responseJson[0].subcategory)
+      setPSkill(responseJson[0].skills)
+      setExp(responseJson[0].exp)
+      setSSkill(responseJson[0].sskills)
+      setPrates(responseJson[0].project_rates)
+      setSt(responseJson[0].start_date)     
+      setPref(responseJson[0].ref)
       
           
          }).catch((error) => {
@@ -94,7 +95,7 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
     let endDate = moment(input2.date).utc().format('YYYY-MM-DD');
     console.log(endDate);
 
-    {/*let reg_psk = /^[a-zA-Z]{1,}/;
+    let reg_psk = /^[a-zA-Z]{1,}/;
     if (pskills === "") {
       setPsError("Primary Skills is Required Field.");  
     } 
@@ -129,7 +130,11 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
      else{      
       setExpError("");
      }
-    }*/}
+    }
+
+    if((pskills != "") && (exp != ""))
+    {
+      
 
     fetch('https://reclancer.com/reclancerapi/appfreead_update.php',
    {
@@ -176,9 +181,15 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
           console.error(error);
         });   
 
+      
 
-
-   }
+      }
+else
+{
+Alert.alert("Enter all mandatory fields");
+}
+  
+}
  
 return(
 <View style={styles.screen}>  
@@ -188,7 +199,7 @@ return(
     <Text style={styles.headerText}>Freelancer Edit Ad</Text>
     </View>
     
-       <Text style={styles.titleStyle}>Name</Text>
+       <Text style={styles.titleStyle}>Name<Text style={{color: 'red'}}> *</Text></Text>
         <TextInput
              style={styles.textInputRN}
              theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}             
@@ -197,7 +208,7 @@ return(
              onChangeText={(name) => setName(name)}
         />
 
-        <Text style={styles.titleStyle}>Email</Text>
+        <Text style={styles.titleStyle}>Email<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN}                
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -206,7 +217,7 @@ return(
                     onChangeText={(email) => setEmail(email)}
                 />
 
-          <Text style={styles.titleStyle}>Mobile</Text>
+          <Text style={styles.titleStyle}>Mobile<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -222,7 +233,7 @@ return(
                     onChangeText={(ptitle) => setPtitle(ptitle)}
                 />
             
-          <Text style={styles.titleStyle}>State</Text>
+          <Text style={styles.titleStyle}>State<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -235,11 +246,11 @@ return(
           <TextInput
                     style={styles.inputStyle} 
                     //theme={{ colors: { primary: '#069A8E' } }}
-                    defaultValue = {data.city_name}  
+                    defaultValue = {data.city}  
                     onChangeText={(city) => setCity(city)}                
                 />
 
-          <Text style={styles.titleStyle}>Category</Text>
+          <Text style={styles.titleStyle}>Category<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     //theme={{ colors: { primary: '#069A8E' } }}
@@ -257,7 +268,7 @@ return(
                 />
 
 
-          <Text style={styles.titleStyle}>Work Type</Text>
+          <Text style={styles.titleStyle}>Work Type<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -266,7 +277,7 @@ return(
                     onChangeText={(wt) => setWt(wt)}
                 />
 
-          <Text style={styles.titleStyle}>Gender</Text>
+          <Text style={styles.titleStyle}>Gender<Text style={{color: 'red'}}> *</Text></Text>
           <TextInput
                     style={styles.textInputRN} 
                     theme={{ colors: { primary: '#069A8E' } }}
@@ -275,11 +286,11 @@ return(
                     onChangeText={(gen) => setGen(gen)}
                 />
 
-            <Text style={styles.titleStyle}>Primary Skills</Text>
+            <Text style={styles.titleStyle}>Primary Skills<Text style={{color: 'red'}}> *</Text></Text>
             <TextInput
                     style={styles.inputStyle}
                     //theme={{ colors: { primary: '#069A8E' } }}
-                    defaultValue = {data.skills}
+                    defaultValue= {data.skills}                  
                     onChangeText={(pskills) => setPSkill(pskills)}
                     onFocus={()=>{
                       if(pskills === '')
@@ -296,11 +307,11 @@ return(
                 />
                  <Text style={styles.errorText}>{psError}</Text>  
              
-             <Text style={styles.titleStyle}>Experience</Text>
+             <Text style={styles.titleStyle}>Experience<Text style={{color: 'red'}}> *</Text></Text>
                 <TextInput
                     style={styles.inputStyle}
                     //theme={{ colors: { primary: '#069A8E' } }}
-                    defaultValue = {data.exp}
+                    defaultValue = {data.exp}                   
                     onChangeText={(exp) => setExp(exp)}
                     onFocus={()=>{
                       if(pskills === '')
@@ -335,7 +346,7 @@ return(
                 <TextInput
                     style={styles.inputStyle}
                    // theme={{ colors: { primary: '#069A8E' } }}
-                    defaultValue = {data.project_rates}
+                    defaultValue = {data.project_rates}                    
                     onChangeText={(prates) => setPrates(prates)}
                     onFocus={()=>{
                       if(exp === '')
@@ -356,7 +367,7 @@ return(
                 />
                  <Text style={styles.errorText}>{pratesError}</Text>  
 
-             <Text style={styles.titleStyle}>Start Date</Text>
+             <Text style={styles.titleStyle}>Start Date<Text style={{color: 'red'}}> *</Text></Text>
             <View style={styles.inputStyle}>
             <Text onPress={input.showDatepicker}>{moment(input.date).format('YYYY-MM-DD')}</Text>
             </View>

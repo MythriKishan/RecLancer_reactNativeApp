@@ -71,12 +71,12 @@ const Redit_ad = ({User,Token,route,navigation}) => {
       
       setData(responseJson[0])
 
-      setCity(data.city)
-      setSub(data.subcategory)
-      setAdr(data.project_address)
-      setSSkill(data.sskills)
-      setPrates(data.project_rates)
-      setPper(data.project_period)
+      setCity(responseJson[0].city)
+      setSub(responseJson[0].subcategory)
+      setAdr(responseJson[0].project_address)
+      setSSkill(responseJson[0].sskills)
+      setPrates(responseJson[0].project_rates)
+      setPper(responseJson[0].project_period)
       
           
          }).catch((error) => {
@@ -135,6 +135,8 @@ const Redit_ad = ({User,Token,route,navigation}) => {
      }
     }
 
+    if((exp != "")){
+    {
     fetch('https://reclancer.com/reclancerapi/apprecad_update.php',
    {
      method: 'POST',    
@@ -176,12 +178,17 @@ const Redit_ad = ({User,Token,route,navigation}) => {
          
         }).catch((error) => {
           console.error(error);
-        });   
-
+        }); 
+      }
+    
 
 
    }
- 
+   else
+   {
+    Alert.alert("Enter all Mandatory fields");
+   }
+  }
 return(
 <View style={styles.screen}>  
 <ScrollView>  

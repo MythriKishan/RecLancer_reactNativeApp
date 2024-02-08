@@ -19,6 +19,7 @@ import { ResizeMode } from "expo-av";
 import * as DocumentPicker from "expo-document-picker";
 import AudioSlider from "../../audio/AudioSlider";
 import * as FileSystem from "expo-file-system";
+//import * as ExpoFileSystem from 'expo-file-system';
 let images = [];
 
 const EditImage = ({ User, navigation, route, Token }) => {
@@ -203,24 +204,39 @@ const EditImage = ({ User, navigation, route, Token }) => {
   };
 
   var pickAudio = async () => {
-    let result = await DocumentPicker.getDocumentAsync({ type: "audio/mpeg" });
+    let result = await DocumentPicker.getDocumentAsync({ type: "audio/mpeg"});
     console.log(result);
-    if (result.type != "cancel") {
-      console.log(result.uri);
-      //const fileInfo = await FileSystem.getInfoAsync(result.uri);
-      const fileInfo = await FileSystem.getInfoAsync(result.uri);
-      if (fileInfo.size < 4000000) {
+    const assets = result.assets;
+    if (!assets) return;
+
+    const file = assets[0];
+    console.log(file.uri);
+
+     if (result.canceled === false) {     
+      const fileInfo = await FileSystem.readAsStringAsync(file.uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
+     
+      //const fileInfo = await FileSystem.getInfoAsync(result.uri)
+      //const fileInfo = await ExpoFileSystem.readAsStringAsync(result.uri); 
+      /*const fileInfo = await FileSystem.readAsStringAsync(result.assets.uri, {
+        encoding: FileSystem.EncodingType.Base64,
+      })*/
+     
+      //if (fileInfo.size < 4000000) {
+        if(file.size <  4000000 ){
         var obj = {
           // uri: result.uri,
           // type: result.mimeType,
-          name: result.uri,
+          //name: result.uri,
+          name:file.uri
         };
         internal.push(obj);
         setTimeout(() => {
           setInternal([...internal]);
         }, 200);
       } else {
-        Alert.alert("Please select audio file lessthen 4Mb");
+        Alert.alert("Please select audio file less then 4Mb");
       }
     }
   };

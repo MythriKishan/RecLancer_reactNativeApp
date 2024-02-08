@@ -196,7 +196,7 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
 
   var pickAudio = async () => {
     let result = await DocumentPicker.getDocumentAsync({ type: "audio/mpeg" });
-    if (result.type != "cancel") {
+    /*if (result.type != "cancel") {
       const fileInfo = await FileSystem.getInfoAsync(result.uri);
       if (fileInfo.size < 4000000) {
         setUpload([]);
@@ -204,7 +204,25 @@ const Ruploads = ({ User, Token ,navigation, route }) => {
           uri: result.uri,
           type: result.mimeType,
           name: result.name,
-        };
+        };*/
+        console.log(result);
+        const assets = result.assets;
+        if (!assets) return;
+    
+        const file = assets[0];
+        console.log(file.uri);
+    
+         if (result.canceled === false) {     
+          const fileInfo = await FileSystem.readAsStringAsync(file.uri, {
+            encoding: FileSystem.EncodingType.Base64,
+          });
+          if(file.size <  4000000 ){
+            setUpload([]);
+            var obj = {
+              uri: file.uri,
+              type: file.mimeType,
+              name:file.name
+            };
         internal.push(obj);
         setTimeout(() => {
           setInternal([...internal]);

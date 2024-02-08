@@ -10,7 +10,7 @@ const Success = ({User,navigation,Token,route}) => {
 
   useEffect(()=>{
 
-    fetch('https://reclancer.com/reclancerapi/fsuggest.php',
+    fetch('https://reclancer.com/reclancerapi/rsuggest.php',
    {
      method: 'POST',    
      headers: {

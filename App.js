@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import AppLoading from 'expo-app-loading';
+import { PaperProvider } from 'react-native-paper';
 import * as Font from 'expo-font';
 import { useFonts } from 'expo-font';
 import dropdown from './screens/Freelancer/dropdown';
@@ -433,6 +434,7 @@ else{
     <>
       <StatusBar style="light" />
       <NavigationContainer>
+      <PaperProvider>
        <Provider store={store}>
        <Stack.Navigator
           screenOptions={{
@@ -486,6 +488,7 @@ else{
 
         </Stack.Navigator>
         </Provider>
+        </PaperProvider>
       </NavigationContainer>
     </>
   );

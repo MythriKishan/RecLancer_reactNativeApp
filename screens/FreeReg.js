@@ -379,7 +379,7 @@ const styles= StyleSheet.create({
       //outlineColor:'white',
       //activeoutlineColor:'#6B240C',
       borderRadius:2,
-      borderColor: 'blue',
+      borderColor: '#FFD0EC',
   },
   btnText:{
       color:'#FFFFFF',

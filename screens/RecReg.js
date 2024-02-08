@@ -164,6 +164,7 @@ function RecReg({route,navigation}){
           //style={focus ? styles.inputOnFocus : styles.inputOnBlur}        
           theme={{colors: {primary: '#413C69', placeholder: '#413C69',underlineColor:"transparent"}}}
          mode="outlined"
+         underlineColorAndroid={'rgba(0,0,0,0)'}
        //label="Email"
        label={
         <Text>

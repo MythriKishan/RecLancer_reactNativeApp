@@ -74,9 +74,11 @@ const Redit_ad = ({User,Token,route,navigation}) => {
       setCity(responseJson[0].city)
       setSub(responseJson[0].subcategory)
       setAdr(responseJson[0].project_address)
+      setPSkill(responseJson[0].skills)
       setSSkill(responseJson[0].sskills)
       setPrates(responseJson[0].project_rates)
       setPper(responseJson[0].project_period)
+      setExp(responseJson[0].experience)
       
           
          }).catch((error) => {
@@ -168,7 +170,12 @@ const Redit_ad = ({User,Token,route,navigation}) => {
 
      if(responseJson.code === 200)
      {
-     Alert.alert("Success");
+     //Alert.alert("Success");
+     navigation.navigate('Recruiter Edit Success',{
+      id:User,        
+      pskill : pskills,
+      ex : exp,
+    });
      }
      else
      {
@@ -738,6 +745,12 @@ headerText:{
   color:'#23211d'
   //color:'#363062'      
 },
+errorText:{
+  fontSize:12,
+  fontFamily:'OpenSans-bold',
+  color:'red',
+  paddingLeft:20
+ },
   
 
 

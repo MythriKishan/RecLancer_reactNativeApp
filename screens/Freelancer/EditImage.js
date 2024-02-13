@@ -174,8 +174,8 @@ const EditImage = ({ User, navigation, route, Token }) => {
           setLoading(false);
           setInternal([]);
           setClick(true);
-          Alert.alert("Edited successfully");
-         // navigation.navigate("Freelancer Details", { adid: adid });
+          //Alert.alert("Edited successfully");
+         navigation.navigate("Freelancer Image Success");
         })
         .catch((err) => {
          // console.log("Error", err);

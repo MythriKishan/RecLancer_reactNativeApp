@@ -57,7 +57,7 @@ const RStatusAd = ({User,Token,route,navigation}) => {
 
        const validate=()=>{
 
-        console.log(adstatus);
+        console.log(sta);
 
         fetch('https://reclancer.com/reclancerapi/apprecad_status_update.php',
         {
@@ -80,7 +80,12 @@ const RStatusAd = ({User,Token,route,navigation}) => {
 
           if(responseJson.code === 200)
           {
-            Alert.alert("Successfully edited")
+            //Alert.alert("Successfully edited")
+            navigation.navigate("Recruiter Status Change")
+          }
+
+          else{
+            Alert.alert("Error ! Retry")
           }
               
              }).catch((error) => {

@@ -11,7 +11,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from "moment";
 import Buttons from "../../components/Buttons";
 
-const Fedit_ad = ({User,Token,route,navigation}) => {
+const Fedit_success = ({User,Token,route,navigation}) => {
 
   const {adid} =  route.params
   console.log(adid)
@@ -169,7 +169,11 @@ const Fedit_ad = ({User,Token,route,navigation}) => {
 
      if(responseJson.code === 200)
      {
-     Alert.alert("Success");
+      navigation.navigate('Freelancer Edit Success',{
+        id:User,        
+        pskill : pskills,
+        ex : exp,
+      });
      }
      else
      {
@@ -522,7 +526,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
   export default connect(  
     mapStateToProps,
     mapDispatchToProps    
-  )(Fedit_ad)
+  )(Fedit_success)
 
 const styles = StyleSheet.create({
     screen: {
@@ -659,7 +663,6 @@ shadowOpacity: 1, // IOS
 shadowRadius: 1, //IOS        
 elevation: 2, // Android
 },
-  
 
 
 

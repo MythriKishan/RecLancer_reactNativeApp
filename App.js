@@ -70,7 +70,12 @@ import RUploads from './screens/Recruiter/RUploads';
 import RecMLogin from './screens/RecMLogin';
 import Fpostscreen1 from './screens/Freelancer/Fpostscreen1';
 import Fpostscreen2 from './screens/Freelancer/Fpostscreen2';
-
+import Fedit_success from './screens/Freelancer/Fedit_success';
+import FImage_success from './screens/Freelancer/FImage_success';
+import FStatus_Success from './screens/Freelancer/FStatus_Success';
+import REditad_success from './screens/Recruiter/REditad_success';
+import RImage_success from './screens/Recruiter/RImage_success';
+import RStatus_Success from './screens/Recruiter/RStatus_Success';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -157,6 +162,32 @@ function DrawerNavigate(){
         }}
        />
 
+<Drawar.Screen
+        name="Recruiter Edit Success"        
+        component={REditad_success}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+          drawerItemStyle: { display: 'none' }
+  
+        }}
+      />
+
+<Drawar.Screen
+        name="Recruiter Image Success"        
+        component={RImage_success}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+          drawerItemStyle: { display: 'none' }
+  
+        }}
+      />
+
+
+
 <Drawar.Screen 
         name="Account"
         component={Raccount}
@@ -167,6 +198,18 @@ function DrawerNavigate(){
           ),
         }}
        />
+
+<Drawar.Screen
+        name="Recruiter Status Change"        
+        component={RStatus_Success}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+          drawerItemStyle: { display: 'none' }
+  
+        }}
+      />
 
 <Drawar.Screen
         name="Recruiter Hide Profile"        
@@ -316,6 +359,32 @@ function DrawerNavigator() {
 
 
 <Drawer.Screen
+        name="Freelancer Edit Success"        
+        component={Fedit_success}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+          drawerItemStyle: { display: 'none' }
+  
+        }}
+      />
+
+<Drawer.Screen
+        name="Freelancer Image Success"        
+        component={FImage_success}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+          drawerItemStyle: { display: 'none' }
+  
+        }}
+      />
+
+
+
+<Drawer.Screen
         name="Success Page"        
         component={Success}
         options={{
@@ -401,6 +470,21 @@ function DrawerNavigator() {
         }}
       />*/}
 
+
+<Drawer.Screen
+        name="Freelancer Status Change"        
+        component={FStatus_Success}
+        options={{
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),          
+          drawerItemStyle: { display: 'none' }
+  
+        }}
+      />
+
+
+
       <Drawer.Screen
         name="Freelancer Logout"        
         component={FLogout}
@@ -478,8 +562,10 @@ else{
     <Stack.Screen name="Recruiter Result" component={RecResults} />
     <Stack.Screen name="Rec Ad Details" component={RecAd} />
     <Stack.Screen name="Freelancer Edit Ad" component={Fedit_ad} />
-    <Stack.Screen name="Freelancer Ad Status" component={FStatusAd} />
+    
+    <Stack.Screen name="Freelancer Ad Status" component={FStatusAd} />   
     <Stack.Screen name="Freelancer Edit Image" component={EditImage} />
+    
     <Stack.Screen name="Recruiter Edit Image" component={REditImages} />
     <Stack.Screen name="ImageZoom" component={(ImageZoom)}/>
     <Stack.Screen name="Hide Profile" component={Hide} />

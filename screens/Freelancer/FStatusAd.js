@@ -56,7 +56,7 @@ const FStatusAd = ({User,Token,route,navigation}) => {
 
        const validate=()=>{
 
-        console.log(adstatus);
+        console.log(sta);
 
         fetch('https://reclancer.com/reclancerapi/appfreead_status_update.php',
         {
@@ -79,13 +79,18 @@ const FStatusAd = ({User,Token,route,navigation}) => {
 
           if(responseJson.code === 200)
           {
-            Alert.alert("Successfully edited")
+            //Alert.alert("Successfully edited")
+            navigation.navigate("Freelancer Status Change")
+          }
+
+          else{
+            Alert.alert("Error! Retry")
           }
               
              }).catch((error) => {
                console.error(error);
              });  
-       
+         
 
        }
 
@@ -102,7 +107,7 @@ const FStatusAd = ({User,Token,route,navigation}) => {
                             placeholderStyle={styles.placeholderStyle}
                             //selectedTextStyle={styles.selectedTextStyle}          
                             iconStyle={styles.iconStyle}
-                            data={status}         
+                            data={status}                                     
                             maxHeight={300}
                             labelField="label"
                             valueField="value"

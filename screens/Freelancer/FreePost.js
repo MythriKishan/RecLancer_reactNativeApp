@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from "react";
-import { StyleSheet, Text, View,TouchableOpacity,Button, Alert } from "react-native";
+import { StyleSheet, Text, View,TouchableOpacity,Button, Alert ,RefreshControl} from "react-native";
 import FPostForm from "../../components/FPostForm";
 import * as actions from '../actions';
 import appstate from '../appreducers';
@@ -18,6 +18,7 @@ import { AntDesign } from '@expo/vector-icons';
 import moment from "moment";
 //import { getStateFromPath } from "@react-navigation/native";
 import axios from 'axios';
+import { useFocusEffect } from '@react-navigation/native';
 //import ReactDatePicker from "react-datepicker";
 
 //import "react-datepicker/dist/react-datepicker.css";
@@ -134,6 +135,9 @@ const FreePostAd = ({User,Token,route,navigation}) => {
     console.log(User+"Inside Postad")
     console.log(Token+"token Inside Postad")
 
+   
+       
+
     /*State list API Call*/
     getState();
     
@@ -147,9 +151,16 @@ const FreePostAd = ({User,Token,route,navigation}) => {
     getWorktype();
 
     //getCity(st);
-
+   
 
    },[])  
+
+   useFocusEffect(   
+    
+    React.useCallback(() => {
+        clearState()
+    }, [])   
+) 
 
   
   const getState= () => {
@@ -294,7 +305,13 @@ const FreePostAd = ({User,Token,route,navigation}) => {
        });     
    
      } 
-       
+
+     
+  clearState = () => {
+    setName('');
+    setEmail('');
+    
+  }
   
   const Validate=()=>{
    
@@ -465,6 +482,10 @@ const FreePostAd = ({User,Token,route,navigation}) => {
         mode,
         onChange
     }
+}
+
+const cancelHandler = () =>{
+  navigation.navigate('Freelancer PostAd');
 }
 
     return (
@@ -949,7 +970,7 @@ const FreePostAd = ({User,Token,route,navigation}) => {
 
                 <View style={styles.btnCont}>
      <TouchableOpacity style={styles.button} onPress={Validate}><Text style={styles.btnText}>Next</Text></TouchableOpacity>
-     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} onPress={() =>cancelHandler()}><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
      </View>
 
             </ScrollView>

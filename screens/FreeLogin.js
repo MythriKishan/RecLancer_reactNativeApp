@@ -117,10 +117,10 @@ function FreeLogin({navigation,route,props}){
     
  }
 
-  const cancelHandler = () => {
-   
-    
-  }
+ const cancelHandler = () => {
+  navigation.navigate('Home')
+ 
+ }
 
   const MLogin = () =>{
     navigation.navigate('Freelancer Mobile Login');

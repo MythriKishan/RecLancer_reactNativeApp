@@ -62,7 +62,7 @@ const REditad_success = ({User,navigation,Token,route}) => {
 
    const getItem = (userid) => {
          
-    navigation.navigate('Rec Ad Details',{adid:userid});  
+    navigation.navigate('Freelancer Details',{adid:userid});  
        
     } 
    

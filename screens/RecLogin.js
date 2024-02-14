@@ -80,6 +80,12 @@ function RecLogin({navigation,route,props}){
     
    }
 
+
+   const cancelHandler = () => {
+    navigation.navigate('Home')
+   
+   }
+
    return(      
        
     <View style={styles.screen}>
@@ -154,7 +160,7 @@ function RecLogin({navigation,route,props}){
 
      <View style={styles.btnCont}>
      <TouchableOpacity style={styles.button} onPress={LoginHandler}><Text style={styles.btnText}>Login</Text></TouchableOpacity>
-     <TouchableOpacity style={styles.button} ><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
+     <TouchableOpacity style={styles.button} onPress={cancelHandler}><Text style={styles.btnText}>Cancel</Text></TouchableOpacity>
      </View>
          
 </View>

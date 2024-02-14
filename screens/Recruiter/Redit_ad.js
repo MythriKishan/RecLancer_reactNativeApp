@@ -173,7 +173,7 @@ const Redit_ad = ({User,Token,route,navigation}) => {
      //Alert.alert("Success");
      navigation.navigate('Recruiter Edit Success',{
       id:User,        
-      pskill : pskills,
+      pskills : pskills,
       ex : exp,
     });
      }
